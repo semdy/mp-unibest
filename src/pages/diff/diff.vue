@@ -54,11 +54,7 @@
         </view>
         <scroll-view scroll-y enable-flex class="page-scrollview" @scrolltolower="loadMore">
           <view class="diff-content">
-            <ui-card
-              v-for="(item, index) in diffRecords.diff_info"
-              :key="index"
-              @click="toDetail(item, index)"
-            >
+            <ui-card v-for="(item, index) in diff_info" :key="index" @click="toDetail(item, index)">
               <template #title>
                 <view>
                   <ui-alert type="error" icon="warning" plain>
@@ -83,7 +79,7 @@
             </ui-card>
           </view>
           <uv-loadmore
-            v-if="diffRecords.diff_info.length === 0 || currentPage > 1"
+            v-if="diff_info.length === 0 || currentPage > 1"
             :status="loadingPage ? 'loading' : 'more'"
             :nomoreText="currentPage === 1 ? '暂无数据' : '没有更多数据了'"
             margin-top="0"
@@ -97,10 +93,11 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from 'pinia'
 import { shareMixins } from '@/config'
 import { objectToQueryString } from '@/utils/util'
 import { approveStatusMap, approveStatusStyleMap, diffTypeMap } from '@/utils/enum'
+import { usePickerDataStore, useDiffRecordsStore } from '@/store'
 
 export default {
   data() {
@@ -116,10 +113,10 @@ export default {
     }
   },
   mixins: [shareMixins],
-  computed: mapState({
-    pickerData: (state) => state.pickerData.data,
-    diffRecords: (state) => state.diffRecords.data,
-  }),
+  computed: {
+    ...mapState(usePickerDataStore, ['pickerData']),
+    ...mapState(useDiffRecordsStore, ['diff_info']),
+  },
   watch: {
     customer() {
       this.refreshData()
@@ -153,7 +150,8 @@ export default {
           return
         }
         this.loading = true
-        const pageData = await this.$store.dispatch('diffRecords/getDiffRecordsReport', {
+        const diffRecordsStore = useDiffRecordsStore()
+        const pageData = await diffRecordsStore.getDiffRecordsReport({
           customer_name: this.customer,
           quarter_id: this.quarter,
           diff_type: this.diffType,
@@ -183,7 +181,8 @@ export default {
       this.appendData()
     },
     updateItemApprovalStateByIndex(index, status) {
-      this.$store.dispatch('diffRecords/updateApprovalState', { index, status })
+      const diffRecordsStore = useDiffRecordsStore()
+      diffRecordsStore.updateApprovalState({ index, status })
     },
     diffTypeText(type) {
       return diffTypeMap[type]

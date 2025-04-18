@@ -8,7 +8,7 @@
       <view class="page-main">
         <view class="page-info">
           <view class="page-info-item">
-            <view class="page-info-item-title"> 经销商名称 </view>
+            <view class="page-info-item-title">经销商名称</view>
             <view class="page-info-item-content">
               <ui-picker
                 dark
@@ -20,7 +20,7 @@
             </view>
           </view>
           <view class="page-info-item">
-            <view class="page-info-item-title"> 数据更新时间 </view>
+            <view class="page-info-item-title">数据更新时间</view>
             <view class="page-info-item-content" style="margin-top: 14px">
               {{ basicInfo.update_time || '-' }}
             </view>
@@ -29,16 +29,16 @@
 
         <view class="page-info">
           <view class="page-info-item">
-            <view class="page-info-item-title"> 上级经销商 </view>
-            <view class="page-info-item-content"> {{ basicInfo.dealer_leader_name || '-' }} </view>
+            <view class="page-info-item-title">上级经销商</view>
+            <view class="page-info-item-content">{{ basicInfo.dealer_leader_name || '-' }}</view>
           </view>
           <view class="page-info-item">
-            <view class="page-info-item-title"> 享受政策 </view>
-            <view class="page-info-item-content"> {{ totalRecords }}项 </view>
+            <view class="page-info-item-title">享受政策</view>
+            <view class="page-info-item-content">{{ totalRecords }}项</view>
           </view>
           <view class="page-info-item">
-            <view class="page-info-item-title"> 产品线 </view>
-            <view class="page-info-item-content"> {{ basicInfo.product_line || '-' }} </view>
+            <view class="page-info-item-title">产品线</view>
+            <view class="page-info-item-content">{{ basicInfo.product_line || '-' }}</view>
           </view>
         </view>
       </view>
@@ -56,11 +56,7 @@
         </view>
         <scroll-view scroll-y enable-flex class="page-scrollview" @scrolltolower="loadMore">
           <view class="policy-content">
-            <ui-card
-              @click="toDetail(item)"
-              v-for="(item, index) in policyData.policy_info"
-              :key="index"
-            >
+            <ui-card @click="toDetail(item)" v-for="(item, index) in policy_info" :key="index">
               <view class="policy-name">{{ item.policy_name }}</view>
               <ui-label-value value-bold inline>
                 <text style="margin-right: 8px">政策编号</text>
@@ -71,19 +67,19 @@
                 <text>{{ item.settlement_number }}</text>
               </ui-label-value>
               <view class="justify-between">
-                <ui-label-value label="所属季度"> {{ item.account_period }} </ui-label-value>
+                <ui-label-value label="所属季度">{{ item.account_period }}</ui-label-value>
                 <ui-tag :type="statusStyle(item.dms_confirmed)">
                   {{ statusText(item.dms_confirmed) }}
                 </ui-tag>
               </view>
               <view class="justify-between">
-                <ui-label-value label="返利值(含税)"> {{ item.rebate_amount }} </ui-label-value>
-                <ui-label-value label="已结算金额"> {{ item.claimed_amount }} </ui-label-value>
+                <ui-label-value label="返利值(含税)">{{ item.rebate_amount }}</ui-label-value>
+                <ui-label-value label="已结算金额">{{ item.claimed_amount }}</ui-label-value>
               </view>
             </ui-card>
           </view>
           <uv-loadmore
-            v-if="policyData.policy_info.length === 0 || currentPage > 1"
+            v-if="policy_info.length === 0 || currentPage > 1"
             :status="loadingPage ? 'loading' : 'more'"
             :nomoreText="currentPage === 1 ? '暂无数据' : '没有更多数据了'"
             margin-top="0"
@@ -97,10 +93,11 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from 'pinia'
 import { shareMixins } from '@/config'
 import { objectToQueryString } from '@/utils/util'
 import { dmsConfirmedStatusMap, dmsConfirmedStatusStyleMap } from '@/utils/enum'
+import { usePickerDataStore, usePolicyDataStore } from '@/store'
 
 export default {
   data() {
@@ -110,31 +107,33 @@ export default {
       totalRecords: 0,
       currentPage: 1,
       loadingPage: true,
-      loading: true
+      loading: true,
     }
   },
   mixins: [shareMixins],
-  computed: mapState({
-    pickerData: state => state.pickerData.data,
-    policyData: state => state.policyData.data,
-    basicInfo: state => state.policyData.data.policy_info[0] || {}
-  }),
+  computed: {
+    ...mapState(usePickerDataStore, ['pickerData']),
+    ...mapState(usePolicyDataStore, {
+      policy_info: 'policy_info',
+      basicInfo: store => store.policy_info[0] || {},
+    }),
+  },
   watch: {
     dealer() {
       this.refreshData()
     },
     quarter(val) {
       this.refreshData()
-    }
+    },
   },
   methods: {
     toDetail(event) {
       const queryString = objectToQueryString({
         policy_id: event.policy,
-        rebate_amount: event.rebate_amount
+        rebate_amount: event.rebate_amount,
       })
       uni.navigateTo({
-        url: '/pages/policy-detail/policy-detail?' + queryString
+        url: '/pages/policy-detail/policy-detail?' + queryString,
       })
     },
     async requestData() {
@@ -143,11 +142,12 @@ export default {
           return
         }
         this.loading = true
-        const res = await this.$store.dispatch('policyData/getPolicyReportData', {
+        const policyDataStore = usePolicyDataStore()
+        const res = await policyDataStore.getPolicyReportData({
           dealer_id: this.dealer,
           quarter_id: this.quarter,
           page: this.currentPage,
-          page_size: 20
+          page_size: 20,
         })
         this.totalRecords = res.pagination.total_records
         if (res.data.length < 20) {
@@ -175,11 +175,11 @@ export default {
     },
     statusStyle(status) {
       return dmsConfirmedStatusStyleMap[status]
-    }
+    },
   },
   onLoad() {
     this.refreshData()
-  }
+  },
 }
 </script>
 

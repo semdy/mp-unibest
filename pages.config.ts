@@ -2,12 +2,31 @@ import { defineUniPages } from '@uni-helper/vite-plugin-uni-pages'
 
 export default defineUniPages({
   globalStyle: {
-    navigationStyle: 'default',
-    navigationBarTitleText: 'unibest',
-    navigationBarBackgroundColor: '#f8f8f8',
+    navigationStyle: 'custom',
+    transparentTitle: 'always',
+    titlePenetrate: 'YES',
     navigationBarTextStyle: 'black',
-    backgroundColor: '#FFFFFF',
+    navigationBarTitleText: '',
+    navigationBarBackgroundColor: '#fff',
+    backgroundColor: '#fff',
+    backgroundTextStyle: 'light',
   },
+  networkTimeout: {
+    request: 10000,
+  },
+  window: {
+    enableInPageRenderInput: 'YES',
+  },
+  permission: {
+    'scope.userLocation': {
+      desc: '你的位置信息将用于小程序位置接口的效果展示',
+    },
+    'scope.getFuzzyLocation': {
+      desc: '你的位置信息将用于小程序位置接口的效果展示',
+    },
+  },
+  requiredPrivateInfos: ['getFuzzyLocation', 'chooseLocation', 'chooseAddress', 'choosePoi'],
+  subPackages: [],
   easycom: {
     autoscan: true,
     custom: {
@@ -17,26 +36,39 @@ export default defineUniPages({
     },
   },
   tabBar: {
-    color: '#999999',
-    selectedColor: '#018d71',
-    backgroundColor: '#F8F8F8',
+    color: '#888',
+    selectedColor: '#2BA293',
+    backgroundColor: '#fff',
     borderStyle: 'black',
     height: '50px',
     fontSize: '10px',
     iconWidth: '24px',
     spacing: '3px',
+    midButton: {
+      width: '65px',
+      height: '65px',
+      iconPath: 'static/images/homekey.png',
+      text: '开门',
+      iconWidth: '45px',
+    },
     list: [
       {
-        iconPath: 'static/tabbar/home.png',
-        selectedIconPath: 'static/tabbar/homeHL.png',
-        pagePath: 'pages/index/index',
-        text: '首页',
+        pagePath: 'pages/review/review',
+        text: '票审结果',
+        iconPath: 'static/images/review.png',
+        selectedIconPath: 'static/images/review-selected.png',
       },
       {
-        iconPath: 'static/tabbar/example.png',
-        selectedIconPath: 'static/tabbar/exampleHL.png',
-        pagePath: 'pages/about/about',
-        text: '关于',
+        pagePath: 'pages/diff/diff',
+        text: '差异说明',
+        iconPath: 'static/images/diff.png',
+        selectedIconPath: 'static/images/diff-selected.png',
+      },
+      {
+        pagePath: 'pages/policy/policy',
+        text: '商务返利/促销',
+        iconPath: 'static/images/policy.png',
+        selectedIconPath: 'static/images/policy-selected.png',
       },
     ],
   },

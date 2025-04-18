@@ -2,7 +2,7 @@
 import { onLaunch, onShow, onHide } from '@dcloudio/uni-app'
 import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only'
 import authorize from '@/utils/authorize'
-import store from '@/store'
+import { usePickerDataStore } from '@/store'
 
 // import { getCurrentPage } from '@/utils/util'
 // import { shareMixins } from '@/config'
@@ -20,10 +20,11 @@ onLaunch(() => {
       url: '/pages/login/login',
     })
   }
-  authorize.startup(true).then((token) => {
+  const pickerDataStore = usePickerDataStore()
+  authorize.startup(true).then(token => {
     // Logined
     if (token) {
-      // store.dispatch('pickerData/initAllFilter')
+      pickerDataStore.initAllFilter()
     } else {
       toLogin()
     }
@@ -43,7 +44,17 @@ onHide(() => {
 })
 </script>
 
+<!-- <style lang="less">
+@import './themes/lightVars.less';
+@import './themes/darkVars.less';
+
+.lightVars();
+.darkVars();
+</style> -->
+
 <style lang="scss">
+@import './app.scss';
+
 /* stylelint-disable selector-type-no-unknown */
 button::after {
   border: none;

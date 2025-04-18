@@ -1,7 +1,7 @@
 import Request from 'luch-request'
 import { toast, delay } from '@/utils/util'
 import authorize from '@/utils/authorize'
-import { getServerUrl } from '@/config'
+import { getEnvBaseUrl } from '@/utils'
 
 const http = new Request()
 
@@ -29,7 +29,7 @@ function initRequest() {
 
   http.interceptors.request.use(
     config => {
-      config.baseURL = config.custom.server || getServerUrl()
+      config.baseURL = config.custom.server || getEnvBaseUrl()
       config.data = config.data || {}
       if (config?.custom?.auth !== false) {
         const token = config.data.token || authorize.getToken()
@@ -43,7 +43,7 @@ function initRequest() {
     },
     config => {
       return Promise.reject(config)
-    }
+    },
   )
 
   http.interceptors.response.use(
@@ -109,7 +109,7 @@ function initRequest() {
       }
       //（statusCode !== 200）
       return Promise.reject(response)
-    }
+    },
   )
 }
 

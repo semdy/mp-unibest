@@ -16,26 +16,27 @@
 <script>
 import { getAuthorizedInfo } from '@/api'
 import { toast } from '@/utils/util'
-import { mapState } from 'vuex'
-import mpMixin from '@/uni_modules/uview-plus/libs/mixin/mpMixin'
+import { mapState } from 'pinia'
+import mpMixin from '@/uni_modules/uv-ui-tools/libs/mixin/mpMixin'
+import { useUserStore } from '@/store'
 
 export default {
   name: 'phone-number-auth-button',
   emits: ['click', 'getPhoneNumber'],
   props: {
     style: {
-      type: [Object, String]
+      type: [Object, String],
     },
     class: {
-      type: String
-    }
+      type: String,
+    },
   },
   mixins: [mpMixin],
   computed: {
-    ...mapState(['userInfo']),
+    ...mapState(useUserStore, ['userInfo']),
     className() {
       return this['class']
-    }
+    },
   },
   methods: {
     onClick() {
@@ -50,15 +51,14 @@ export default {
         return toast.error('已拒绝授权')
       }
       const res = await getAuthorizedInfo(code)
-      this.$store.commit('setUserInfo', {
-        phone: res
-      })
+      const userStore = useUserStore()
+      userStore.setUserInfo({ phone: res })
       this.$emit('getPhoneNumber', res)
     },
     onAuthError() {
       toast.error('已拒绝授权')
-    }
-  }
+    },
+  },
 }
 </script>
 

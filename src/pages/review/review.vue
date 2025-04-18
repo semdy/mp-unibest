@@ -1,3 +1,4 @@
+<route lang="json5" type="home"></route>
 <template>
   <view class="home-page g-page bg1 full-bg full-page">
     <view style="height: 44px; flex: none">
@@ -34,16 +35,16 @@
           </view>
           <view class="page-info">
             <view class="page-info-item">
-              <view class="page-info-item-title"> 经销商名称 </view>
-              <view class="page-info-item-content"> {{ dealerName || '-' }} </view>
+              <view class="page-info-item-title">经销商名称</view>
+              <view class="page-info-item-content">{{ dealerName || '-' }}</view>
             </view>
             <view class="page-info-item">
-              <view class="page-info-item-title"> 季度 </view>
-              <view class="page-info-item-content"> {{ quarterName || '-' }} </view>
+              <view class="page-info-item-title">季度</view>
+              <view class="page-info-item-content">{{ quarterName || '-' }}</view>
             </view>
             <view class="page-info-item">
-              <view class="page-info-item-title"> 审计截止时间 </view>
-              <view class="page-info-item-content"> {{ endDate || '-' }} </view>
+              <view class="page-info-item-title">审计截止时间</view>
+              <view class="page-info-item-content">{{ endDate || '-' }}</view>
             </view>
           </view>
 
@@ -78,14 +79,14 @@
                     <view class="stats-chart-label-text" :style="{ '--color': colors[index] }">
                       {{ item.label }}
                     </view>
-                    <view class="stats-chart-label-value"
-                      >{{ item.qty }}; {{ item.percentage }}</view
-                    >
+                    <view class="stats-chart-label-value">
+                      {{ item.qty }}; {{ item.percentage }}
+                    </view>
                   </view>
                   <view class="stats-chart-label">
-                    <view class="stats-chart-label-text" style="--color: #deeaff"
-                      >特殊销量上报</view
-                    >
+                    <view class="stats-chart-label-text" style="--color: #deeaff">
+                      特殊销量上报
+                    </view>
                     <view class="stats-chart-label-value">{{ summaryData.special_sales_qty }}</view>
                   </view>
                 </view>
@@ -164,12 +165,12 @@
                   </ui-tag>
                 </template>
                 <template #default>
-                  <ui-label-value label="产品名称"> {{ item.sales_global_name }} </ui-label-value>
+                  <ui-label-value label="产品名称">{{ item.sales_global_name }}</ui-label-value>
                   <view class="justify-between">
                     <ui-label-value label="差异数量">
                       {{ $numberFormat(item.diff_qty) }}
                     </ui-label-value>
-                    <ui-label-value label="所属月份"> {{ item.sales_month }} </ui-label-value>
+                    <ui-label-value label="所属月份">{{ item.sales_month }}</ui-label-value>
                   </view>
                 </template>
               </ui-card>
@@ -190,11 +191,12 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from 'pinia'
 import { shareMixins } from '@/config'
 import { getNodeRect, objectToQueryString } from '@/utils/util'
 import wxCharts from '@/uni_modules/wx-charts'
 import { auditStatusMap, auditStatusStyleMap } from '@/utils/enum'
+import { usePickerDataStore, useSummaryDataStore } from '@/store'
 
 export default {
   data() {
@@ -209,25 +211,26 @@ export default {
       currentPage: 1,
       loadingPage: true,
       loading: true,
-      colors: ['#326DF8', '#06BCFF', '#FF06E1', '#FFA820', '#FE584C', '#0ACEBE']
+      colors: ['#326DF8', '#06BCFF', '#FF06E1', '#FFA820', '#FE584C', '#0ACEBE'],
     }
   },
   mixins: [shareMixins],
-  computed: mapState({
-    pickerData: state => state.pickerData.data,
-    summaryData: state => state.summaryData.data,
-    endDate(state) {
-      if (!this.quarter) return null
-      return state.pickerData.data.audit_quarters.find(item => item.value === this.quarter)
-        ?.end_date
-    },
-    dealerName() {
-      return this.pickerData.audit_dealers.find(item => item.value === this.dealer)?.label
-    },
-    quarterName() {
-      return this.pickerData.audit_quarters.find(item => item.value === this.quarter)?.label
-    }
-  }),
+  computed: {
+    ...mapState(usePickerDataStore, {
+      pickerData: 'pickerData',
+      endDate: store => {
+        if (!this.quarter) return null
+        return store.pickerData.audit_quarters.find(item => item.value === this.quarter)?.end_date
+      },
+      dealerName: store => {
+        return store.pickerData.audit_dealers.find(item => item.value === this.dealer)?.label
+      },
+      quarterName: store => {
+        return store.pickerData.audit_quarters.find(item => item.value === this.quarter)?.label
+      },
+    }),
+    ...mapState(useSummaryDataStore, ['summaryData']),
+  },
   watch: {
     dealer() {
       this.refreshFilterSales()
@@ -255,7 +258,7 @@ export default {
           this.initRingCharts()
           this.getMainHeight()
         })
-      }
+      },
     },
     'pickerData.audit_quarters': {
       handler(val) {
@@ -267,37 +270,39 @@ export default {
           }
         }
       },
-      immediate: true
-    }
+      immediate: true,
+    },
   },
   methods: {
     refreshFilterSales() {
-      this.$store.dispatch('pickerData/filterSales', {
+      const pickerDataStore = usePickerDataStore()
+      pickerDataStore.filterSales({
         dealer_id: this.dealer,
         quarter_id: this.quarter?.toString(),
-        audit_type: this.auditType
+        audit_type: this.auditType,
       })
     },
     async requestData(isAppend) {
+      const summaryDataStore = useSummaryDataStore()
       try {
         if (!isAppend) {
-          this.$store.dispatch('summaryData/getReportInvoice', {
+          summaryDataStore.getReportInvoice({
             dealer_id: this.dealer,
-            quarter_id: this.quarter?.toString()
+            quarter_id: this.quarter?.toString(),
           })
         }
         if (!this.loadingPage) {
           return
         }
         this.loading = true
-        const pageData = await this.$store.dispatch('summaryData/getSummarySales', {
+        const pageData = await summaryDataStore.getSummarySales({
           dealer_id: this.dealer,
           quarter_id: this.quarter?.toString(),
           audit_type: this.auditType,
           customer_name: this.salesCustomer,
           sales_month: this.salesMonth,
           page: this.currentPage,
-          page_size: 20
+          page_size: 20,
         })
         if (pageData.length < 20) {
           this.loadingPage = false
@@ -328,10 +333,10 @@ export default {
         sales_month: event.sales_month,
         sales_global_name: event.sales_global_name,
         total_sales_qty: event.total_sales_qty,
-        pass_qty: event.pass_qty
+        pass_qty: event.pass_qty,
       })
       uni.navigateTo({
-        url: '/pages/review-detail/review-detail?' + queryString
+        url: '/pages/review-detail/review-detail?' + queryString,
       })
     },
     async getMainHeight() {
@@ -394,9 +399,9 @@ export default {
             name: item.label,
             data: item.qty,
             stroke: false,
-            color: this.colors[i]
+            color: this.colors[i],
           }
-        })
+        }),
       })
     },
     initRingCharts() {
@@ -414,15 +419,15 @@ export default {
         extra: {
           ringWidth: 22,
           pie: {
-            offsetAngle: -45
-          }
+            offsetAngle: -45,
+          },
         },
         series: this.summaryData.audit_report.map((item, i) => {
           return {
             name: item.label,
             data: item.qty,
             stroke: false,
-            color: this.colors[i]
+            color: this.colors[i],
           }
         }),
         disablePieStroke: true,
@@ -431,7 +436,7 @@ export default {
         dataLabel: false,
         legend: false,
         background: '#fff',
-        padding: 0
+        padding: 0,
       })
       // this.ringChart.addEventListener('renderComplete', () => {
       //   console.log('renderComplete')
@@ -447,14 +452,14 @@ export default {
           this.$refs.popup.slideToUpper()
         }
       }
-    }
+    },
   },
   mounted() {
     this.getMainHeight()
   },
   onLoad() {
     // this.refreshData()
-  }
+  },
   // onReady() {
   //   this.initRingCharts()
   //   // this.$refs.ringCharts.initRingCharts()

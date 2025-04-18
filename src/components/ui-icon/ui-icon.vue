@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import mpMixin from '@/uni_modules/uview-plus/libs/mixin/mpMixin'
+import mpMixin from '@/uni_modules/uv-ui-tools/libs/mixin/mpMixin'
 
 const getVal = val => {
   const reg = /^[0-9]*$/g
@@ -29,22 +29,22 @@ export default {
   props: {
     name: {
       type: String,
-      default: ''
+      default: '',
     },
     color: {
       type: String,
-      default: 'currentColor'
+      default: 'currentColor',
     },
     size: {
       type: [Number, String],
-      default: ''
+      default: '',
     },
     style: {
-      type: [Object, String]
+      type: [Object, String],
     },
     class: {
-      type: String
-    }
+      type: String,
+    },
   },
   computed: {
     iconSize() {
@@ -58,13 +58,13 @@ export default {
     },
     className() {
       return this['class']
-    }
+    },
   },
   methods: {
     onClick() {
       this.$emit('click')
-    }
-  }
+    },
+  },
 }
 </script>
 

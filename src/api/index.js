@@ -1,11 +1,10 @@
 import { http } from '@/utils/request2'
-import { appId } from '@/config'
 
 const prefix = '/api'
 
 // 登录授权认证
 export function getTokenByJsCode(jsCode) {
-  return http.post(`${prefix}/login`, { appId, jsCode }, { custom: { auth: false } })
+  return http.post(`${prefix}/login`, { jsCode }, { custom: { auth: false } })
 }
 
 // 授权获取手机号

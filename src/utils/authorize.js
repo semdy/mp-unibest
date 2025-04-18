@@ -1,7 +1,7 @@
 import { login, isAuthorized } from './wechat'
 import { getTokenByJsCode } from '@/api'
 import { refreshTokenApi } from '@/api/index'
-import store from '@/store'
+import { useTokenStore } from '@/store'
 import { showLoading, hideLoading } from '@/utils/util'
 
 const authorize = {
@@ -85,7 +85,8 @@ const authorize = {
   //   try {
   //     const { encryptedData, iv } = await getWxUserInfo({ withCredentials: true, lang: 'zh_CN' })
   //     const res = await getWxUserInfoFromServer(this.openId, encryptedData, iv)
-  //     store.commit('setUserInfo', res.datas)
+  //     const userStore = useUserStore()
+  //     userStore.setUserInfo(res.datas)
   //     return res.datas
   //   } catch (errMsg) {
   //     // toast.error(errMsg)
@@ -125,8 +126,9 @@ const authorize = {
   },
 
   async saveToken(token, refreshToken) {
+    const tokenStore = useTokenStore()
     uni.setStorageSync('token', token)
-    store.dispatch('setToken', token)
+    tokenStore.setToken(token)
     if (refreshToken) {
       uni.setStorageSync('refreshToken', refreshToken)
     }
@@ -134,7 +136,8 @@ const authorize = {
   },
 
   getToken() {
-    return store.state.token || uni.getStorageSync('token') || ''
+    const tokenStore = useTokenStore()
+    return tokenStore.token || uni.getStorageSync('token') || ''
   },
 
   getRefreshToken() {
@@ -144,14 +147,15 @@ const authorize = {
   async refreshToken(token) {
     const { access, refresh } = await refreshTokenApi({
       token,
-      refresh: this.getRefreshToken()
+      refresh: this.getRefreshToken(),
     })
     return { token: access, refreshToken: refresh }
   },
 
   resetToken(resetRefreshToken) {
+    const tokenStore = useTokenStore()
     uni.removeStorageSync('token')
-    store.dispatch('setToken', null)
+    tokenStore.setToken(null)
     if (resetRefreshToken) {
       uni.removeStorageSync('refreshToken')
     }
@@ -197,7 +201,7 @@ const authorize = {
         callback.apply(this, arguments)
       }
     })
-  }
+  },
 }
 
 export default authorize

@@ -20,7 +20,7 @@ export const getIsTabbar = () => {
   }
   const lastPage = getLastPage()
   const currPath = lastPage.route
-  return !!tabBar.list.find((e) => e.pagePath === currPath)
+  return !!tabBar.list.find(e => e.pagePath === currPath)
 }
 
 /**
@@ -65,7 +65,7 @@ export const getUrlObj = (url: string) => {
     }
   }
   const query: Record<string, string> = {}
-  queryStr.split('&').forEach((item) => {
+  queryStr.split('&').forEach(item => {
     const [key, value] = item.split('=')
     // console.log(key, value)
     query[key] = ensureDecodeURIComponent(value) // 这里需要统一 decodeURIComponent 一下，可以兼容h5和微信y
@@ -81,20 +81,20 @@ export const getAllPages = (key = 'needLogin') => {
   // 这里处理主包
   const mainPages = [
     ...pages
-      .filter((page) => !key || page[key])
-      .map((page) => ({
+      .filter(page => !key || page[key])
+      .map(page => ({
         ...page,
         path: `/${page.path}`,
       })),
   ]
   // 这里处理分包
   const subPages: any[] = []
-  subPackages.forEach((subPageObj) => {
+  subPackages.forEach(subPageObj => {
     // console.log(subPageObj)
     const { root } = subPageObj
 
     subPageObj.pages
-      .filter((page) => !key || page[key])
+      .filter(page => !key || page[key])
       .forEach((page: { path: string } & Record<string, any>) => {
         subPages.push({
           ...page,
@@ -111,13 +111,13 @@ export const getAllPages = (key = 'needLogin') => {
  * 得到所有的需要登录的 pages，包括主包和分包的
  * 只得到 path 数组
  */
-export const getNeedLoginPages = (): string[] => getAllPages('needLogin').map((page) => page.path)
+export const getNeedLoginPages = (): string[] => getAllPages('needLogin').map(page => page.path)
 
 /**
  * 得到所有的需要登录的 pages，包括主包和分包的
  * 只得到 path 数组
  */
-export const needLoginPages: string[] = getAllPages('needLogin').map((page) => page.path)
+export const needLoginPages: string[] = getAllPages('needLogin').map(page => page.path)
 
 /**
  * 根据微信小程序当前环境，判断应该获取的 baseUrl
@@ -144,6 +144,12 @@ export const getEnvBaseUrl = () => {
         break
     }
   }
+
+  /* #ifdef H5 */
+  if (import.meta.env.DEV) {
+    baseUrl = '/'
+  }
+  /* #endif */
 
   return baseUrl
 }

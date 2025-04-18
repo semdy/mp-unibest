@@ -287,8 +287,8 @@
 </template>
 
 <script>
-import { shareMixins, getServerUrl } from '@/config'
-import test from '@/uni_modules/uview-plus/libs/function/test'
+import { shareMixins } from '@/config'
+import * as test from '@/uni_modules/uv-ui-tools/libs/function/test'
 import {
   getDiffRecordReportDetailApi,
   submitDifferenceApi,
@@ -296,6 +296,7 @@ import {
   uploadFile,
 } from '@/api'
 import { showLoading, hideLoading, toast, getPrevPage } from '@/utils/util'
+import { getEnvBaseUrl } from '@/utils'
 import { approveStatusMap, approveStatusStyleMap, diffTypeMap } from '@/utils/enum'
 
 function isOfficeFile(filePathOrName) {
@@ -345,8 +346,8 @@ export default {
   },
   computed: {
     fileListWithHttp() {
-      const serverUrl = getServerUrl()
-      return this.fileList.map((item) => {
+      const serverUrl = getEnvBaseUrl()
+      return this.fileList.map(item => {
         if (item.url && !item.url.startsWith('http')) {
           item.url = serverUrl + (item.url.startsWith('/') ? item.url : '/' + item.url)
         }
@@ -446,7 +447,7 @@ export default {
       if (!Array.isArray(event)) {
         event = [event]
       }
-      const res = event.filter((item) => {
+      const res = event.filter(item => {
         const name = item.name || item.url
         return test.image(name) || isOfficeFile(name)
       })
@@ -459,7 +460,7 @@ export default {
       // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
       let lists = [].concat(event.file)
       let fileListLen = this.fileList.length
-      lists.forEach((item) => {
+      lists.forEach(item => {
         this.fileList.push({
           ...item,
           status: 'uploading',

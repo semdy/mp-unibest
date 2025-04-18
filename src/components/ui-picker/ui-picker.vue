@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { mpMixin } from '@/uni_modules/uview-plus/libs/mixin/mpMixin'
+import mpMixin from '@/uni_modules/uv-ui-tools/libs/mixin/mpMixin'
 
 export default {
   name: 'ui-picker',
@@ -123,13 +123,13 @@ export default {
     },
     searchedColumns() {
       const result = this.keyword
-        ? this.innerColumns.map((it) => {
-            return it.filter((item) => item.label.includes(this.keyword))
+        ? this.innerColumns.map(it => {
+            return it.filter(item => item.label.includes(this.keyword))
           })
         : this.innerColumns
 
       if (this.emptyOption) {
-        return result.map((it) => {
+        return result.map(it => {
           return [this.emptyOption, ...it]
         })
       }
@@ -140,24 +140,22 @@ export default {
       const result = this.defaultIndex.map((it, index) => this.searchedColumns[index][it])
       if (
         this.emptyOption &&
-        result.every((item) => item === undefined || item.value === this.emptyOption.value)
+        result.every(item => item === undefined || item.value === this.emptyOption.value)
       ) {
         return ''
       }
       return result
         .filter(Boolean)
-        .map((it) => it.label)
+        .map(it => it.label)
         .join(',')
     },
   },
   methods: {
     getDefaultIndex(val) {
       if (Array.isArray(val)) {
-        return val.map((it, i) =>
-          this.searchedColumns[i].findIndex((column) => column.value === it),
-        )
+        return val.map((it, i) => this.searchedColumns[i].findIndex(column => column.value === it))
       }
-      return [this.searchedColumns[0]?.findIndex((column) => column.value === val)]
+      return [this.searchedColumns[0]?.findIndex(column => column.value === val)]
     },
     showPicker() {
       this.visible = true
@@ -174,7 +172,7 @@ export default {
       this.$emit('cancel')
     },
     handleChange(result) {
-      const value = result.value.map((it) => it.value)
+      const value = result.value.map(it => it.value)
       // this.$emit('update:modelValue', this.isMultiple ? value : value[0])
       this.$emit('change', result)
     },
@@ -187,7 +185,7 @@ export default {
       this.$emit('confirm', {
         ...result,
         value,
-        indexs: result.indexs.map((it) => (it === -1 ? 0 : it)),
+        indexs: result.indexs.map(it => (it === -1 ? 0 : it)),
       })
     },
   },

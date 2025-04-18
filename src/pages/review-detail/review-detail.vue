@@ -5,13 +5,13 @@
       <ui-card>
         <view class="page-info">
           <view class="page-info-item">
-            <view class="page-info-item-title"> 销售数量 </view>
+            <view class="page-info-item-title">销售数量</view>
             <view class="page-info-item-content font-lg">
               {{ $numberFormat(queryOptions.total_sales_qty) }}
             </view>
           </view>
           <view class="page-info-item">
-            <view class="page-info-item-title"> 已核实数量 </view>
+            <view class="page-info-item-title">已核实数量</view>
             <view class="page-info-item-content font-lg color-red">
               {{ $numberFormat(queryOptions.pass_qty) }}
             </view>
@@ -22,21 +22,21 @@
         <ui-card>
           <view class="page-info">
             <view class="page-info-item">
-              <view class="page-info-item-title"> 医院名称 </view>
-              <view class="page-info-item-content"> {{ queryOptions.customer_name }} </view>
+              <view class="page-info-item-title">医院名称</view>
+              <view class="page-info-item-content">{{ queryOptions.customer_name }}</view>
             </view>
           </view>
         </ui-card>
         <ui-card>
           <view class="page-info">
             <view class="page-info-item">
-              <view class="page-info-item-title"> 所属月份 </view>
-              <view class="page-info-item-content"> {{ queryOptions.sales_month }} </view>
+              <view class="page-info-item-title">所属月份</view>
+              <view class="page-info-item-content">{{ queryOptions.sales_month }}</view>
             </view>
           </view>
         </ui-card>
       </view>
-      <view class="section-title"> 销售明细 </view>
+      <view class="section-title">销售明细</view>
       <uv-tabs
         :list="tabs"
         v-model:current="result_type"
@@ -58,11 +58,7 @@
       @scrolltolower="loadMore"
     >
       <view class="page-container" style="padding-top: 0">
-        <ui-card
-          @click="toDetail(item)"
-          v-for="(item, index) in summaryDetail.sales_detail"
-          :key="index"
-        >
+        <ui-card @click="toDetail(item)" v-for="(item, index) in sales_detail" :key="index">
           <template #title>
             <view v-if="item.audit_result">
               <ui-alert
@@ -89,18 +85,18 @@
             </ui-alert>
             <ui-divider />
             <view class="justify-between">
-              <ui-label-value label="产品名称"> {{ item.product_name }} </ui-label-value>
-              <ui-label-value label="销量"> {{ item.sales_qty }} </ui-label-value>
+              <ui-label-value label="产品名称">{{ item.product_name }}</ui-label-value>
+              <ui-label-value label="销量">{{ item.sales_qty }}</ui-label-value>
             </view>
             <view class="justify-between">
-              <ui-label-value label="销量日期"> {{ item.sales_date }} </ui-label-value>
-              <ui-label-value label="差异"> {{ item.diff_qty }} </ui-label-value>
+              <ui-label-value label="销量日期">{{ item.sales_date }}</ui-label-value>
+              <ui-label-value label="差异">{{ item.diff_qty }}</ui-label-value>
             </view>
           </template>
         </ui-card>
       </view>
       <uv-loadmore
-        v-if="summaryDetail.sales_detail.length === 0 || currentPage > 1"
+        v-if="sales_detail.length === 0 || currentPage > 1"
         :status="loadingPage ? 'loading' : 'more'"
         :nomoreText="currentPage === 1 ? '暂无数据' : '没有更多数据了'"
         margin-top="0"
@@ -112,10 +108,11 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from 'pinia'
 import { shareMixins } from '@/config'
 import { showLoading, hideLoading, objectToQueryString, getNode } from '@/utils/util'
 import { auditStatusMap, auditStatusStyleMap } from '@/utils/enum'
+import { useSummaryDetailStore } from '@/store'
 
 export default {
   data() {
@@ -123,26 +120,26 @@ export default {
       tabs: [
         { name: '全部', value: 0 },
         { name: '已核实', value: 1 },
-        { name: '未核实', value: 2 }
+        { name: '未核实', value: 2 },
       ],
       result_type: 0,
       queryOptions: {},
       currentPage: 1,
       loadingPage: true,
-      loading: true
+      loading: true,
     }
   },
   mixins: [shareMixins],
-  computed: mapState({
-    summaryDetail: state => state.summaryDetail.data
-  }),
+  computed: {
+    ...mapState(useSummaryDetailStore, ['sales_detail']),
+  },
   watch: {
     result_type() {
       showLoading()
       this.refreshData().then(() => {
         this.scrollViewContext?.scrollTo({ top: 0 })
       })
-    }
+    },
   },
   methods: {
     toDetail(event) {
@@ -152,10 +149,10 @@ export default {
         pass_qty: event.pass_qty,
         customer_name: this.queryOptions.customer_name,
         sales_date: event.sales_date,
-        product_name: event.product_name
+        product_name: event.product_name,
       })
       uni.navigateTo({
-        url: '/pages/review-diff/review-diff?' + queryString
+        url: '/pages/review-diff/review-diff?' + queryString,
       })
     },
     async requestData() {
@@ -164,11 +161,12 @@ export default {
       }
       try {
         this.loading = true
-        const pageData = await this.$store.dispatch('summaryDetail/getDetailSales', {
+        const summaryDetailStore = useSummaryDetailStore()
+        const pageData = await summaryDetailStore.getDetailSales({
           ...this.queryOptions,
           result_type: this.result_type,
           page: this.currentPage,
-          page_size: 20
+          page_size: 20,
         })
         if (pageData.length < 20) {
           this.loadingPage = false
@@ -202,7 +200,7 @@ export default {
     async getScrollViewContext() {
       await this.$nextTick()
       this.scrollViewContext = await getNode('#scrollview')
-    }
+    },
   },
   onLoad(options) {
     this.queryOptions = options
@@ -210,7 +208,7 @@ export default {
   },
   onReady() {
     this.getScrollViewContext()
-  }
+  },
 }
 </script>
 
