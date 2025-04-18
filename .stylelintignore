@@ -1,0 +1,6 @@
+public/**/*.css
+src/static/**/*.css
+src/static/**/*.scss
+src/themes/**/*.less
+templates/**/*.css
+uni_modules
