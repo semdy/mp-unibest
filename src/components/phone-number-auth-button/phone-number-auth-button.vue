@@ -17,7 +17,6 @@
 import { getAuthorizedInfo } from '@/api'
 import { toast } from '@/utils/util'
 import { mapState } from 'pinia'
-import mpMixin from '@/uni_modules/uv-ui-tools/libs/mixin/mpMixin'
 import { useUserStore } from '@/store'
 
 export default {
@@ -31,11 +30,10 @@ export default {
       type: String,
     },
   },
-  mixins: [mpMixin],
   computed: {
     ...mapState(useUserStore, ['userInfo']),
     className() {
-      return this['class']
+      return this.class
     },
   },
   methods: {

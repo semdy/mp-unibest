@@ -17,16 +17,16 @@ export default {
   name: 'ui-card',
   props: {
     title: {
-      type: String
-    }
+      type: String,
+    },
   },
   methods: {
     clickHandler(e) {
       // #ifdef MP
       this.$emit('click', e)
       // #endif
-    }
-  }
+    },
+  },
 }
 </script>
 

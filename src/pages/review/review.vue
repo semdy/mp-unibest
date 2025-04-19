@@ -1,7 +1,13 @@
-<route lang="json5" type="home"></route>
+<route lang="json5" type="home">
+{
+  style: {
+    navigationBarTitleText: '',
+  },
+}
+</route>
 <template>
   <view class="home-page g-page bg1 full-bg full-page">
-    <view style="height: 44px; flex: none">
+    <view style="flex: none; height: 44px">
       <uni-status-bar />
     </view>
     <view class="page-container">
@@ -103,13 +109,13 @@
                   </view>
                 </view>
               </template>
-              <uv-loading-icon
+              <up-loading-icon
                 v-else
                 mode="circle"
                 size="40"
                 timing-function="linear"
                 class="stats-chart-loading"
-              ></uv-loading-icon>
+              ></up-loading-icon>
             </view>
           </view>
         </view>
@@ -175,7 +181,7 @@
                 </template>
               </ui-card>
             </view>
-            <uv-loadmore
+            <up-loadmore
               v-if="summaryData.audit_info.length === 0 || currentPage > 1"
               :status="loadingPage ? 'loading' : 'more'"
               :nomoreText="currentPage === 1 ? '暂无数据' : '没有更多数据了'"
@@ -218,14 +224,14 @@ export default {
   computed: {
     ...mapState(usePickerDataStore, {
       pickerData: 'pickerData',
-      endDate: store => {
+      endDate(store) {
         if (!this.quarter) return null
         return store.pickerData.audit_quarters.find(item => item.value === this.quarter)?.end_date
       },
-      dealerName: store => {
+      dealerName(store) {
         return store.pickerData.audit_dealers.find(item => item.value === this.dealer)?.label
       },
-      quarterName: store => {
+      quarterName(store) {
         return store.pickerData.audit_quarters.find(item => item.value === this.quarter)?.label
       },
     }),
@@ -412,7 +418,7 @@ export default {
       if (this.canvasOpacity === 0 && !this.moveOffset) {
         this.canvasOpacity = 1
       }
-      this.ringChart = new wxCharts({
+      this.ringChart = new WxCharts({
         animation: true,
         canvasId: 'ringCanvas',
         type: 'ring',
@@ -486,10 +492,10 @@ export default {
 }
 
 .page-title {
-  font-size: 24px;
-  color: #fff;
-  font-weight: 600;
   padding: 16px;
+  font-size: 24px;
+  font-weight: 600;
+  color: #fff;
 }
 
 .page-filter {
@@ -502,9 +508,9 @@ export default {
 
 .review-popup {
   position: absolute !important;
-  left: 0;
   top: 0;
   right: 0;
+  left: 0;
   /* #ifdef H5 */
   height: calc(100vh - 107px - 50px);
   /* #endif */
@@ -517,8 +523,8 @@ export default {
   }
 
   ::v-deep .ui-popup-body {
-    flex: 1;
     display: flex;
+    flex: 1;
     flex-direction: column;
     padding-bottom: 3px;
     overflow: hidden;
@@ -526,8 +532,8 @@ export default {
 
   .page-scrollview {
     width: calc(100% + 32px);
-    margin-left: -16px;
     margin-right: -16px;
+    margin-left: -16px;
   }
 }
 
@@ -550,12 +556,12 @@ export default {
   }
 
   &:not(:last-child)::after {
-    content: '';
     position: absolute;
-    right: 0;
     top: 20%;
+    right: 0;
     bottom: 20%;
     width: 1px;
+    content: '';
     background-color: rgba(255, 255, 255, 0.3);
   }
 
@@ -567,10 +573,10 @@ export default {
 }
 
 .page-info-item-title {
+  margin-bottom: 8px;
   font-size: 13px;
   color: rgba(255, 255, 255, 0.7);
   white-space: nowrap;
-  margin-bottom: 8px;
 }
 
 .page-info-item-content {
@@ -593,20 +599,20 @@ export default {
   }
 
   &:not(:last-child)::after {
-    content: '';
     position: absolute;
-    right: 0;
     top: 12%;
+    right: 0;
     bottom: 12%;
     width: 1px;
+    content: '';
     background-color: rgba(0, 0, 0, 0.06);
   }
 }
 
 .stats-item-title {
+  margin-bottom: 6px;
   font-size: 13px;
   color: rgba(0, 0, 0, 0.6);
-  margin-bottom: 6px;
 }
 
 .stats-item-content {
@@ -615,11 +621,11 @@ export default {
 }
 
 .stats-chart-title {
+  margin-bottom: 15px;
   font-size: 17px;
+  font-weight: bold;
   color: #000;
   text-align: center;
-  font-weight: bold;
-  margin-bottom: 15px;
 }
 
 .stats-chart-info {
@@ -631,8 +637,8 @@ export default {
 
 .stats-chart-loading {
   position: absolute;
-  left: 50%;
   top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
 }
 
@@ -643,8 +649,8 @@ export default {
 
 .stats-chart-label {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 8px;
 }
 
@@ -654,28 +660,28 @@ export default {
   white-space: nowrap;
 
   &::before {
-    content: '';
     display: inline-block;
     width: 4px;
     height: 4px;
-    border-radius: 1px;
-    background-color: var(--color, #f42850);
     margin-right: 5px;
     vertical-align: 2px;
+    content: '';
+    background-color: var(--color, #f42850);
+    border-radius: 1px;
   }
 }
 
 .stats-chart-label-value {
-  color: #000;
   font-weight: bold;
+  color: #000;
   white-space: nowrap;
 }
 
 .stats-chart {
-  flex: 1;
   display: flex;
-  justify-content: center;
+  flex: 1;
   align-items: center;
+  justify-content: center;
 
   image {
     width: 100%;
@@ -684,18 +690,18 @@ export default {
 }
 
 .stats-chart-canvas {
-  padding: 6px;
   width: 142px;
   height: 142px;
+  padding: 6px;
+  overflow: hidden;
   border-radius: 50%;
   box-shadow: 0 0 0 6px rgba(43, 162, 147, 0.16) inset;
-  overflow: hidden;
 }
 
 .review-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 10px;
 }
 

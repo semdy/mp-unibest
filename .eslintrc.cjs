@@ -68,10 +68,14 @@ module.exports = {
     'no-undef': 'off',
     'no-unused-vars': 'off',
     'no-param-reassign': 'off',
+    camelcase: 'off',
     '@typescript-eslint/no-unused-vars': 'off',
     // 避免 `eslint` 对于 `typescript` 函数重载的误报
     'no-redeclare': 'off',
     '@typescript-eslint/no-redeclare': 'error',
+    '@typescript-eslint/no-this-alias': 'off',
+    'prefer-promise-reject-errors': 'off',
+    'prefer-rest-params': 'off',
   },
   // eslint-import-resolver-typescript 插件，@see https://www.npmjs.com/package/eslint-import-resolver-typescript
   settings: {

@@ -155,7 +155,7 @@
             <view class="diff-switch">
               <ui-alert type="" plain bold>
                 <text style="font-size: 15px; margin-right: 12px">长期有效</text>
-                <uv-switch
+                <up-switch
                   v-model="data.approve_timeliness"
                   :disabled="data.approval_state === 1 || data.approval_state === 2"
                   active-color="#2ba293"
@@ -181,7 +181,7 @@
           </ui-divider>
           <view class="upload-wrapper">
             <view style="flex: none">
-              <uv-upload
+              <up-upload
                 ref="uploadRef"
                 :width="70"
                 :height="70"
@@ -206,7 +206,7 @@
                   <ui-icon name="plus" />
                 </view>
                 <view v-else style="display: none"></view>
-              </uv-upload>
+              </up-upload>
             </view>
             <view class="upload-explain">仅支持 png、jpg、xls、word</view>
           </view>
@@ -218,7 +218,7 @@
       class="page-footer flex-row"
       v-if="data.is_approval_permission && (data.approval_state === 1 || data.approval_state === 2)"
     >
-      <uv-button
+      <up-button
         type="error"
         shape="square"
         plain
@@ -226,7 +226,7 @@
         @click="showReject"
         text="驳回"
       />
-      <uv-button
+      <up-button
         type="primary"
         shape="square"
         class="page-footer-btn"
@@ -239,10 +239,10 @@
       v-if="data.is_approval_permission && (data.approval_state === 0 || data.approval_state === 4)"
       class="page-footer flex-row"
     >
-      <uv-button type="primary" shape="square" plain class="page-footer-btn" @click="handleCancel">
+      <up-button type="primary" shape="square" plain class="page-footer-btn" @click="handleCancel">
         取消
-      </uv-button>
-      <uv-button
+      </up-button>
+      <up-button
         type="primary"
         shape="square"
         class="page-footer-btn"
@@ -253,13 +253,13 @@
     </view>
 
     <view style="flex: none">
-      <uv-popup v-model:show="showPopup" class="approve-popup">
+      <up-popup v-model:show="showPopup" class="approve-popup">
         <view class="approve-content">
           <view class="approve-title">{{ isApprove ? '审批通过' : '驳回' }}原因</view>
           <textarea v-model="approve_desc" class="approve-editor" placeholder="请填写..." />
         </view>
         <view class="page-footer flex-row">
-          <uv-button
+          <up-button
             type="info"
             shape="square"
             plain
@@ -267,7 +267,7 @@
             @click="showPopup = false"
             text="取消"
           />
-          <uv-button
+          <up-button
             :type="isApprove ? 'primary' : 'error'"
             shape="square"
             class="page-footer-btn"
@@ -276,8 +276,8 @@
             text="确定"
           />
         </view>
-      </uv-popup>
-      <uv-action-sheet
+      </up-popup>
+      <up-action-sheet
         :actions="actionList"
         v-model:show="actionShow"
         @select="handleActionSelect"
@@ -288,7 +288,7 @@
 
 <script>
 import { shareMixins } from '@/config'
-import * as test from '@/uni_modules/uv-ui-tools/libs/function/test'
+import test from '@/uni_modules/uview-plus/libs/function/test'
 import {
   getDiffRecordReportDetailApi,
   submitDifferenceApi,
@@ -458,7 +458,7 @@ export default {
     },
     async afterRead(event) {
       // 当设置 mutiple 为 true 时, file 为数组格式，否则为对象格式
-      let lists = [].concat(event.file)
+      const lists = [].concat(event.file)
       let fileListLen = this.fileList.length
       lists.forEach(item => {
         this.fileList.push({
@@ -623,7 +623,7 @@ export default {
 }
 
 .approve-popup {
-  & ::v-deep .uv-popup__content {
+  & ::v-deep .u-popup__content {
     border-radius: 12px 12px 0 0;
   }
 }

@@ -3,7 +3,7 @@
 module.exports = {
   root: true,
   extends: [
-    // stylelint-config-standard 替换成了更宽松的 stylelint-config-recommended
+    // 'stylelint-config-standard', 替换成了更宽松的 stylelint-config-recommended
     'stylelint-config-recommended',
     // stylelint-config-standard-scss 替换成了更宽松的 stylelint-config-recommended-scss
     'stylelint-config-recommended-less',
@@ -45,12 +45,16 @@ module.exports = {
       },
     ],
     // 处理小程序page标签不认识的问题
-    'selector-type-no-unknown': [
-      true,
-      {
-        ignoreTypes: ['page'],
-      },
-    ],
+    // 'selector-type-no-unknown': [
+    //   true,
+    //   {
+    //     ignoreTypes: ['page'],
+    //   },
+    // ],
+    'selector-type-no-unknown': null,
+    'no-descending-specificity': null,
+    'order/properties-order': null,
+    'declaration-property-value-no-unknown': null,
     'comment-empty-line-before': 'never', // never|always|always-multi-line|never-multi-line
     'custom-property-empty-line-before': 'never',
     'no-empty-source': null,

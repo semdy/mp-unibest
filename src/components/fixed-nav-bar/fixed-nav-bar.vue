@@ -5,7 +5,7 @@
     :border="false"
     :dark="dark"
     status-bar
-    :left-icon="canBack ? 'left' : ''"
+    :left-icon="canBack ? 'angle-left' : ''"
     background-color="transparent"
     :title="title"
     @click-left="onBack"
@@ -27,16 +27,16 @@ export default {
   name: 'FixedNavBar',
   props: {
     title: {
-      type: String
+      type: String,
     },
     dark: {
       type: Boolean,
-      default: false
+      default: false,
     },
     canBack: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
   methods: {
     onBack() {
@@ -49,7 +49,7 @@ export default {
       /* #ifndef H5 */
       uni.navigateBack()
       /* #endif */
-    }
-  }
+    },
+  },
 }
 </script>

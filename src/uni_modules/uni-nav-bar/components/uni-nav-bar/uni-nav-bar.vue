@@ -9,7 +9,7 @@
 					:style="{width:leftIconWidth}">
 					<slot name="left">
 						<view class="uni-navbar__content_view" v-if="leftIcon.length > 0">
-							<uni-icons :color="themeColor" :type="leftIcon" size="20" />
+							<ui-icon :color="themeColor" :name="leftIcon" size="20" />
 						</view>
 						<view :class="{ 'uni-navbar-btn-icon-left': !leftIcon.length > 0 }" class="uni-navbar-btn-text"
 							v-if="leftText.length">
@@ -29,7 +29,7 @@
 					:style="{width:rightIconWidth}">
 					<slot name="right">
 						<view v-if="rightIcon.length">
-							<uni-icons :color="themeColor" :type="rightIcon" size="22" />
+							<ui-icon :color="themeColor" :name="rightIcon" size="22" />
 						</view>
 						<view class="uni-navbar-btn-text" v-if="rightText.length && !rightIcon.length">
 							<text class="uni-nav-bar-right-text" :style="{ color: themeColor}">{{ rightText }}</text>

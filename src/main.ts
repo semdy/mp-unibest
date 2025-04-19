@@ -4,15 +4,18 @@ import 'virtual:uno.css'
 import { createSSRApp } from 'vue'
 
 import App from './App.vue'
+import uviewPlus from '@/uni_modules/uview-plus'
 import { prototypeInterceptor, requestInterceptor, routeInterceptor } from './interceptors'
-import { initRequest } from '@/utils/request2'
+import { initRequest } from '@/utils/luch-request'
 import i18n from './locale'
 import store from './store'
 
 export function createApp() {
   const app = createSSRApp(App)
+
   app.use(store)
   app.use(i18n)
+  app.use(uviewPlus)
   // app.use(routeInterceptor)
   // app.use(requestInterceptor)
   app.use(prototypeInterceptor)

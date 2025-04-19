@@ -15,8 +15,6 @@
 </template>
 
 <script>
-import mpMixin from '@/uni_modules/uv-ui-tools/libs/mixin/mpMixin'
-
 const getVal = val => {
   const reg = /^[0-9]*$/g
   return typeof val === 'number' || reg.test(val) ? val + 'px' : val
@@ -25,7 +23,6 @@ const getVal = val => {
 export default {
   name: 'UIIcon',
   emits: ['click'],
-  mixins: [mpMixin],
   props: {
     name: {
       type: String,
@@ -57,7 +54,7 @@ export default {
       return /\.(png|svg|gif|jpe?g|bmp|webp)$/i.test(this.name)
     },
     className() {
-      return this['class']
+      return this.class
     },
   },
   methods: {

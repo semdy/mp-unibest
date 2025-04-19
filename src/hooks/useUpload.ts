@@ -19,12 +19,12 @@ export default function useUpload<T = string>(formData: Record<string, any> = {}
     uni.chooseMedia({
       count: 1,
       mediaType: ['image'],
-      success: (res) => {
+      success: res => {
         loading.value = true
         const tempFilePath = res.tempFiles[0].tempFilePath
         uploadFile<T>({ tempFilePath, formData, data, error, loading })
       },
-      fail: (err) => {
+      fail: err => {
         console.error('uni.chooseMedia err->', err)
         error.value = true
       },
@@ -33,12 +33,12 @@ export default function useUpload<T = string>(formData: Record<string, any> = {}
     // #ifndef MP-WEIXIN
     uni.chooseImage({
       count: 1,
-      success: (res) => {
+      success: res => {
         loading.value = true
         const tempFilePath = res.tempFilePaths[0]
         uploadFile<T>({ tempFilePath, formData, data, error, loading })
       },
-      fail: (err) => {
+      fail: err => {
         console.error('uni.chooseImage err->', err)
         error.value = true
       },
@@ -55,10 +55,10 @@ function uploadFile<T>({ tempFilePath, formData, data, error, loading }) {
     filePath: tempFilePath,
     name: 'file',
     formData,
-    success: (uploadFileRes) => {
+    success: uploadFileRes => {
       data.value = uploadFileRes.data as T
     },
-    fail: (err) => {
+    fail: err => {
       console.error('uni.uploadFile err->', err)
       error.value = true
     },

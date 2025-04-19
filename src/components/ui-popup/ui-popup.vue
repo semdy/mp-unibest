@@ -16,12 +16,9 @@
 </template>
 
 <script>
-import mpMixin from '@/uni_modules/uv-ui-tools/libs/mixin/mpMixin'
-
 export default {
   name: 'ui-popup',
   emits: ['start', 'move', 'end', 'slideend'],
-  mixins: [mpMixin],
   props: {
     draggable: {
       type: Boolean,
@@ -217,17 +214,17 @@ export default {
 <style lang="scss">
 .ui-popup {
   position: relative;
+  z-index: 10;
   display: flex;
   flex-direction: column;
   width: 100%;
-  border-radius: 12px 12px 0 0;
-  background-color: #fff;
   overflow: hidden;
-  z-index: 10;
+  background-color: #fff;
+  border-radius: 12px 12px 0 0;
 
   &-header {
-    height: 45px;
     flex-shrink: 0;
+    height: 45px;
   }
 
   &.with-handler {
@@ -239,11 +236,11 @@ export default {
       text-align: center;
 
       &::after {
-        content: '';
         display: inline-block;
-        margin-top: 12px;
         width: 53px;
         height: 6px;
+        margin-top: 12px;
+        content: '';
         background: #dfdfdf;
         border-radius: 3px;
       }

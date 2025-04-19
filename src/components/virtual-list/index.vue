@@ -14,12 +14,12 @@ for (let i = 0; i < 10000; i++) {
 
 export default {
   components: {
-    VirtualList
+    VirtualList,
   },
   data() {
     return {
-      data: d
+      data: d,
     }
-  }
+  },
 }
 </script>

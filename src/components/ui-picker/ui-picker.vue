@@ -8,7 +8,7 @@
         </view>
       </slot>
     </view>
-    <uv-picker
+    <up-picker
       ref="pickerRef"
       :show="visible"
       :title="placeholder"
@@ -23,7 +23,7 @@
     >
       <template #toolbar-bottom v-if="searchable">
         <view class="ui-picker-search">
-          <uv-search
+          <up-search
             :show-action="false"
             reverse
             bg-color="#fff"
@@ -32,20 +32,17 @@
             :height="36"
             :placeholder="searchPlaceholder"
             v-model="keyword"
-          ></uv-search>
+          ></up-search>
         </view>
       </template>
-    </uv-picker>
+    </up-picker>
   </view>
 </template>
 
 <script>
-import mpMixin from '@/uni_modules/uv-ui-tools/libs/mixin/mpMixin'
-
 export default {
   name: 'ui-picker',
   emits: ['close', 'open', 'cancel', 'confirm', 'change', 'update:modelValue'],
-  mixins: [mpMixin],
   props: {
     columns: {
       type: Array,
@@ -104,9 +101,6 @@ export default {
       }
       this.$emit('open', val)
     },
-    noop() {
-      // eslint-disable-line
-    },
   },
   computed: {
     isMultiple() {
@@ -151,6 +145,7 @@ export default {
     },
   },
   methods: {
+    noop() {},
     getDefaultIndex(val) {
       if (Array.isArray(val)) {
         return val.map((it, i) => this.searchedColumns[i].findIndex(column => column.value === it))

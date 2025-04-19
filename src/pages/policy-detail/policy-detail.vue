@@ -23,16 +23,16 @@
                 </view>
               </view> -->
               <view class="page-info-item">
-                <view class="page-info-item-title"> 返利值（含税） </view>
-                <view class="page-info-item-content"> {{ queryOptions.rebate_amount }} </view>
+                <view class="page-info-item-title">返利值（含税）</view>
+                <view class="page-info-item-content">{{ queryOptions.rebate_amount }}</view>
               </view>
             </view>
           </ui-card>
           <ui-card>
             <view class="page-info">
               <view class="page-info-item">
-                <view class="page-info-item-title"> 数据更新时间 </view>
-                <view class="page-info-item-content"> {{ data.update_time }} </view>
+                <view class="page-info-item-title">数据更新时间</view>
+                <view class="page-info-item-content">{{ data.update_time }}</view>
               </view>
             </view>
           </ui-card>
@@ -86,7 +86,7 @@ export default {
   data() {
     return {
       queryOptions: {},
-      data: {}
+      data: {},
     }
   },
   mixins: [shareMixins],
@@ -99,12 +99,12 @@ export default {
       } finally {
         hideLoading()
       }
-    }
+    },
   },
   onLoad(options) {
     this.queryOptions = options
     this.getPolicyReportDetail()
-  }
+  },
 }
 </script>
 
@@ -152,7 +152,6 @@ export default {
   display: flex;
   margin-top: 12px;
   margin-bottom: 12px;
-
   /* #ifdef MP */
   ui-card {
     min-height: 81px;

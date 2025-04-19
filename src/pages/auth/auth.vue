@@ -6,7 +6,7 @@
       <view>以继续使用</view>
     </view>
   </view>
-  <uv-button
+  <up-button
     open-type="getUserInfo"
     type="primary"
     size="large"
@@ -16,7 +16,7 @@
     lang="zh_CN"
   >
     授权用户信息
-  </uv-button>
+  </up-button>
 </template>
 
 <script>

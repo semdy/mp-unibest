@@ -31,7 +31,7 @@ onLaunch(() => {
   })
   authorize.onLoginExpired(toLogin)
   /* #ifdef MP-WEIXIN */
-  //全局监听路由切换，实现全局设置分享内容
+  // 全局监听路由切换，实现全局设置分享内容
   // wx.onAppRoute(routeChangeHandle)
   // routeChangeHandle()
   /* #endif */
@@ -53,8 +53,7 @@ onHide(() => {
 </style> -->
 
 <style lang="scss">
-@import './app.scss';
-
+@import './app';
 /* stylelint-disable selector-type-no-unknown */
 button::after {
   border: none;

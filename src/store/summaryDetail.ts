@@ -18,7 +18,6 @@ export const useSummaryDetailStore = defineStore('summaryDetail', () => {
   }
 
   async function getDetailSales(params) {
-    // @ts-ignore
     const { sales_detail = [] } = await getDetailSalesApi(params)
     if (params.page === 1) {
       setData(sales_detail)

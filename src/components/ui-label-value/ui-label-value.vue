@@ -14,21 +14,21 @@ export default {
   name: 'ui-label-value',
   props: {
     label: {
-      type: String
+      type: String,
     },
     valueBold: {
       type: Boolean,
-      default: false
+      default: false,
     },
     labelColor: {
       type: String,
-      default: ''
+      default: '',
     },
     inline: {
       type: Boolean,
-      default: false
-    }
-  }
+      default: false,
+    },
+  },
 }
 </script>
 

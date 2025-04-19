@@ -77,6 +77,7 @@
         }
       }
     },
+    "renderer": "native",
     "compatible": {
       "ignoreVersion": true
     }
@@ -85,13 +86,50 @@
   "mp-weixin": {
     "appid": "wx4e7c34bfea2e1032",
     "setting": {
-      "urlCheck": false
+      "urlCheck": false,
+      "es6": false,
+      "postcss": false,
+      "minified": false,
+      "bigPackageSizeSupport": true,
+      "coverView": true,
+      "autoAudits": false,
+      "checkInvalidKey": true,
+      "checkSiteMap": true,
+      "uploadWithSourceMap": true,
+      "babelSetting": {
+        "ignore": [],
+        "disablePlugins": [],
+        "outputPath": ""
+      },
+      "minifyWXSS": false,
+      "minifyWXML": false,
+      "ignoreUploadUnusedFiles": true,
+      "uglifyFileName": true
     },
-    "usingComponents": true
+    "usingComponents": true,
+    "compileType": "miniprogram",
+    "projectname": "票审小程序",
+    "miniprogramRoot": "",
+    "libVersion": "2.31.1",
+    "editorSetting": {
+      "tabIndent": "insertSpaces",
+      "tabSize": 2
+    },
+    "optimization": {
+      "subPackages": true
+    },
+    "mergeVirtualHostAttributes": true,
+    "lazyCodeLoading": "requiredComponents"
   },
   "mp-alipay": {
     "usingComponents": true,
-    "styleIsolation": "shared"
+    "projectname": "票审小程序",
+    "styleIsolation": "shared",
+    "compileType": "mini",
+    "miniprogramRoot": "",
+    "mergeVirtualHostAttributes": true,
+    "lazyCodeLoading": "requiredComponents",
+    "enableParallelLoader": true
   },
   "mp-baidu": {
     "usingComponents": true
@@ -104,6 +142,12 @@
   },
   "vueVersion": "3",
   "h5": {
+    "optimization": {
+      "prefetch": true,
+      "treeShaking": {
+        "enable": true
+      }
+    },
     "router": {
       "base": "/"
     }

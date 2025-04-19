@@ -22,6 +22,12 @@ export default defineManifestConfig({
   transformPx: false,
   locale: VITE_FALLBACK_LOCALE, // 'zh-Hans'
   h5: {
+    optimization: {
+      prefetch: true,
+      treeShaking: {
+        enable: true,
+      },
+    },
     router: {
       base: VITE_APP_PUBLIC_BASE,
     },
@@ -30,6 +36,7 @@ export default defineManifestConfig({
   'app-plus': {
     usingComponents: true,
     nvueStyleCompiler: 'uni-app',
+    renderer: 'native',
     compilerVersion: 3,
     compatible: {
       ignoreVersion: true,
@@ -111,15 +118,51 @@ export default defineManifestConfig({
   /* 小程序特有相关 */
   'mp-weixin': {
     appid: VITE_WX_APPID,
+    compileType: 'miniprogram',
+    projectname: '票审小程序',
+    miniprogramRoot: '',
+    libVersion: '2.31.1',
+    editorSetting: {
+      tabIndent: 'insertSpaces',
+      tabSize: 2,
+    },
     setting: {
       urlCheck: false,
+      es6: false,
+      postcss: false,
+      minified: false,
+      bigPackageSizeSupport: true,
+      coverView: true,
+      autoAudits: false,
+      checkInvalidKey: true,
+      checkSiteMap: true,
+      uploadWithSourceMap: true,
+      babelSetting: {
+        ignore: [],
+        disablePlugins: [],
+        outputPath: '',
+      },
+      minifyWXSS: false,
+      minifyWXML: false,
+      ignoreUploadUnusedFiles: true,
+      uglifyFileName: true,
+    },
+    optimization: {
+      subPackages: true,
     },
     usingComponents: true,
-    // __usePrivacyCheck__: true,
+    mergeVirtualHostAttributes: true,
+    lazyCodeLoading: 'requiredComponents',
   },
   'mp-alipay': {
+    projectname: '票审小程序',
     usingComponents: true,
     styleIsolation: 'shared',
+    compileType: 'mini',
+    miniprogramRoot: '',
+    mergeVirtualHostAttributes: true,
+    lazyCodeLoading: 'requiredComponents',
+    enableParallelLoader: true,
   },
   'mp-baidu': {
     usingComponents: true,

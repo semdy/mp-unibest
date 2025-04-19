@@ -80,7 +80,7 @@
           </template>
         </ui-card>
       </view>
-      <uv-loadmore
+      <up-loadmore
         v-if="invoiceData.length === 0 || currentPage > 1"
         :status="loadingPage ? 'loading' : 'more'"
         :nomoreText="currentPage === 1 ? '暂无数据' : '没有更多数据了'"
@@ -182,7 +182,7 @@ export default {
 }
 
 .page-info-item-title {
-  font-size: 13spx;
+  font-size: 13px;
   color: rgba(0, 0, 0, 0.5);
   white-space: nowrap;
   margin-bottom: 12px;
@@ -192,7 +192,6 @@ export default {
   display: flex;
   margin-top: 12px;
   margin-bottom: 12px;
-
   /* #ifdef MP */
   ui-card {
     min-height: 81px;

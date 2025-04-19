@@ -78,7 +78,7 @@
               </view>
             </ui-card>
           </view>
-          <uv-loadmore
+          <up-loadmore
             v-if="policy_info.length === 0 || currentPage > 1"
             :status="loadingPage ? 'loading' : 'more'"
             :nomoreText="currentPage === 1 ? '暂无数据' : '没有更多数据了'"

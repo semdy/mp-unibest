@@ -37,7 +37,7 @@
         </ui-card>
       </view>
       <view class="section-title">销售明细</view>
-      <uv-tabs
+      <up-tabs
         :list="tabs"
         v-model:current="result_type"
         line-color="#2ba293"
@@ -95,7 +95,7 @@
           </template>
         </ui-card>
       </view>
-      <uv-loadmore
+      <up-loadmore
         v-if="sales_detail.length === 0 || currentPage > 1"
         :status="loadingPage ? 'loading' : 'more'"
         :nomoreText="currentPage === 1 ? '暂无数据' : '没有更多数据了'"
@@ -257,7 +257,6 @@ page {
 .card-group {
   display: flex;
   margin-top: 12px;
-
   /* #ifdef MP */
   ui-card {
     min-height: 81px;

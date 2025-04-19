@@ -3,18 +3,18 @@
     <fixed-nav-bar dark :can-back="false" title="手机号登录" />
     <view class="page-container">
       <ui-card class="login-card">
-        <uv-input placeholder="请输入手机号" border="surround" v-model="phone" class="f-input" />
-        <uv-input placeholder="请输入验证码" border="surround" v-model="code" class="l-input">
+        <up-input placeholder="请输入手机号" border="surround" v-model="phone" class="f-input" />
+        <up-input placeholder="请输入验证码" border="surround" v-model="code" class="l-input">
           <template #suffix>
-            <uv-code ref="uCodeRef" seconds="60" changeText="X秒重新获取" @change="codeChange" />
-            <uv-button @click="getCode" :text="tips" type="success" size="mini">
+            <up-code ref="uCodeRef" seconds="60" changeText="X秒重新获取" @change="codeChange" />
+            <up-button @click="getCode" :text="tips" type="success" size="mini">
               {{ tips }}
-            </uv-button>
+            </up-button>
           </template>
-        </uv-input>
+        </up-input>
       </ui-card>
       <view class="login-footer">
-        <uv-button type="primary" shape="square" :loading="logining" @click="doLogin" text="登录" />
+        <up-button type="primary" shape="square" :loading="logining" @click="doLogin" text="登录" />
       </view>
     </view>
   </view>
@@ -96,9 +96,9 @@ export default {
 
 <style lang="scss" scoped>
 .page-container {
+  height: 100%;
   padding: 16px;
   padding-top: 50px;
-  height: 100%;
 
   ::v-deep .ui-card {
     padding: 32px 16px;
@@ -110,18 +110,18 @@ export default {
 }
 
 .login-card .f-input {
-  border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 .login-card .l-input {
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
   margin-top: -0.5px;
   border-top-color: transparent !important;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }
 
-.login-card ::v-deep .uv-input__content__field-wrapper__field {
+.login-card ::v-deep .u-input__content__field-wrapper__field {
   height: 32px;
 }
 </style>

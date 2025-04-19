@@ -35,7 +35,6 @@ export const useSummaryDataStore = defineStore('summaryData', () => {
   }
 
   async function getSummarySales(params) {
-    // @ts-ignore
     const { audit_info = [] } = await getSummarySalesApi(params)
     if (params.page === 1) {
       setData({ audit_info })

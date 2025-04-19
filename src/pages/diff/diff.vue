@@ -1,6 +1,6 @@
 <template>
   <view class="diff-page g-page bg3 full-bg full-page">
-    <view style="height: 44px; flex-shrink: 0">
+    <view style="flex-shrink: 0; height: 44px">
       <uni-status-bar />
     </view>
     <view class="page-container">
@@ -78,7 +78,7 @@
               </template>
             </ui-card>
           </view>
-          <uv-loadmore
+          <up-loadmore
             v-if="diff_info.length === 0 || currentPage > 1"
             :status="loadingPage ? 'loading' : 'more'"
             :nomoreText="currentPage === 1 ? '暂无数据' : '没有更多数据了'"
@@ -203,12 +203,12 @@ export default {
 <style lang="scss" scoped>
 .page-container {
   position: relative;
-  flex: 1;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
   z-index: 1;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
 }
 
 .page-main {
@@ -216,10 +216,10 @@ export default {
 }
 
 .page-title {
-  font-size: 24px;
-  color: #fff;
-  font-weight: 600;
   padding: 16px 16px 0;
+  font-size: 24px;
+  font-weight: 600;
+  color: #fff;
 }
 
 .page-filter {
@@ -239,10 +239,10 @@ ui-popup,
   overflow: hidden;
 
   & ::v-deep .ui-popup-body {
-    flex: 1;
-    overflow: hidden;
     display: flex;
+    flex: 1;
     flex-direction: column;
+    overflow: hidden;
   }
 
   & .diff-content {
@@ -259,6 +259,11 @@ ui-popup,
   display: flex;
 }
 
+.page-info-item-content {
+  font-size: 13px;
+  color: #fff;
+}
+
 .page-info-item {
   position: relative;
   flex: 1;
@@ -273,12 +278,12 @@ ui-popup,
   }
 
   &:not(:last-child)::after {
-    content: '';
     position: absolute;
-    right: 0;
     top: 20%;
+    right: 0;
     bottom: 20%;
     width: 1px;
+    content: '';
     background-color: rgba(255, 255, 255, 0.3);
   }
 
@@ -290,21 +295,16 @@ ui-popup,
 }
 
 .page-info-item-title {
+  margin-bottom: 8px;
   font-size: 13px;
   color: rgba(255, 255, 255, 0.7);
   white-space: nowrap;
-  margin-bottom: 8px;
-}
-
-.page-info-item-content {
-  font-size: 13px;
-  color: #fff;
 }
 
 .review-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 10px;
 }
 

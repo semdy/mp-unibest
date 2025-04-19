@@ -31,6 +31,9 @@ export default defineUniPages({
     autoscan: true,
     custom: {
       '^wd-(.*)': 'wot-design-uni/components/wd-$1/wd-$1.vue',
+      '^u--(.*)': '@/uni_modules/uview-plus/components/u-$1/u-$1.vue',
+      '^up-(.*)': '@/uni_modules/uview-plus/components/u-$1/u-$1.vue',
+      '^u-([^-].*)': '@/uni_modules/uview-plus/components/u-$1/u-$1.vue',
       '^(?!z-paging-refresh|z-paging-load-more)z-paging(.*)':
         'z-paging/components/z-paging$1/z-paging$1.vue',
     },
@@ -47,7 +50,7 @@ export default defineUniPages({
     midButton: {
       width: '65px',
       height: '65px',
-      iconPath: 'static/images/homekey.png',
+      iconPath: 'static/tabbar/homekey.png',
       text: '开门',
       iconWidth: '45px',
     },
@@ -55,20 +58,20 @@ export default defineUniPages({
       {
         pagePath: 'pages/review/review',
         text: '票审结果',
-        iconPath: 'static/images/review.png',
-        selectedIconPath: 'static/images/review-selected.png',
+        iconPath: 'static/tabbar/review.png',
+        selectedIconPath: 'static/tabbar/review-selected.png',
       },
       {
         pagePath: 'pages/diff/diff',
         text: '差异说明',
-        iconPath: 'static/images/diff.png',
-        selectedIconPath: 'static/images/diff-selected.png',
+        iconPath: 'static/tabbar/diff.png',
+        selectedIconPath: 'static/tabbar/diff-selected.png',
       },
       {
         pagePath: 'pages/policy/policy',
         text: '商务返利/促销',
-        iconPath: 'static/images/policy.png',
-        selectedIconPath: 'static/images/policy-selected.png',
+        iconPath: 'static/tabbar/policy.png',
+        selectedIconPath: 'static/tabbar/policy-selected.png',
       },
     ],
   },

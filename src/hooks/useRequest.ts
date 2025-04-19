@@ -25,12 +25,12 @@ export default function useRequest<T>(
   const run = async () => {
     loading.value = true
     return func()
-      .then((res) => {
+      .then(res => {
         data.value = res.data as UnwrapRef<T>
         error.value = false
         return data.value
       })
-      .catch((err) => {
+      .catch(err => {
         error.value = err
         throw err
       })
