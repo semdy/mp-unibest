@@ -200,7 +200,7 @@
 import { mapState } from 'pinia'
 import { shareMixins } from '@/config'
 import { getNodeRect, objectToQueryString } from '@/utils/util'
-import wxCharts from '@/uni_modules/wx-charts'
+import WxCharts from '@/uni_modules/wx-charts'
 import { auditStatusMap, auditStatusStyleMap } from '@/utils/enum'
 import { usePickerDataStore, useSummaryDataStore } from '@/store'
 

@@ -1,18 +1,103 @@
 // @import './iconfont.css';
-
-.test {
-  // 可以通过 @apply 多个样式封装整体样式
-  @apply mt-4 ml-4;
-
-  padding-top: 4px;
-  color: red;
-}
+@import './common';
+@import './res';
 
 :root,
 page {
+  .wot-theme-light,
+  .wot-theme-dark {
+    height: 100%;
+  }
+
   // 修改按主题色
   // --wot-color-theme: #37c2bc;
 
   // 修改按钮背景色
   // --wot-button-primary-bg-color: green;
 }
+
+page {
+  height: 100%;
+  font-family: DINAlternate, Geneva, Tahoma, sans-serif;
+  font-size: 14px;
+  background-color: #fff;
+}
+
+.g-page {
+  position: relative;
+  min-height: 100%;
+  // padding-top: constant(safe-area-inset-top);
+  // padding-top: env(safe-area-inset-top);
+
+  &::after {
+    position: absolute;
+    top: 44px;
+    right: 0;
+    left: 0;
+    height: 144px;
+    pointer-events: none;
+    content: '';
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: auto 100%;
+  }
+
+  &:not(.full-bg) {
+    background-image: linear-gradient(to bottom, $uni-color-primary 150px, #f9f9f9 260px);
+    background-repeat: no-repeat;
+  }
+
+  &.full-bg {
+    background-color: $uni-color-primary;
+  }
+
+  &.bg1 {
+    &::after {
+      background-image: url($g-bg1);
+    }
+  }
+
+  &.bg2 {
+    &::after {
+      background-image: url($g-bg2);
+    }
+  }
+
+  &.bg3 {
+    &:after {
+      background-image: url($g-bg3);
+    }
+  }
+}
+
+.full-page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.page-scrollview {
+  flex: 1;
+  height: 100%;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.uni-nav-bar-text {
+  font-size: 18px !important;
+  font-weight: bold;
+}
+
+.gradient-card {
+  padding: 16px;
+  background-color: #fff;
+  background-image: linear-gradient(rgba(43, 162, 147, 0.2) 0%, rgba(43, 162, 147, 0) 100%);
+  background-repeat: no-repeat;
+  border-radius: 6px;
+}
+/* #ifdef MP */
+ui-card:not(:last-child) {
+  display: block;
+  margin-bottom: 10px;
+}
+/* #endif */

@@ -3,8 +3,8 @@
     <fixed-nav-bar dark :can-back="false" title="手机号登录" />
     <view class="page-container">
       <ui-card class="login-card">
-        <up-input placeholder="请输入手机号" border="surround" v-model="phone" class="f-input" />
-        <up-input placeholder="请输入验证码" border="surround" v-model="code" class="l-input">
+        <up-input placeholder="请输入手机号" v-model="phone" class="f-input" />
+        <up-input placeholder="请输入验证码" v-model="code" class="l-input">
           <template #suffix>
             <up-code ref="uCodeRef" seconds="60" changeText="X秒重新获取" @change="codeChange" />
             <up-button @click="getCode" :text="tips" type="success" size="mini">

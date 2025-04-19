@@ -54,6 +54,7 @@ module.exports = {
     'selector-type-no-unknown': null,
     'no-descending-specificity': null,
     'order/properties-order': null,
+    'scss/load-partial-extension': null,
     'declaration-property-value-no-unknown': null,
     'comment-empty-line-before': 'never', // never|always|always-multi-line|never-multi-line
     'custom-property-empty-line-before': 'never',
