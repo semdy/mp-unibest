@@ -454,7 +454,9 @@ export default {
     handleScroll(e) {
       if (e.detail.scrollTop > 0) {
         if (this.$refs.popup.isAtStart()) {
+          // #ifdef MP
           this.canvasOpacity = 0
+          // #endif
           this.$refs.popup.slideToUpper()
         }
       }
