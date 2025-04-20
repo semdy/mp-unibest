@@ -13,7 +13,7 @@ export function getAuthorizedInfo(code: string): Promise<any> {
 }
 
 export function sendCheckCode(params) {
-  return http.post<{ phone: string }>(`${prefix}/send_checkcode/`, params, {
+  return http.post(`${prefix}/send_checkcode/`, params, {
     custom: { auth: false },
   })
 }

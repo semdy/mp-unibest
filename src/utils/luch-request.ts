@@ -14,7 +14,11 @@ import { getEnvBaseUrl } from '@/utils'
 declare class HttpRequest extends Request {
   request<T = any, D = HttpRequestTask>(config: HttpRequestConfig<D>): Promise<T>
 
-  get<T = any, D = HttpRequestTask>(url: string, config?: HttpRequestConfig<D>): Promise<T>
+  get<T = any, D = HttpRequestTask>(
+    url: string,
+    params?: HttpParams,
+    config?: HttpRequestConfig<D>,
+  ): Promise<T>
 
   delete<T = any, D = HttpRequestTask>(
     url: string,
