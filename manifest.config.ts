@@ -121,7 +121,7 @@ export default defineManifestConfig({
     compileType: 'miniprogram',
     projectname: '票审小程序',
     miniprogramRoot: '',
-    libVersion: '2.31.1',
+    libVersion: '3.7.12',
     editorSetting: {
       tabIndent: 'insertSpaces',
       tabSize: 2,
@@ -166,9 +166,11 @@ export default defineManifestConfig({
   },
   'mp-baidu': {
     usingComponents: true,
+    mergeVirtualHostAttributes: true,
   },
   'mp-toutiao': {
     usingComponents: true,
+    mergeVirtualHostAttributes: true,
   },
   uniStatistics: {
     enable: false,

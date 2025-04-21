@@ -4,7 +4,7 @@ import 'virtual:uno.css'
 import { createSSRApp } from 'vue'
 
 import App from './App.vue'
-import uviewPlus from '@/uni_modules/uview-plus'
+import uviewPlus from 'uview-plus'
 import { prototypeInterceptor, requestInterceptor, routeInterceptor } from './interceptors'
 import { initRequest } from '@/utils/luch-request'
 import i18n from './locale'

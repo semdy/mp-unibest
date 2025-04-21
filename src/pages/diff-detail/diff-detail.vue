@@ -288,7 +288,7 @@
 
 <script>
 import { shareMixins } from '@/config'
-import test from '@/uni_modules/uview-plus/libs/function/test'
+import test from 'uview-plus/libs/function/test'
 import {
   getDiffRecordReportDetailApi,
   submitDifferenceApi,
