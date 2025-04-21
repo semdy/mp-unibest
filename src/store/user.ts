@@ -14,6 +14,7 @@ export const useUserStore = defineStore('user', () => {
 
   const $reset = () => {
     userInfo.value = { ...initState }
+    tokenStore.$reset()
   }
 
   const isLogined = computed(() => !!tokenStore.token)
