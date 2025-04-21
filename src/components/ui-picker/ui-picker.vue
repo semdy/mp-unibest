@@ -145,6 +145,7 @@ export default {
     },
   },
   methods: {
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     noop() {},
     getDefaultIndex(val) {
       if (Array.isArray(val)) {

@@ -75,7 +75,7 @@
             </view>
             <view class="stats-chart-title">各差异情况占比</view>
             <view class="stats-chart-info">
-              <template v-if="summaryData.audit_report.length > 0">
+              <template v-if="!reportLoading">
                 <view class="stats-chart-labels">
                   <view
                     class="stats-chart-label"
@@ -106,6 +106,9 @@
                       @touchstart="canvasTouchHandler"
                       :style="{ display: canvasOpacity > 0 ? '' : 'none' }"
                     />
+                  </view>
+                  <view class="stats-chart-empty" v-if="summaryData.audit_report.length === 0">
+                    暂无差异
                   </view>
                 </view>
               </template>
@@ -217,6 +220,7 @@ export default {
       currentPage: 1,
       loadingPage: true,
       loading: true,
+      reportLoading: true,
       colors: ['#326DF8', '#06BCFF', '#FF06E1', '#FFA820', '#FE584C', '#0ACEBE'],
     }
   },
@@ -292,11 +296,15 @@ export default {
       const summaryDataStore = useSummaryDataStore()
       try {
         if (!isAppend) {
-          summaryDataStore.getReportInvoice({
+          await summaryDataStore.getReportInvoice({
             dealer_id: this.dealer,
             quarter_id: this.quarter?.toString(),
           })
         }
+      } finally {
+        this.reportLoading = false
+      }
+      try {
         if (!this.loadingPage) {
           return
         }
@@ -680,6 +688,7 @@ export default {
 }
 
 .stats-chart {
+  position: relative;
   display: flex;
   flex: 1;
   align-items: center;
@@ -689,6 +698,14 @@ export default {
     width: 100%;
     border-radius: 50%;
   }
+}
+
+.stats-chart-empty {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: rgba(0, 0, 0, 0.3);
 }
 
 .stats-chart-canvas {
