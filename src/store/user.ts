@@ -12,19 +12,16 @@ export const useUserStore = defineStore('user', () => {
     userInfo.value = val
   }
 
-  const clearUserInfo = () => {
-    userInfo.value = { ...initState }
-  }
-  // 一般没有reset需求，不需要的可以删除
   const $reset = () => {
     userInfo.value = { ...initState }
   }
+
   const isLogined = computed(() => !!tokenStore.token)
 
   return {
+    token: tokenStore.token,
     userInfo,
     setUserInfo,
-    clearUserInfo,
     isLogined,
     $reset,
   }

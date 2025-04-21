@@ -22,7 +22,7 @@ const http = <T>(options: CustomRequestOptions) => {
           resolve(res.data as T)
         } else if (res.statusCode === 401) {
           // 401错误  -> 清理用户信息，跳转到登录页
-          // userStore.clearUserInfo()
+          // userStore.$reset()
           // uni.navigateTo({ url: '/pages/login/login' })
           reject(res)
         } else {
