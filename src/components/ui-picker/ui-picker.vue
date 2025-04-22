@@ -25,7 +25,7 @@
         <view class="ui-picker-search">
           <up-search
             :show-action="false"
-            reverse
+            icon-position="right"
             bg-color="#fff"
             border-color="#e8e8e8"
             shape="square"
