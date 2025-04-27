@@ -90,8 +90,8 @@ importers:
         specifier: ^11.1.0
         version: 11.1.0
       uview-plus:
-        specifier: ^3.4.22
-        version: 3.4.22
+        specifier: ^3.4.25
+        version: 3.4.25
       vue:
         specifier: 3.5.13
         version: 3.5.13(typescript@5.8.3)
@@ -8923,8 +8923,8 @@ packages:
     deprecated: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
     hasBin: true
 
-  uview-plus@3.4.22:
-    resolution: {integrity: sha512-t6O81cN28K6rwAsu5CEV/womLGse/BHn9NXMyoqFAESPnqBnZNHzLqA3p/U3nZbCgfqmW1+UL4hChB+AsLc6LQ==}
+  uview-plus@3.4.25:
+    resolution: {integrity: sha512-HivgBLxOR85mVd0PQBSQDVMsE4Wx36YkhQnliQ8uU4YS+FzU/givPR638HisUZ05z0EFqM1BQilnGJo8tLzbVg==}
     engines: {HBuilderX: ^3.1.0}
 
   v8-to-istanbul@8.1.1:
@@ -20002,7 +20002,7 @@ snapshots:
 
   uuid@3.4.0: {}
 
-  uview-plus@3.4.22:
+  uview-plus@3.4.25:
     dependencies:
       clipboard: 2.0.11
       dayjs: 1.11.10
