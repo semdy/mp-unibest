@@ -1,23 +1,23 @@
-import { defaultPlugins } from '@hey-api/openapi-ts'
+import {
+  defineConfig,
+  defaultPlugins,
+  clientDefaultConfig,
+  clientPluginHandler,
+} from '@hey-api/openapi-ts'
 
-import { clientDefaultConfig, clientPluginHandler } from '@hey-api/openapi-ts'
-
-export const defaultConfig = {
+const defaultConfig = {
   ...clientDefaultConfig,
   _handler: clientPluginHandler,
   _handlerLegacy: () => {},
   name: '@/http/client-mp',
 }
 
-/**
- * Type helper for `@hey-api/client-custom` plugin, returns {@link Plugin.Config} object
- */
-export const customClientPlugin = config => ({
+const customClientPlugin = config => ({
   ...defaultConfig,
   ...config,
 })
 
-export default {
+export default defineConfig({
   input: 'http://petstore.swagger.io/v2/swagger.json',
   // input: 'https://get.heyapi.dev/hey-api/backend',
   // input: './wechat-qy.openapi.json',
@@ -32,4 +32,4 @@ export default {
       name: '@hey-api/typescript',
     },
   ],
-}
+})
