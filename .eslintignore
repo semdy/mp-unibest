@@ -5,3 +5,5 @@ vscode
 dist
 types.gen.ts
 sdk.gen.ts
+client.gen.ts
+@tanstack/
