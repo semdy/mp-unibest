@@ -1,4 +1,4 @@
-export { createClient } from './client';
+export { createClient } from './client'
 export type {
   Client,
   ClientOptions,
@@ -9,11 +9,11 @@ export type {
   RequestOptions,
   RequestResult,
   TDataShape,
-} from './types';
-export { createConfig } from './utils';
-export type { Auth, QuerySerializerOptions } from '@/http/client-core';
+} from './types'
+export { createConfig } from './utils'
+export type { Auth, QuerySerializerOptions } from '@/http/client-core'
 export {
   formDataBodySerializer,
   jsonBodySerializer,
   urlSearchParamsBodySerializer,
-} from '@/http/client-core';
+} from '@/http/client-core'

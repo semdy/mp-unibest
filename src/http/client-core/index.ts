@@ -1,21 +1,17 @@
-export type { Auth } from './auth';
-export { getAuthToken } from './auth';
-export type {
-  BodySerializer,
-  QuerySerializer,
-  QuerySerializerOptions,
-} from './bodySerializer';
+export type { Auth } from './auth'
+export { getAuthToken } from './auth'
+export type { BodySerializer, QuerySerializer, QuerySerializerOptions } from './bodySerializer'
 export {
   formDataBodySerializer,
   jsonBodySerializer,
   urlSearchParamsBodySerializer,
-} from './bodySerializer';
+} from './bodySerializer'
 export type {
   ArraySeparatorStyle,
   ArrayStyle,
   ObjectStyle,
   SerializerOptions,
-} from './pathSerializer';
+} from './pathSerializer'
 export {
   separatorArrayExplode,
   separatorArrayNoExplode,
@@ -23,5 +19,5 @@ export {
   serializeArrayParam,
   serializeObjectParam,
   serializePrimitiveParam,
-} from './pathSerializer';
-export type { Client, Config } from './types';
+} from './pathSerializer'
+export type { Client, Config } from './types'

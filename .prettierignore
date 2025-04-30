@@ -16,3 +16,5 @@ templates
 
 /public
 dist/
+sdk.gen.ts
+types.gen.ts
