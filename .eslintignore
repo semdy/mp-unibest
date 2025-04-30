@@ -4,3 +4,4 @@ uni_modules
 vscode
 dist
 types.gen.ts
+sdk.gen.ts
