@@ -12,53 +12,6 @@ export type Category = {
   name?: string;
 };
 
-export type deleteOrderParams = {
-  /** ID of the order that needs to be deleted */
-  orderId: number;
-};
-
-export type deletePetParams = {
-  /** Pet id to delete */
-  petId: number;
-};
-
-export type deleteUserParams = {
-  /** The name that needs to be deleted */
-  username: string;
-};
-
-export type findPetsByStatusParams = {
-  /** Status values that need to be considered for filter */
-  status: ('available' | 'pending' | 'sold')[];
-};
-
-export type findPetsByTagsParams = {
-  /** Tags to filter by */
-  tags: string[];
-};
-
-export type getOrderByIdParams = {
-  /** ID of pet that needs to be fetched */
-  orderId: number;
-};
-
-export type getPetByIdParams = {
-  /** ID of pet to return */
-  petId: number;
-};
-
-export type getUserByNameParams = {
-  /** The name that needs to be fetched. Use user1 for testing.  */
-  username: string;
-};
-
-export type loginUserParams = {
-  /** The user name for login */
-  username: string;
-  /** The password for login in clear text */
-  password: string;
-};
-
 export type Order = {
   id?: number;
   petId?: number;
@@ -79,6 +32,36 @@ export type Pet = {
   status?: 'available' | 'pending' | 'sold';
 };
 
+export type petFindByStatusUsingGetParams = {
+  /** Status values that need to be considered for filter */
+  status: ('available' | 'pending' | 'sold')[];
+};
+
+export type petFindByTagsUsingGetParams = {
+  /** Tags to filter by */
+  tags: string[];
+};
+
+export type petPetIdUploadImageUsingPostParams = {
+  /** ID of pet to update */
+  petId: number;
+};
+
+export type petPetIdUsingDeleteParams = {
+  /** Pet id to delete */
+  petId: number;
+};
+
+export type petPetIdUsingGetParams = {
+  /** ID of pet to return */
+  petId: number;
+};
+
+export type petPetIdUsingPostParams = {
+  /** ID of pet that needs to be updated */
+  petId: number;
+};
+
 export enum StatusEnum {
   available = 'available',
   pending = 'pending',
@@ -95,24 +78,19 @@ export enum StatusEnum2 {
 
 export type IStatusEnum2 = keyof typeof StatusEnum2;
 
+export type storeOrderOrderIdUsingDeleteParams = {
+  /** ID of the order that needs to be deleted */
+  orderId: number;
+};
+
+export type storeOrderOrderIdUsingGetParams = {
+  /** ID of pet that needs to be fetched */
+  orderId: number;
+};
+
 export type Tag = {
   id?: number;
   name?: string;
-};
-
-export type updatePetWithFormParams = {
-  /** ID of pet that needs to be updated */
-  petId: number;
-};
-
-export type updateUserParams = {
-  /** name that need to be updated */
-  username: string;
-};
-
-export type uploadFileParams = {
-  /** ID of pet to update */
-  petId: number;
 };
 
 export type User = {
@@ -125,4 +103,26 @@ export type User = {
   phone?: string;
   /** User Status */
   userStatus?: number;
+};
+
+export type userLoginUsingGetParams = {
+  /** The user name for login */
+  username: string;
+  /** The password for login in clear text */
+  password: string;
+};
+
+export type userUsernameUsingDeleteParams = {
+  /** The name that needs to be deleted */
+  username: string;
+};
+
+export type userUsernameUsingGetParams = {
+  /** The name that needs to be fetched. Use user1 for testing.  */
+  username: string;
+};
+
+export type userUsernameUsingPutParams = {
+  /** name that need to be updated */
+  username: string;
 };

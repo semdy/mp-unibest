@@ -6,7 +6,7 @@ import { CustomRequestOptions } from '@/interceptors/request';
 import * as API from './types';
 
 /** Create user This can only be done by the logged in user. 返回值: successful operation POST /user */
-export async function createUser({
+export async function userUsingPost({
   body,
   options,
 }: {
@@ -24,12 +24,12 @@ export async function createUser({
 }
 
 /** Get user by user name GET /user/${param0} */
-export async function getUserByName({
+export async function userUsernameUsingGet({
   params,
   options,
 }: {
   // 叠加生成的Param类型 (非body参数openapi默认没有生成对象)
-  params: API.getUserByNameParams;
+  params: API.userUsernameUsingGetParams;
   options?: CustomRequestOptions;
 }) {
   const { username: param0, ...queryParams } = params;
@@ -42,13 +42,13 @@ export async function getUserByName({
 }
 
 /** Updated user This can only be done by the logged in user. PUT /user/${param0} */
-export async function updateUser({
+export async function userUsernameUsingPut({
   params,
   body,
   options,
 }: {
   // 叠加生成的Param类型 (非body参数openapi默认没有生成对象)
-  params: API.updateUserParams;
+  params: API.userUsernameUsingPutParams;
   body: API.User;
   options?: CustomRequestOptions;
 }) {
@@ -66,12 +66,12 @@ export async function updateUser({
 }
 
 /** Delete user This can only be done by the logged in user. DELETE /user/${param0} */
-export async function deleteUser({
+export async function userUsernameUsingDelete({
   params,
   options,
 }: {
   // 叠加生成的Param类型 (非body参数openapi默认没有生成对象)
-  params: API.deleteUserParams;
+  params: API.userUsernameUsingDeleteParams;
   options?: CustomRequestOptions;
 }) {
   const { username: param0, ...queryParams } = params;
@@ -84,7 +84,7 @@ export async function deleteUser({
 }
 
 /** Creates list of users with given input array 返回值: successful operation POST /user/createWithArray */
-export async function createUsersWithArrayInput({
+export async function userCreateWithArrayUsingPost({
   body,
   options,
 }: {
@@ -102,7 +102,7 @@ export async function createUsersWithArrayInput({
 }
 
 /** Creates list of users with given input array 返回值: successful operation POST /user/createWithList */
-export async function createUsersWithListInput({
+export async function userCreateWithListUsingPost({
   body,
   options,
 }: {
@@ -120,12 +120,12 @@ export async function createUsersWithListInput({
 }
 
 /** Logs user into the system GET /user/login */
-export async function loginUser({
+export async function userLoginUsingGet({
   params,
   options,
 }: {
   // 叠加生成的Param类型 (非body参数openapi默认没有生成对象)
-  params: API.loginUserParams;
+  params: API.userLoginUsingGetParams;
   options?: CustomRequestOptions;
 }) {
   return request<string>('/user/login', {
@@ -138,7 +138,7 @@ export async function loginUser({
 }
 
 /** Logs out current logged in user session 返回值: successful operation GET /user/logout */
-export async function logoutUser({
+export async function userLogoutUsingGet({
   options,
 }: {
   options?: CustomRequestOptions;

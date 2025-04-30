@@ -6,7 +6,7 @@ import { CustomRequestOptions } from '@/interceptors/request';
 import * as API from './types';
 
 /** Update an existing pet PUT /pet */
-export async function updatePet({
+export async function petUsingPut({
   body,
   options,
 }: {
@@ -24,7 +24,7 @@ export async function updatePet({
 }
 
 /** Add a new pet to the store POST /pet */
-export async function addPet({
+export async function petUsingPost({
   body,
   options,
 }: {
@@ -42,12 +42,12 @@ export async function addPet({
 }
 
 /** Find pet by ID Returns a single pet GET /pet/${param0} */
-export async function getPetById({
+export async function petPetIdUsingGet({
   params,
   options,
 }: {
   // 叠加生成的Param类型 (非body参数openapi默认没有生成对象)
-  params: API.getPetByIdParams;
+  params: API.petPetIdUsingGetParams;
   options?: CustomRequestOptions;
 }) {
   const { petId: param0, ...queryParams } = params;
@@ -60,13 +60,13 @@ export async function getPetById({
 }
 
 /** Updates a pet in the store with form data POST /pet/${param0} */
-export async function updatePetWithForm({
+export async function petPetIdUsingPost({
   params,
   body,
   options,
 }: {
   // 叠加生成的Param类型 (非body参数openapi默认没有生成对象)
-  params: API.updatePetWithFormParams;
+  params: API.petPetIdUsingPostParams;
   body: {
     /** Updated name of the pet */
     name?: string;
@@ -89,12 +89,12 @@ export async function updatePetWithForm({
 }
 
 /** Deletes a pet DELETE /pet/${param0} */
-export async function deletePet({
+export async function petPetIdUsingDelete({
   params,
   options,
 }: {
   // 叠加生成的Param类型 (非body参数openapi默认没有生成对象)
-  params: API.deletePetParams;
+  params: API.petPetIdUsingDeleteParams;
   options?: CustomRequestOptions;
 }) {
   const { petId: param0, ...queryParams } = params;
@@ -107,14 +107,14 @@ export async function deletePet({
 }
 
 /** uploads an image POST /pet/${param0}/uploadImage */
-export async function uploadFile({
+export async function petPetIdUploadImageUsingPost({
   params,
   body,
   file,
   options,
 }: {
   // 叠加生成的Param类型 (非body参数openapi默认没有生成对象)
-  params: API.uploadFileParams;
+  params: API.petPetIdUploadImageUsingPostParams;
   body: {
     /** Additional data to pass to server */
     additionalMetadata?: string;
@@ -157,12 +157,12 @@ export async function uploadFile({
 }
 
 /** Finds Pets by status Multiple status values can be provided with comma separated strings GET /pet/findByStatus */
-export async function findPetsByStatus({
+export async function petFindByStatusUsingGet({
   params,
   options,
 }: {
   // 叠加生成的Param类型 (非body参数openapi默认没有生成对象)
-  params: API.findPetsByStatusParams;
+  params: API.petFindByStatusUsingGetParams;
   options?: CustomRequestOptions;
 }) {
   return request<API.Pet[]>('/pet/findByStatus', {
@@ -175,12 +175,12 @@ export async function findPetsByStatus({
 }
 
 /** Finds Pets by tags Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing. GET /pet/findByTags */
-export async function findPetsByTags({
+export async function petFindByTagsUsingGet({
   params,
   options,
 }: {
   // 叠加生成的Param类型 (非body参数openapi默认没有生成对象)
-  params: API.findPetsByTagsParams;
+  params: API.petFindByTagsUsingGetParams;
   options?: CustomRequestOptions;
 }) {
   return request<API.Pet[]>('/pet/findByTags', {
