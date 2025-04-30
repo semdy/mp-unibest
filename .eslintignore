@@ -3,3 +3,4 @@ uni_modules
 .DS_Store
 vscode
 dist
+types.gen.ts

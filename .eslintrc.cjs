@@ -70,6 +70,7 @@ module.exports = {
     'no-param-reassign': 'off',
     camelcase: 'off',
     '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
     // 避免 `eslint` 对于 `typescript` 函数重载的误报
     'no-redeclare': 'off',
     '@typescript-eslint/no-redeclare': 'error',

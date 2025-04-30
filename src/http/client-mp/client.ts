@@ -2,6 +2,34 @@ import type { Client, Config } from './types'
 import { buildUrl, createConfig, mergeConfigs, mergeHeaders } from './utils'
 import { http, type HttpRequestConfig } from '@/utils/luch-request'
 
+const isFile = (value: unknown) => {
+  return (
+    value instanceof File ||
+    value instanceof Blob ||
+    (typeof value === 'string' &&
+      (value.startsWith('blob:') ||
+        value.startsWith('wxfile://') ||
+        value.startsWith('http://tmp/')))
+  )
+}
+
+const getUploadOpts = (body: unknown): HttpRequestConfig => {
+  const result: HttpRequestConfig = {
+    filePath: '',
+    name: '',
+    formData: {},
+  }
+  for (const [key, value] of Object.entries(body ?? {})) {
+    if (isFile(value) || (Array.isArray(value) && isFile(value[0]))) {
+      result.filePath = value as any
+      result.name = key
+    } else {
+      result.formData![key] = value
+    }
+  }
+  return result
+}
+
 export const createClient = (config: Config = {}): Omit<Client, 'interceptors'> => {
   let _config = mergeConfigs(createConfig(), config)
 
@@ -26,6 +54,10 @@ export const createClient = (config: Config = {}): Omit<Client, 'interceptors'> 
 
     const url = buildUrl(opts)
     const { headers, body, query, baseUrl, ...restOpts } = opts
+
+    if (!opts.headers.get('Content-Type')) {
+      return http.upload(url, getUploadOpts(body))
+    }
 
     const requestOpts = {
       ...restOpts,
