@@ -18,7 +18,8 @@ export const customClientPlugin = config => ({
 })
 
 export default {
-  input: 'https://get.heyapi.dev/hey-api/backend',
+  input: 'http://petstore.swagger.io/v2/swagger.json',
+  // input: 'https://get.heyapi.dev/hey-api/backend',
   // input: './wechat-qy.openapi.json',
   output: 'src/api/heyapi',
   plugins: [
