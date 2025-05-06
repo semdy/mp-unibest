@@ -10,7 +10,7 @@ const authorize = {
   readyCallback: [] as noop[],
   loginExpiredCallback: [] as noop[],
   isPending: false,
-  startup(checkTokenExist?: boolean, lastToken?: string, needUnionId?: boolean) {
+  startup(checkTokenExist?: boolean, lastToken?: string | null, needUnionId?: boolean) {
     if (this.isPending) {
       return Promise.reject()
     }
@@ -191,7 +191,7 @@ const authorize = {
     const self = this
     this.readyCallback.forEach(function (callback) {
       if (typeof callback === 'function') {
-        callback.apply(self, arguments)
+        callback.apply(self, arguments as unknown as any[])
       }
     })
     this.readyCallback = []
@@ -201,7 +201,7 @@ const authorize = {
     const self = this
     this.loginExpiredCallback.forEach(function (callback) {
       if (typeof callback === 'function') {
-        callback.apply(self, arguments)
+        callback.apply(self, arguments as unknown as any[])
       }
     })
   },
