@@ -17,7 +17,7 @@ export const useSummaryDetailStore = defineStore('summaryDetail', () => {
     sales_detail.value = []
   }
 
-  async function getDetailSales(params) {
+  async function getDetailSales(params: any) {
     const { sales_detail = [] } = await getDetailSalesApi(params)
     if (params.page === 1) {
       setData(sales_detail)

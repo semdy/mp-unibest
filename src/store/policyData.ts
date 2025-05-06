@@ -17,7 +17,7 @@ export const usePolicyDataStore = defineStore('policyData', () => {
     policy_info.value = []
   }
 
-  const getPolicyReportData = async params => {
+  const getPolicyReportData = async (params: any) => {
     const res = await getPolicyReportApi(params)
     if (params.page === 1) {
       setData(res.data || [])

@@ -14,7 +14,7 @@ const initState = {
 type ISummaryData = typeof initState
 
 export const useSummaryDataStore = defineStore('summaryData', () => {
-  const summaryData = ref<Partial<ISummaryData>>({ ...initState })
+  const summaryData = ref<ISummaryData>({ ...initState })
 
   const setData = (val: Partial<ISummaryData>) => {
     summaryData.value = { ...summaryData.value, ...val }
@@ -28,13 +28,13 @@ export const useSummaryDataStore = defineStore('summaryData', () => {
     summaryData.value = { ...initState }
   }
 
-  async function getReportInvoice(params) {
+  async function getReportInvoice(params: any) {
     const data = await getReportInvoiceApi(params)
     setData(data as unknown as ISummaryData)
     return data
   }
 
-  async function getSummarySales(params) {
+  async function getSummarySales(params: any) {
     const { audit_info = [] } = await getSummarySalesApi(params)
     if (params.page === 1) {
       setData({ audit_info })

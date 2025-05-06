@@ -13,7 +13,7 @@ export const useDiffRecordsStore = defineStore('diffRecords', () => {
     diff_info.value = [...diff_info.value, ...val]
   }
 
-  const updateData = ({ status, index }) => {
+  const updateData = ({ status, index }: { status: number; index: number }) => {
     diff_info.value[index] = {
       ...diff_info.value[index],
       approval_state: status,
@@ -24,7 +24,7 @@ export const useDiffRecordsStore = defineStore('diffRecords', () => {
     diff_info.value = []
   }
 
-  const getDiffRecordsReport = async params => {
+  const getDiffRecordsReport = async (params: any) => {
     const { data } = await getDiffRecordReportApi(params)
     if (params.page === 1) {
       setData(data)
@@ -34,7 +34,7 @@ export const useDiffRecordsStore = defineStore('diffRecords', () => {
     return data
   }
 
-  const updateApprovalState = ({ index, status }) => {
+  const updateApprovalState = ({ index, status }: { index: number; status: number }) => {
     updateData({ index, status })
   }
 

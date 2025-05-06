@@ -1,7 +1,7 @@
 export function formatDate(source: string | Date | null, format: string): string {
   if (!source) return ''
   source = !(source instanceof Date) ? new Date(source.replace(/-/g, '/')) : source
-  const o = {
+  const o: Record<string, number> = {
     'M+': source.getMonth() + 1,
     'd+': source.getDate(),
     'H+': source.getHours(),
@@ -17,14 +17,14 @@ export function formatDate(source: string | Date | null, format: string): string
     if (new RegExp('(' + k + ')').test(format)) {
       format = format.replace(
         RegExp.$1,
-        RegExp.$1.length === 1 ? o[k] : ('00' + o[k]).substr(('' + o[k]).length),
+        RegExp.$1.length === 1 ? o[k].toString() : ('00' + o[k]).substr(('' + o[k]).length),
       )
     }
   }
   return format
 }
 
-export function parseDate(dateStr: string | Date | null | undefined): Date {
+export function parseDate(dateStr: number | string | Date): Date {
   if (typeof dateStr === 'string') {
     dateStr = dateStr.replace(/-/g, '/')
   }
@@ -35,7 +35,7 @@ export function padZero(n: number): string {
   return n < 10 ? '0' + n : '' + n
 }
 
-export function dayAfter(target: string | Date | null | undefined, offset = 0): Date {
+export function dayAfter(target: number | string | Date, offset = 0): Date {
   const now = parseDate(target)
   now.setDate(now.getDate() + offset)
   return now
@@ -46,7 +46,7 @@ export function formatFloat(f: number, digit = 2): number {
   return Math.round(f * m) / m
 }
 
-export function calcSum(objArray: object[], key: string): number {
+export function calcSum(objArray: Record<string, any>[], key: string): number {
   return objArray.reduce((prev, cur) => cur[key] + prev, 0)
 }
 
@@ -251,7 +251,11 @@ export function pxToRpx(px: number) {
   return (750 * px) / screenWidth
 }
 
-export function pickerDataAdapter(data: any[], labelName: string, valueName: string) {
+export function pickerDataAdapter(
+  data: any[],
+  labelName: string = 'label',
+  valueName: string = 'value',
+) {
   if (!data) return []
   return data.map(item => {
     if (typeof item === 'object') {
