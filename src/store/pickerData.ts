@@ -1,5 +1,5 @@
-import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import { defineStore } from 'pinia'
 import {
   getMainFilterApi,
   getSalesRecordFilterApi,
@@ -9,18 +9,18 @@ import {
 import { pickerDataAdapter } from '@/utils/util'
 
 const initState = {
-  audit_types: [],
-  audit_dealers: [],
-  audit_quarters: [],
-  diff_customers: [],
-  diff_quarters: [],
-  diff_dealers: [],
-  diff_diffTypes: [],
-  diff_approveStatus: [],
-  sales_customers: [],
-  sales_month: [],
-  policy_dealers: [],
-  policy_quarters: [],
+  audit_types: [] as IPickerItem[],
+  audit_dealers: [] as IPickerItem[],
+  audit_quarters: [] as IPickerItem[],
+  diff_customers: [] as IPickerItem[],
+  diff_quarters: [] as IPickerItem[],
+  diff_dealers: [] as IPickerItem[],
+  diff_diffTypes: [] as IPickerItem[],
+  diff_approveStatus: [] as IPickerItem[],
+  sales_customers: [] as IPickerItem[],
+  sales_month: [] as IPickerItem[],
+  policy_dealers: [] as IPickerItem[],
+  policy_quarters: [] as IPickerItem[],
 }
 
 type IPickerItem = {
@@ -29,20 +29,7 @@ type IPickerItem = {
   [key: string]: any
 }
 
-export interface IPickerData {
-  audit_types: IPickerItem[]
-  audit_dealers: IPickerItem[]
-  audit_quarters: IPickerItem[]
-  diff_customers: IPickerItem[]
-  diff_quarters: IPickerItem[]
-  diff_dealers: IPickerItem[]
-  diff_diffTypes: IPickerItem[]
-  diff_approveStatus: IPickerItem[]
-  sales_customers: IPickerItem[]
-  sales_month: IPickerItem[]
-  policy_dealers: IPickerItem[]
-  policy_quarters: IPickerItem[]
-}
+export type IPickerData = typeof initState
 
 export const usePickerDataStore = defineStore('pickerData', () => {
   const pickerData = ref<IPickerData>({ ...initState })
