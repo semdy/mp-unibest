@@ -137,7 +137,7 @@
     "@dcloudio/vite-plugin-uni": "3.0.0-4050720250324001",
     "@esbuild/darwin-arm64": "0.20.2",
     "@esbuild/darwin-x64": "0.20.2",
-    "@hey-api/openapi-ts": "^0.66.7",
+    "@hey-api/openapi-ts": "^0.67.4",
     "@iconify-json/carbon": "^1.2.4",
     "@rollup/rollup-darwin-x64": "^4.28.0",
     "@types/node": "^20.17.9",
