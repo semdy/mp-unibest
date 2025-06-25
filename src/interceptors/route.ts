@@ -26,7 +26,7 @@ const navigateToInterceptor = {
 
     // 处理相对路径
     if (!path.startsWith('/')) {
-      const currentPath = getLastPage().route
+      const currentPath = getLastPage().route ?? ''
       const normalizedCurrentPath = currentPath.startsWith('/') ? currentPath : `/${currentPath}`
       const baseDir = normalizedCurrentPath.substring(0, normalizedCurrentPath.lastIndexOf('/'))
       path = `${baseDir}/${path}`

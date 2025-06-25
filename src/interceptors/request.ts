@@ -1,4 +1,4 @@
-/* eslint-disable no-param-reassign */
+/* eslint-disable import/default */
 import qs from 'qs'
 import { useUserStore } from '@/store'
 import { platform } from '@/utils/platform'
