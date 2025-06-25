@@ -3,7 +3,7 @@ const crypto = require('crypto')
 const fs = require('fs')
 const path = require('path')
 const gulp = require('gulp')
-const gutil = require('gulp-util')
+const replaceExt = require('replace-ext')
 const rename = require('gulp-rename')
 const concat = require('gulp-concat')
 const iconfont = require('gulp-iconfont')
@@ -42,17 +42,17 @@ gulp.task('svgstore', () =>
             {
               cleanupIDs: {
                 prefix: prefix + '-',
-                minify: true
-              }
-            }
-          ]
+                minify: true,
+              },
+            },
+          ],
         }
-      })
+      }),
     )
     .pipe(svgstore())
     .pipe(pipeSvgSpriteData())
     .pipe(rename({ basename: fontName }))
-    .pipe(gulp.dest('src/static/fonts/icons/'))
+    .pipe(gulp.dest('src/static/fonts/icons/')),
 )
 
 gulp.task(
@@ -69,8 +69,8 @@ gulp.task(
           timestamp,
           log: () => {
             //
-          }
-        })
+          },
+        }),
       )
       .on('glyphs', function (glyphs) {
         const options = {
@@ -80,7 +80,7 @@ gulp.task(
           timestamp,
           hash: calcHash(glob.sync(svgs)),
           fontPath: '../fonts/',
-          glyphs: glyphs.map(mapGlyphs)
+          glyphs: glyphs.map(mapGlyphs),
         }
 
         gulp
@@ -107,8 +107,8 @@ gulp.task(
           setTimeout(buildBase64font.bind(this, options), 50)
         })
       })
-      .pipe(gulp.dest('src/static/fonts/fonts/'))
-  )
+      .pipe(gulp.dest('src/static/fonts/fonts/')),
+  ),
 )
 
 function buildBase64font(options) {
@@ -132,11 +132,11 @@ function pipeFontBase64Data(data) {
       const cssBuffer = fs.readFileSync(`templates/${template}.css`)
       const contents = Buffer.concat(
         [fontfaceBuffer, cssBuffer],
-        fontfaceBuffer.length + cssBuffer.length
+        fontfaceBuffer.length + cssBuffer.length,
       )
       const compiled = _.template(contents.toString())(Object.assign({ base64: base64 }, data))
       file.contents = Buffer.from(compiled)
-      file.path = gutil.replaceExtension(file.path, '.css')
+      file.path = replaceExt(file.path, '.css')
       return callback(null, file)
     } else {
       return callback()
@@ -155,7 +155,7 @@ function pipeSvgSpriteData() {
       const svgSprite = file.contents.toString().replace(/<defs>[\s\S]+<\/defs>/, '')
       const tmpJs = fs.readFileSync(`templates/${template}.js`).toString()
       file.contents = Buffer.from(tmpJs.replace('${svgSprite}', svgSprite))
-      file.path = gutil.replaceExtension(file.path, '.js')
+      file.path = replaceExt(file.path, '.js')
       return callback(null, file)
     } else {
       return callback()
@@ -170,10 +170,10 @@ gulp.task(
       files: 'src/static/fonts/*.html',
       server: 'src/static/fonts/',
       startPath: '/preview_fontclass.html',
-      middleware: cacheControl
+      middleware: cacheControl,
     })
     gulp.watch([svgs, templates], gulp.series('build:iconfont'))
-  })
+  }),
 )
 
 function mapGlyphs(glyph) {
