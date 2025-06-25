@@ -54,6 +54,7 @@ onHide(() => {
 
 <style lang="scss">
 @import 'uview-plus/index.scss';
+@import '@/style/index.scss';
 /* stylelint-disable selector-type-no-unknown */
 button::after {
   border: none;
