@@ -46,6 +46,7 @@ module.exports = {
     'prettier/prettier': 'error',
     // turn on errors for missing imports
     'import/no-unresolved': 'off',
+    'import/default': 'off',
     // 对后缀的检测，否则 import 一个ts文件也会报错，需要手动添加'.ts', 增加了下面的配置后就不用了
     'import/extensions': [
       'error',
@@ -54,29 +55,31 @@ module.exports = {
     ],
     // 只允许1个默认导出，关闭，否则不能随意export xxx
     'import/prefer-default-export': ['off'],
-    'no-console': ['off'],
-    // 'no-unused-vars': ['off'],
-    // '@typescript-eslint/no-unused-vars': ['off'],
     // 解决vite.config.ts报错问题
     'import/no-extraneous-dependencies': 'off',
+    'no-console': ['off'],
+    // 'no-unused-vars': ['off'],
     'no-plusplus': 'off',
     'no-shadow': 'off',
     'vue/multi-word-component-names': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
     'no-underscore-dangle': 'off',
     'no-use-before-define': 'off',
     'no-undef': 'off',
     'no-unused-vars': 'off',
     'no-param-reassign': 'off',
-    camelcase: 'off',
-    '@typescript-eslint/no-unused-vars': 'off',
-    '@typescript-eslint/ban-ts-comment': 'off',
     // 避免 `eslint` 对于 `typescript` 函数重载的误报
     'no-redeclare': 'off',
+    camelcase: 'off',
+    // '@typescript-eslint/no-unused-vars': ['off'],
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
+    '@typescript-eslint/no-empty-function': 'off',
     '@typescript-eslint/no-redeclare': 'error',
     '@typescript-eslint/no-this-alias': 'off',
     'prefer-promise-reject-errors': 'off',
     'prefer-rest-params': 'off',
+    'selector-type-no-unknown': 'off',
   },
   // eslint-import-resolver-typescript 插件，@see https://www.npmjs.com/package/eslint-import-resolver-typescript
   settings: {
