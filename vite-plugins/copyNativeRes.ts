@@ -1,7 +1,8 @@
 import fs from 'fs-extra'
 import path from 'path'
+import type { Plugin } from 'vite'
 
-export function copyNativeRes() {
+export function copyNativeRes(): Plugin {
   const waitPath = path.resolve(__dirname, '../src/nativeResources')
   const buildPath = path.resolve(
     __dirname,
@@ -12,6 +13,7 @@ export function copyNativeRes() {
   )
 
   return {
+    name: 'copy-native-res',
     enforce: 'post',
     async writeBundle() {
       try {
