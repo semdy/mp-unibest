@@ -75,7 +75,8 @@
     "start:iconfont": "gulp start:iconfont",
     "build:iconfont": "gulp build:iconfont",
     "lint-staged": "lint-staged",
-    "lint": "eslint --cache --fix --ext .js,.ts,.jsx,.tsx,.vue src --quiet",
+    "lint": "eslint --cache --ext .js,.ts,.jsx,.tsx,.vue src --quiet",
+    "lint:fix": "eslint --cache --fix --ext .js,.ts,.jsx,.tsx,.vue src --quiet",
     "pretty": "pretty-quick --staged"
   },
   "lint-staged": {
