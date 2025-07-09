@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>本地网页</title>
+    <style type="text/css">
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .error-box {
+        text-align: center;
+      }
+      .error-box img {
+        width: 160px;
+        height: 160px;
+      }
+      .error-text {
+        font-size: 14px;
+        font-weight: bold;
+        color: #86909c;
+        margin-top: 6px;
+        margin-bottom: 12px;
+        text-align: center;
+      }
+      .back-btn {
+        padding: 8px 16px;
+        border-radius: 4px;
+        color: #fff;
+        border: 1px solid #165dff;
+        background-color: #165dff;
+        cursor: pointer;
+      }
+      .back-btn:active {
+        background-color: #0042d8;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="error-box">
+      <img src="../../static/images/404.png" alt="404" />
+      <div class="error-text">Sorry, current page is not found.</div>
+      <button class="back-btn" @click="back">Back</button>
+    </div>
+    <!-- uni 的 SDK -->
+    <script type="text/javascript" src="uni.webview.1.5.5.js"></script>
+    <script type="text/javascript">
+      document.querySelector('.back-btn').addEventListener(
+        'click',
+        function (evt) {
+          uni.webView.navigateBack({
+            delta: 1
+          })
+        },
+        false
+      )
+      document.addEventListener(
+        'error',
+        function (e) {
+          var url = e.url // 错误页面的url地址
+          var href = e.href // 错误页面的完整路径（包括完整的协议头）
+        },
+        false
+      )
+    </script>
+  </body>
+</html>

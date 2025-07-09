@@ -264,7 +264,8 @@
 import { shareMixins } from '@/config'
 import test from 'uview-plus/libs/function/test'
 import { getDiffRecordReportDetailApi, submitDifferenceApi, approveDifferenceApi, uploadFile } from '@/api'
-import { showLoading, hideLoading, toast, getPrevPage } from '@/utils/util'
+import { getPrevPage } from '@/utils/util'
+import { showLoading, hideLoading, toast } from '@/utils/toast'
 import { getEnvBaseUrl } from '@/utils'
 import { approveStatusMap, approveStatusStyleMap, diffTypeMap } from '@/utils/enum'
 

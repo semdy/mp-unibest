@@ -111,7 +111,12 @@ export default async ({ command, mode }) => {
         imports: ['vue', 'uni-app'],
         dts: 'src/types/auto-import.d.ts',
         dirs: ['src/hooks'], // 自动导入 hooks
-        vueTemplate: true // default false
+        vueTemplate: true, // default false
+        eslintrc: {
+          enabled: true,
+          filepath: 'src/types/.eslintrc-auto-import.json',
+          globalsPropValue: true // 设为 true 代表 `readonly`
+        }
       }),
       // Optimization 插件需要 page.json 文件，故应在 UniPages 插件之后执行
       Optimization({

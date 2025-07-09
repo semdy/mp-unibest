@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onLaunch, onShow, onHide } from '@dcloudio/uni-app'
+// import { usePageAuth } from '@/hooks/usePageAuth'
 import 'abortcontroller-polyfill/dist/abortcontroller-polyfill-only'
 import authorize from '@/utils/authorize'
 import { usePickerDataStore } from '@/store'
@@ -13,6 +14,8 @@ import { usePickerDataStore } from '@/store'
 //     curPage.onShareAppMessage = shareMixins.onShareAppMessage
 //   }
 // }
+
+// usePageAuth()
 
 onLaunch(() => {
   const toLogin = () => {

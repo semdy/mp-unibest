@@ -1,26 +1,32 @@
 export function formatDate(source: string | Date | null, format: string): string {
   if (!source) return ''
-  source = !(source instanceof Date) ? new Date(source.replace(/-/g, '/')) : source
-  const o: Record<string, number> = {
-    'M+': source.getMonth() + 1,
-    'd+': source.getDate(),
-    'H+': source.getHours(),
-    'm+': source.getMinutes(),
-    's+': source.getSeconds(),
-    'q+': Math.floor((source.getMonth() + 3) / 3),
-    'f+': source.getMilliseconds()
+
+  const date = source instanceof Date ? source : new Date(source.replace(/-/g, '/'))
+
+  const map: Record<string, number> = {
+    'M+': date.getMonth() + 1,
+    'd+': date.getDate(),
+    'H+': date.getHours(),
+    'm+': date.getMinutes(),
+    's+': date.getSeconds(),
+    'q+': Math.floor((date.getMonth() + 3) / 3),
+    'f+': date.getMilliseconds()
   }
-  if (/(y+)/.test(format)) {
-    format = format.replace(RegExp.$1, (source.getFullYear() + '').substr(4 - RegExp.$1.length))
+
+  // 处理年份：yyyy 或 yy
+  format = format.replace(/(y+)/g, (_, matched) => {
+    return `${date.getFullYear()}`.slice(4 - matched.length)
+  })
+
+  // 处理其他时间字段
+  for (const key in map) {
+    const regex = new RegExp(`(${key})`, 'g')
+    format = format.replace(regex, (_, matched) => {
+      const value = map[key].toString()
+      return matched.length === 1 ? value : value.padStart(matched.length, '0')
+    })
   }
-  for (const k in o) {
-    if (new RegExp('(' + k + ')').test(format)) {
-      format = format.replace(
-        RegExp.$1,
-        RegExp.$1.length === 1 ? o[k].toString() : ('00' + o[k]).substr(('' + o[k]).length)
-      )
-    }
-  }
+
   return format
 }
 
@@ -32,7 +38,7 @@ export function parseDate(dateStr: number | string | Date): Date {
 }
 
 export function padZero(n: number): string {
-  return n < 10 ? '0' + n : '' + n
+  return n < 10 ? `0${n}` : `${n}`
 }
 
 export function dayAfter(target: number | string | Date, offset = 0): Date {
@@ -42,7 +48,7 @@ export function dayAfter(target: number | string | Date, offset = 0): Date {
 }
 
 export function formatFloat(f: number, digit = 2): number {
-  const m = Math.pow(10, digit)
+  const m = 10 ** digit
   return Math.round(f * m) / m
 }
 
@@ -149,12 +155,12 @@ export function confirm(
 ): Promise<boolean> {
   return new Promise(resolve => {
     uni.showModal({
-      title: title,
+      title,
       content: msg,
       confirmColor: '#08affe',
-      confirmText: confirmText,
-      cancelText: cancelText,
-      success: function (res) {
+      confirmText,
+      cancelText,
+      success(res) {
         if (res.confirm) {
           resolve(true)
         } else {
@@ -162,14 +168,6 @@ export function confirm(
         }
       }
     })
-  })
-}
-
-export function Alert(msg: string, title?: string) {
-  return uni.showModal({
-    title: title || '提示',
-    showCancel: false,
-    content: msg
   })
 }
 
@@ -181,62 +179,12 @@ export function delay(ms: number): Promise<void> {
   })
 }
 
-let isLoadingShown = false
-
-export function showLoading(title = '请稍候...', mask = true) {
-  isLoadingShown = true
-  return uni.showLoading({
-    mask: mask,
-    title: title
-  })
-}
-
-export function hideLoading() {
-  isLoadingShown = false
-  uni.hideLoading()
-}
-
-export async function toast(options: UniNamespace.ShowToastOptions) {
-  if (isLoadingShown) {
-    await delay(200)
-  }
-  return uni.showToast(options)
-}
-
-toast.error = (msg: string, duration = 2000, image = '') => {
-  return toast({
-    title: typeof msg === 'object' ? JSON.stringify(msg) : msg,
-    icon: 'none',
-    image: image,
-    duration: duration
-  })
-}
-
-toast.info = (msg: string, duration = 2000, image = '') => {
-  return toast({
-    title: typeof msg === 'object' ? JSON.stringify(msg) : msg,
-    icon: 'none',
-    image: image,
-    duration: duration
-  })
-}
-
-toast.success = (msg: string, duration = 2000) => {
-  return toast({
-    title: typeof msg === 'object' ? JSON.stringify(msg) : msg,
-    icon: 'success',
-    duration: duration
-  })
-}
-
 export function getPrevPage(): Page.PageInstance | undefined {
-  // eslint-disable-next-line
   const pages = getCurrentPages()
   return pages[pages.length - 2]
 }
 
 export function getCurrentPage(): Page.PageInstance | undefined {
-  // eslint-disable-next-line
   const pages = getCurrentPages()
   return pages[pages.length - 1]
 }

@@ -15,11 +15,14 @@ declare global {
   }
 
   type IUserInfo = {
+    username?: string
     nickname?: string
     avatar?: string
     /** 微信的 openid，非微信没有这个字段 */
     openid?: string
     phone?: string
+    refreshToken?: string
+    accessToken?: string
   }
 }
 

@@ -1,4 +1,4 @@
-import { hideLoading, showLoading } from '@/utils/util'
+import { hideLoading, showLoading } from '@/utils/toast'
 
 let _isQyWechat: boolean
 

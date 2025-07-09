@@ -13,8 +13,7 @@ interface NavigateToOptions {
        "/pages/policy-detail/policy-detail" |
        "/pages/review-detail/review-detail" |
        "/pages/review-diff/review-diff" |
-       "/pages/webview/webview" |
-       "/uni_modules/uni-upgrade-center-app/pages/upgrade-popup";
+       "/pages/webview/webview";
 }
 interface RedirectToOptions extends NavigateToOptions {}
 

@@ -15,7 +15,7 @@
 
 <script>
 import { getAuthorizedInfo } from '@/api'
-import { toast } from '@/utils/util'
+import { toast } from '@/utils/toast'
 import { mapState } from 'pinia'
 import { useUserStore } from '@/store'
 

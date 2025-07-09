@@ -7,7 +7,8 @@ import Request, {
   type HttpUploadTask,
   type HttpDownloadTask
 } from 'luch-request'
-import { toast, delay } from '@/utils/util'
+import { delay } from '@/utils/util'
+import { toast } from '@/utils/toast'
 import authorize from '@/utils/authorize'
 import { getEnvBaseUrl } from '@/utils'
 

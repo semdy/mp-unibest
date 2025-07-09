@@ -1,7 +1,7 @@
 import { login, isAuthorized } from './wechat'
 import { getTokenByJsCode, refreshTokenApi } from '@/api'
 import { useTokenStore } from '@/store'
-import { showLoading, hideLoading } from '@/utils/util'
+import { showLoading, hideLoading } from '@/utils/toast'
 
 type noop = (...args: any[]) => void
 

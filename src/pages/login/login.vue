@@ -24,7 +24,7 @@
 import { shareMixins } from '@/config'
 import { sendCheckCode, loginApi } from '@/api'
 import authorize from '@/utils/authorize'
-import { showLoading, hideLoading, toast } from '@/utils/util'
+import { showLoading, hideLoading, toast } from '@/utils/toast'
 import { usePickerDataStore } from '@/store'
 
 export default {

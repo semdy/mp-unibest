@@ -8,10 +8,10 @@ import eslintPluginImportX from 'eslint-plugin-import-x'
 // import tsParser from '@typescript-eslint/parser'
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 
-// import { readFile } from 'node:fs/promises'
+import { readFile } from 'node:fs/promises'
 
-// const autoImportFile = new URL('./types/.eslintrc-auto-import.json', import.meta.url)
-// const autoImportGlobals = JSON.parse(await readFile(autoImportFile, 'utf8'))
+const autoImportFile = new URL('./src/types/.eslintrc-auto-import.json', import.meta.url)
+const autoImportGlobals = JSON.parse(await readFile(autoImportFile, 'utf8'))
 
 /** @type {import('eslint').Linter.Config[]} */
 const config = [
@@ -26,7 +26,7 @@ const config = [
       globals: {
         ...globals.browser, // 浏览器环境
         ...globals.node, // node 环境
-        // ...autoImportGlobals.globals, // 自动导入配置
+        ...autoImportGlobals.globals, // 自动导入配置
         $t: true,
         uni: true,
         wx: true,

@@ -4,7 +4,7 @@ import { createSSRApp } from 'vue'
 
 import App from './App.vue'
 import uviewPlus from 'uview-plus'
-import { prototypeInterceptor, requestInterceptor, routeInterceptor } from './interceptors'
+// import { requestInterceptor, routeInterceptor } from './interceptors'
 import { initRequest } from '@/utils/luch-request'
 import i18n from './locale'
 import store from './store'
@@ -17,7 +17,6 @@ export function createApp() {
   app.use(uviewPlus)
   // app.use(routeInterceptor)
   // app.use(requestInterceptor)
-  app.use(prototypeInterceptor)
   app.use(VueQueryPlugin)
 
   app.config.globalProperties.$numberFormat = (num: number, locale: string = 'en-US'): string => {

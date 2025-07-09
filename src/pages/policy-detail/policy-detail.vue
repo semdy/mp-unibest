@@ -80,7 +80,7 @@
 <script>
 import { shareMixins } from '@/config'
 import { getPolicyReportDetailApi } from '@/api'
-import { showLoading, hideLoading } from '@/utils/util'
+import { showLoading, hideLoading } from '@/utils/toast'
 
 export default {
   data() {
