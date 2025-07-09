@@ -25,6 +25,7 @@ const config = [
       // 指定全局变量
       globals: {
         ...globals.browser, // 浏览器环境
+        ...globals.es2021,
         ...globals.node, // node 环境
         ...autoImportGlobals.globals, // 自动导入配置
         $t: true,
