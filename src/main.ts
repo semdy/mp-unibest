@@ -33,6 +33,6 @@ export function createApp() {
   initRequest()
 
   return {
-    app,
+    app
   }
 }

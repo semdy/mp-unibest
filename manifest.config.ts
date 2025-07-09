@@ -1,17 +1,19 @@
 // manifest.config.ts
-import { defineManifestConfig } from '@uni-helper/vite-plugin-uni-manifest'
 import path from 'node:path'
+import process from 'node:process'
+import { defineManifestConfig } from '@uni-helper/vite-plugin-uni-manifest'
 import { loadEnv } from 'vite'
 
+// 手动解析命令行参数获取 mode
+function getMode() {
+  const args = process.argv.slice(2)
+  const modeFlagIndex = args.findIndex(arg => arg === '--mode')
+  return modeFlagIndex !== -1 ? args[modeFlagIndex + 1] : args[0] === 'build' ? 'production' : 'development' // 默认 development
+}
+
 // 获取环境变量的范例
-const env = loadEnv(process.env.NODE_ENV!, path.resolve(process.cwd(), 'env'))
-const {
-  VITE_APP_TITLE,
-  VITE_UNI_APPID,
-  VITE_WX_APPID,
-  VITE_APP_PUBLIC_BASE,
-  VITE_FALLBACK_LOCALE,
-} = env
+const env = loadEnv(getMode(), path.resolve(process.cwd(), 'env'))
+const { VITE_APP_TITLE, VITE_UNI_APPID, VITE_WX_APPID, VITE_APP_PUBLIC_BASE, VITE_FALLBACK_LOCALE } = env
 
 export default defineManifestConfig({
   name: VITE_APP_TITLE,
@@ -20,33 +22,36 @@ export default defineManifestConfig({
   versionName: '1.0.0',
   versionCode: '100',
   transformPx: false,
-  locale: VITE_FALLBACK_LOCALE, // 'zh-Hans'
+  locale: VITE_FALLBACK_LOCALE,
   h5: {
     optimization: {
       prefetch: true,
       treeShaking: {
-        enable: true,
-      },
+        enable: true
+      }
     },
     router: {
       base: VITE_APP_PUBLIC_BASE,
-    },
+      mode: 'hash'
+    }
   },
   /* 5+App特有相关 */
   'app-plus': {
     usingComponents: true,
     nvueStyleCompiler: 'uni-app',
-    renderer: 'native',
+    nvueCompiler: 'uni-app',
+    // renderer: 'native',
     compilerVersion: 3,
     compatible: {
-      ignoreVersion: true,
+      ignoreVersion: true
     },
     splashscreen: {
       alwaysShowBeforeRender: true,
       waiting: true,
       autoclose: true,
-      delay: 0,
+      delay: 0
     },
+    screenOrientation: ['portrait-primary'],
     /* 模块配置 */
     modules: {},
     /* 应用发布信息 */
@@ -56,6 +61,7 @@ export default defineManifestConfig({
         minSdkVersion: 30,
         targetSdkVersion: 30,
         abiFilters: ['armeabi-v7a', 'arm64-v8a'],
+        schemes: 'centrdxapp,centrdx',
         permissions: [
           '<uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>',
           '<uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>',
@@ -71,11 +77,13 @@ export default defineManifestConfig({
           '<uses-permission android:name="android.permission.WAKE_LOCK"/>',
           '<uses-permission android:name="android.permission.FLASHLIGHT"/>',
           '<uses-feature android:name="android.hardware.camera"/>',
-          '<uses-permission android:name="android.permission.WRITE_SETTINGS"/>',
-        ],
+          '<uses-permission android:name="android.permission.WRITE_SETTINGS"/>'
+        ]
       },
       /* ios打包配置 */
-      ios: {},
+      ios: {
+        urltypes: 'centrdxapp,centrdx'
+      },
       /* SDK配置 */
       sdkConfigs: {},
       /* 图标配置 */
@@ -84,7 +92,7 @@ export default defineManifestConfig({
           hdpi: 'static/app/icons/72x72.png',
           xhdpi: 'static/app/icons/96x96.png',
           xxhdpi: 'static/app/icons/144x144.png',
-          xxxhdpi: 'static/app/icons/192x192.png',
+          xxxhdpi: 'static/app/icons/192x192.png'
         },
         ios: {
           appstore: 'static/app/icons/1024x1024.png',
@@ -97,7 +105,7 @@ export default defineManifestConfig({
             settings: 'static/app/icons/29x29.png',
             'settings@2x': 'static/app/icons/58x58.png',
             spotlight: 'static/app/icons/40x40.png',
-            'spotlight@2x': 'static/app/icons/80x80.png',
+            'spotlight@2x': 'static/app/icons/80x80.png'
           },
           iphone: {
             'app@2x': 'static/app/icons/120x120.png',
@@ -107,11 +115,23 @@ export default defineManifestConfig({
             'settings@2x': 'static/app/icons/58x58.png',
             'settings@3x': 'static/app/icons/87x87.png',
             'spotlight@2x': 'static/app/icons/80x80.png',
-            'spotlight@3x': 'static/app/icons/120x120.png',
-          },
-        },
+            'spotlight@3x': 'static/app/icons/120x120.png'
+          }
+        }
       },
+      splashscreen: {
+        androidStyle: 'default',
+        android: {
+          hdpi: 'static/app/launcher/480x762.png',
+          xhdpi: 'static/app/launcher/720x1242.png',
+          xxhdpi: 'static/app/launcher/1080x1882.png'
+        },
+        useOriginalMsgbox: true
+      }
     },
+    error: {
+      url: 'hybrid/html/error.html'
+    }
   },
   /* 快应用特有相关 */
   quickapp: {},
@@ -119,12 +139,12 @@ export default defineManifestConfig({
   'mp-weixin': {
     appid: VITE_WX_APPID,
     compileType: 'miniprogram',
-    projectname: '票审小程序',
+    projectname: 'centrdx',
     miniprogramRoot: '',
     libVersion: '3.7.12',
     editorSetting: {
       tabIndent: 'insertSpaces',
-      tabSize: 2,
+      tabSize: 2
     },
     setting: {
       urlCheck: false,
@@ -140,40 +160,40 @@ export default defineManifestConfig({
       babelSetting: {
         ignore: [],
         disablePlugins: [],
-        outputPath: '',
+        outputPath: ''
       },
       minifyWXSS: false,
       minifyWXML: false,
       ignoreUploadUnusedFiles: true,
-      uglifyFileName: true,
+      uglifyFileName: true
     },
     optimization: {
-      subPackages: true,
+      subPackages: true
     },
     usingComponents: true,
     mergeVirtualHostAttributes: true,
-    lazyCodeLoading: 'requiredComponents',
+    lazyCodeLoading: 'requiredComponents'
   },
   'mp-alipay': {
-    projectname: '票审小程序',
+    projectname: 'centrdx',
     usingComponents: true,
     styleIsolation: 'shared',
     compileType: 'mini',
     miniprogramRoot: '',
     mergeVirtualHostAttributes: true,
     lazyCodeLoading: 'requiredComponents',
-    enableParallelLoader: true,
+    enableParallelLoader: true
   },
   'mp-baidu': {
     usingComponents: true,
-    mergeVirtualHostAttributes: true,
+    mergeVirtualHostAttributes: true
   },
   'mp-toutiao': {
     usingComponents: true,
-    mergeVirtualHostAttributes: true,
+    mergeVirtualHostAttributes: true
   },
   uniStatistics: {
-    enable: false,
+    enable: false
   },
-  vueVersion: '3',
+  vueVersion: '3'
 })

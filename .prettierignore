@@ -20,3 +20,5 @@ sdk.gen.ts
 types.gen.ts
 client.gen.ts
 @tanstack/
+
+.gitignore

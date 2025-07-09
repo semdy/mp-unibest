@@ -1,9 +1,0 @@
-node_modules
-uni_modules
-.DS_Store
-vscode
-dist
-types.gen.ts
-sdk.gen.ts
-client.gen.ts
-@tanstack/

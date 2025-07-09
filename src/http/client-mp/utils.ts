@@ -4,7 +4,7 @@ import {
   jsonBodySerializer,
   serializeArrayParam,
   serializeObjectParam,
-  serializePrimitiveParam,
+  serializePrimitiveParam
 } from '@/http/client-core'
 
 import type { Client, ClientOptions, Config, RequestOptions } from './types'
@@ -60,8 +60,8 @@ const defaultPathSerializer = ({ path, url: _url }: PathSerializer) => {
             explode,
             name,
             style,
-            value: value as Record<string, unknown>,
-          }),
+            value: value as Record<string, unknown>
+          })
         )
         continue
       }
@@ -71,26 +71,20 @@ const defaultPathSerializer = ({ path, url: _url }: PathSerializer) => {
           match,
           `;${serializePrimitiveParam({
             name,
-            value: value as string,
-          })}`,
+            value: value as string
+          })}`
         )
         continue
       }
 
-      const replaceValue = encodeURIComponent(
-        style === 'label' ? `.${value as string}` : (value as string),
-      )
+      const replaceValue = encodeURIComponent(style === 'label' ? `.${value as string}` : (value as string))
       url = url.replace(match, replaceValue)
     }
   }
   return url
 }
 
-export const createQuerySerializer = <T = unknown>({
-  allowReserved,
-  array,
-  object,
-}: QuerySerializerOptions = {}) => {
+export const createQuerySerializer = <T = unknown>({ allowReserved, array, object }: QuerySerializerOptions = {}) => {
   const querySerializer = (queryParams: T) => {
     let search: string[] = []
     if (queryParams && typeof queryParams === 'object') {
@@ -110,8 +104,8 @@ export const createQuerySerializer = <T = unknown>({
               name,
               style: 'form',
               value,
-              ...array,
-            }),
+              ...array
+            })
           ]
           continue
         }
@@ -125,8 +119,8 @@ export const createQuerySerializer = <T = unknown>({
               name,
               style: 'deepObject',
               value: value as Record<string, unknown>,
-              ...object,
-            }),
+              ...object
+            })
           ]
           continue
         }
@@ -136,8 +130,8 @@ export const createQuerySerializer = <T = unknown>({
           serializePrimitiveParam({
             allowReserved,
             name,
-            value: value as string,
-          }),
+            value: value as string
+          })
         ]
       }
     }
@@ -224,7 +218,7 @@ export const buildUrl: Client['buildUrl'] = options => {
       typeof options.querySerializer === 'function'
         ? options.querySerializer
         : createQuerySerializer(options.querySerializer),
-    url: options.url,
+    url: options.url
   })
   return url
 }
@@ -234,7 +228,7 @@ export const getUrl = ({
   path,
   query,
   querySerializer,
-  url: _url,
+  url: _url
 }: {
   baseUrl?: string
   path?: Record<string, unknown>
@@ -268,22 +262,20 @@ export const mergeConfigs = (a: Config, b: Config): Config => {
 
 let _Headers: typeof Headers
 if (typeof Headers === 'undefined') {
-  // @ts-expect-error
+  // @ts-expect-error - Headers is not defined in mp-weixin
   _Headers = Map
 } else {
   _Headers = Headers
 }
 
-export const mergeHeaders = (
-  ...headers: Array<Required<Config>['headers'] | undefined>
-): Headers => {
+export const mergeHeaders = (...headers: Array<Required<Config>['headers'] | undefined>): Headers => {
   const mergedHeaders = new _Headers()
   for (const header of headers) {
     if (!header || typeof header !== 'object') {
       continue
     }
 
-    // @ts-expect-error
+    // @ts-expect-error - Headers is not defined in mp-weixin
     const iterator = header instanceof _Headers ? header.entries() : Object.entries(header)
 
     for (const [key, value] of iterator) {
@@ -296,10 +288,7 @@ export const mergeHeaders = (
       } else if (value !== undefined) {
         // assume object headers are meant to be JSON stringified, i.e. their
         // content value in OpenAPI specification is 'application/json'
-        mergedHeaders.set(
-          key,
-          typeof value === 'object' ? JSON.stringify(value) : (value as string),
-        )
+        mergedHeaders.set(key, typeof value === 'object' ? JSON.stringify(value) : (value as string))
       }
     }
   }
@@ -310,16 +299,12 @@ type ErrInterceptor<Err, Res, Req, Options> = (
   error: Err,
   response: Res,
   request: Req,
-  options: Options,
+  options: Options
 ) => Err | Promise<Err>
 
 type ReqInterceptor<Req, Options> = (request: Req, options: Options) => Req | Promise<Req>
 
-type ResInterceptor<Res, Req, Options> = (
-  response: Res,
-  request: Req,
-  options: Options,
-) => Res | Promise<Res>
+type ResInterceptor<Res, Req, Options> = (response: Res, request: Req, options: Options) => Res | Promise<Res>
 
 class Interceptors<Interceptor> {
   _fns: Interceptor[]
@@ -360,31 +345,31 @@ export interface Middleware<Req, Res, Err, Options> {
 export const createInterceptors = <Req, Res, Err, Options>() => ({
   error: new Interceptors<ErrInterceptor<Err, Res, Req, Options>>(),
   request: new Interceptors<ReqInterceptor<Req, Options>>(),
-  response: new Interceptors<ResInterceptor<Res, Req, Options>>(),
+  response: new Interceptors<ResInterceptor<Res, Req, Options>>()
 })
 
 const defaultQuerySerializer = createQuerySerializer({
   allowReserved: false,
   array: {
     explode: true,
-    style: 'form',
+    style: 'form'
   },
   object: {
     explode: true,
-    style: 'deepObject',
-  },
+    style: 'deepObject'
+  }
 })
 
 const defaultHeaders = {
-  'Content-Type': 'application/json',
+  'Content-Type': 'application/json'
 }
 
 export const createConfig = <T extends ClientOptions = ClientOptions>(
-  override: Config<Omit<ClientOptions, keyof T> & T> = {},
+  override: Config<Omit<ClientOptions, keyof T> & T> = {}
 ): Config<Omit<ClientOptions, keyof T> & T> => ({
   ...jsonBodySerializer,
   headers: defaultHeaders,
   parseAs: 'auto',
   querySerializer: defaultQuerySerializer,
-  ...override,
+  ...override
 })

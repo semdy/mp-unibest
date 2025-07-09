@@ -13,7 +13,7 @@
 						</view>
 						<view :class="{ 'uni-navbar-btn-icon-left': !leftIcon.length > 0 }" class="uni-navbar-btn-text"
 							v-if="leftText.length">
-							<text :style="{ color: themeColor, fontSize: '12px' }">{{ leftText }}</text>
+							<text :style="{ color: themeColor, fontSize: '16px' }">{{ leftText }}</text>
 						</view>
 					</slot>
 				</view>
@@ -21,7 +21,7 @@
 					<slot>
 						<view class="uni-navbar__header-container-inner" v-if="title.length>0">
 							<text class="uni-nav-bar-text uni-ellipsis-1"
-								:style="{color: themeColor }">{{ title }}</text>
+								:style="{color: _titleColor }">{{ title }}</text>
 						</view>
 					</slot>
 				</view>
@@ -32,7 +32,7 @@
 							<ui-icon :color="themeColor" :name="rightIcon" size="22" />
 						</view>
 						<view class="uni-navbar-btn-text" v-if="rightText.length && !rightIcon.length">
-							<text class="uni-nav-bar-right-text" :style="{ color: themeColor}">{{ rightText }}</text>
+							<text class="uni-nav-bar-right-text">{{ rightText }}</text>
 						</view>
 					</slot>
 				</view>
@@ -104,6 +104,10 @@
 				type: String,
 				default: ""
 			},
+			titleColor: {
+				type: String,
+				default: ""
+			},
 			backgroundColor: {
 				type: String,
 				default: ""
@@ -155,10 +159,21 @@
 					if (this.color) {
 						return this.color
 					} else {
-						return this.dark ? '#fff' : '#333'
+						return this.dark ? '#fff' : '#4E5969'
 					}
 				}
-				return this.color || '#333'
+				return this.color || '#4E5969'
+			},
+			_titleColor() {
+				if (this.dark) {
+					// 默认值
+					if (this.titleColor) {
+						return this.titleColor
+					} else {
+						return this.dark ? '#fff' : '#1D2129'
+					}
+				}
+				return this.titleColor || '#1D2129'
 			},
 			navbarHeight() {
 				return getVal(this.height)
@@ -206,7 +221,8 @@
 	}
 
 	.uni-nav-bar-right-text {
-		font-size: 12px;
+		font-size: 16px;
+		color: $uni-color-primary;
 	}
 
 	.uni-navbar__content {

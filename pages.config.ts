@@ -9,21 +9,21 @@ export default defineUniPages({
     navigationBarTitleText: '',
     navigationBarBackgroundColor: '#fff',
     backgroundColor: '#fff',
-    backgroundTextStyle: 'light',
+    backgroundTextStyle: 'light'
   },
   networkTimeout: {
-    request: 10000,
+    request: 10000
   },
   window: {
-    enableInPageRenderInput: 'YES',
+    enableInPageRenderInput: 'YES'
   },
   permission: {
     'scope.userLocation': {
-      desc: '你的位置信息将用于小程序位置接口的效果展示',
+      desc: '你的位置信息将用于小程序位置接口的效果展示'
     },
     'scope.getFuzzyLocation': {
-      desc: '你的位置信息将用于小程序位置接口的效果展示',
-    },
+      desc: '你的位置信息将用于小程序位置接口的效果展示'
+    }
   },
   requiredPrivateInfos: ['getFuzzyLocation', 'chooseLocation', 'chooseAddress', 'choosePoi'],
   subPackages: [],
@@ -34,9 +34,8 @@ export default defineUniPages({
       '^u--(.*)': 'uview-plus/components/u-$1/u-$1.vue',
       '^up-(.*)': 'uview-plus/components/u-$1/u-$1.vue',
       '^u-([^-].*)': 'uview-plus/components/u-$1/u-$1.vue',
-      '^(?!z-paging-refresh|z-paging-load-more)z-paging(.*)':
-        'z-paging/components/z-paging$1/z-paging$1.vue',
-    },
+      '^(?!z-paging-refresh|z-paging-load-more)z-paging(.*)': 'z-paging/components/z-paging$1/z-paging$1.vue'
+    }
   },
   tabBar: {
     color: '#888',
@@ -52,27 +51,27 @@ export default defineUniPages({
       height: '65px',
       iconPath: 'static/tabbar/homekey.png',
       text: '开门',
-      iconWidth: '45px',
+      iconWidth: '45px'
     },
     list: [
       {
         pagePath: 'pages/review/review',
         text: '票审结果',
         iconPath: 'static/tabbar/review.png',
-        selectedIconPath: 'static/tabbar/review-selected.png',
+        selectedIconPath: 'static/tabbar/review-selected.png'
       },
       {
         pagePath: 'pages/diff/diff',
         text: '差异说明',
         iconPath: 'static/tabbar/diff.png',
-        selectedIconPath: 'static/tabbar/diff-selected.png',
+        selectedIconPath: 'static/tabbar/diff-selected.png'
       },
       {
         pagePath: 'pages/policy/policy',
         text: '商务返利/促销',
         iconPath: 'static/tabbar/policy.png',
-        selectedIconPath: 'static/tabbar/policy-selected.png',
-      },
-    ],
-  },
+        selectedIconPath: 'static/tabbar/policy-selected.png'
+      }
+    ]
+  }
 })

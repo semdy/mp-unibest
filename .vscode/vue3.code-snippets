@@ -19,38 +19,38 @@
     "scope": "vue",
     "prefix": "v3",
     "body": [
-      "<route lang=\"json5\" type=\"page\">",
+      "<route lang=\"jsonc\" type=\"page\">",
       "{",
-      "  layout: 'default',",
-      "  style: {",
-      "    navigationBarTitleText: '$1',",
-      "  },",
+      "  \"layout\": \"default\",",
+      "  \"style\": {",
+      "    \"navigationBarTitleText\": \"$1\"",
+      "  }",
       "}",
       "</route>\n",
-      "<template>",
-      "  <view class=\"\">$2</view>",
-      "</template>\n",
       "<script lang=\"ts\" setup>",
       "//$3",
       "</script>\n",
+      "<template>",
+      "  <view class=\"\">$2</view>",
+      "</template>\n",
       "<style lang=\"scss\" scoped>",
       "//$4",
-      "</style>\n",
-    ],
+      "</style>\n"
+    ]
   },
   "Print unibest style": {
     "scope": "vue",
     "prefix": "st",
-    "body": ["<style lang=\"scss\" scoped>", "//", "</style>\n"],
+    "body": ["<style lang=\"scss\" scoped>", "//", "</style>\n"]
   },
   "Print unibest script": {
     "scope": "vue",
     "prefix": "sc",
-    "body": ["<script lang=\"ts\" setup>", "//$3", "</script>\n"],
+    "body": ["<script lang=\"ts\" setup>", "//$3", "</script>\n"]
   },
   "Print unibest template": {
     "scope": "vue",
     "prefix": "te",
-    "body": ["<template>", "  <view class=\"\">$1</view>", "</template>\n"],
-  },
+    "body": ["<template>", "  <view class=\"\">$1</view>", "</template>\n"]
+  }
 }

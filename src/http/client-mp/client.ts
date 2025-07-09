@@ -7,9 +7,7 @@ const isFile = (value: unknown) => {
     value instanceof File ||
     value instanceof Blob ||
     (typeof value === 'string' &&
-      (value.startsWith('blob:') ||
-        value.startsWith('wxfile://') ||
-        value.startsWith('http://tmp/')))
+      (value.startsWith('blob:') || value.startsWith('wxfile://') || value.startsWith('http://tmp/')))
   )
 }
 
@@ -17,7 +15,7 @@ const getUploadOpts = (body: unknown): HttpRequestConfig => {
   const result: HttpRequestConfig = {
     filePath: '',
     name: '',
-    formData: {},
+    formData: {}
   }
   for (const [key, value] of Object.entries(body ?? {})) {
     if (isFile(value) || (Array.isArray(value) && isFile(value[0]))) {
@@ -40,12 +38,12 @@ export const createClient = (config: Config = {}): Omit<Client, 'interceptors'> 
     return getConfig()
   }
 
-  // @ts-expect-error
+  // @ts-expect-error - TS doesn't know about this method
   const request: Client['request'] = options => {
     const opts = {
       ..._config,
       ...options,
-      headers: mergeHeaders(_config.headers, options.headers),
+      headers: mergeHeaders(_config.headers, options.headers)
     }
 
     // if (opts.body && opts.bodySerializer) {
@@ -65,7 +63,7 @@ export const createClient = (config: Config = {}): Omit<Client, 'interceptors'> 
       header: headers,
       data: body,
       params: query,
-      baseURL: baseUrl,
+      baseURL: baseUrl
     } as unknown as HttpRequestConfig
 
     return http.request(requestOpts)
@@ -84,6 +82,6 @@ export const createClient = (config: Config = {}): Omit<Client, 'interceptors'> 
     put: options => request({ ...options, method: 'PUT' }),
     request,
     setConfig,
-    trace: options => request({ ...options, method: 'TRACE' }),
+    trace: options => request({ ...options, method: 'TRACE' })
   }
 }

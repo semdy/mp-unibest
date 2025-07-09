@@ -148,7 +148,7 @@ const authorize = {
   async refreshToken(token: string) {
     const res: any = await refreshTokenApi({
       token,
-      refresh: this.getRefreshToken(),
+      refresh: this.getRefreshToken()
     })
     return { token: res.access, refreshToken: res.refresh }
   },
@@ -185,26 +185,26 @@ const authorize = {
     return this.appReady
   },
 
-  dispatchReady() {
+  dispatchReady(...args: any[]) {
     this.appReady = true
     this.isPending = false
     const self = this
     this.readyCallback.forEach(function (callback) {
       if (typeof callback === 'function') {
-        callback.apply(self, arguments as unknown as any[])
+        callback.apply(self, args)
       }
     })
     this.readyCallback = []
   },
 
-  dispatchLoginExpired() {
+  dispatchLoginExpired(...args: any[]) {
     const self = this
     this.loginExpiredCallback.forEach(function (callback) {
       if (typeof callback === 'function') {
-        callback.apply(self, arguments as unknown as any[])
+        callback.apply(self, args)
       }
     })
-  },
+  }
 }
 
 export default authorize

@@ -40,9 +40,12 @@
         "abiFilters": [
           "armeabi-v7a",
           "arm64-v8a"
-        ]
+        ],
+        "schemes": "centrdxapp,centrdx"
       },
-      "ios": {},
+      "ios": {
+        "urltypes": "centrdxapp,centrdx"
+      },
       "sdkConfigs": {},
       "icons": {
         "android": {
@@ -75,11 +78,26 @@
             "spotlight@3x": "static/app/icons/120x120.png"
           }
         }
+      },
+      "splashscreen": {
+        "androidStyle": "default",
+        "android": {
+          "hdpi": "static/app/launcher/480x762.png",
+          "xhdpi": "static/app/launcher/720x1242.png",
+          "xxhdpi": "static/app/launcher/1080x1882.png"
+        },
+        "useOriginalMsgbox": true
       }
     },
-    "renderer": "native",
+    "nvueCompiler": "uni-app",
     "compatible": {
       "ignoreVersion": true
+    },
+    "screenOrientation": [
+      "portrait-primary"
+    ],
+    "error": {
+      "url": "hybrid/html/error.html"
     }
   },
   "quickapp": {},
@@ -108,7 +126,7 @@
     },
     "usingComponents": true,
     "compileType": "miniprogram",
-    "projectname": "票审小程序",
+    "projectname": "centrdx",
     "miniprogramRoot": "",
     "libVersion": "3.7.12",
     "editorSetting": {
@@ -123,7 +141,7 @@
   },
   "mp-alipay": {
     "usingComponents": true,
-    "projectname": "票审小程序",
+    "projectname": "centrdx",
     "styleIsolation": "shared",
     "compileType": "mini",
     "miniprogramRoot": "",
@@ -151,7 +169,8 @@
       }
     },
     "router": {
-      "base": "/"
+      "base": "/",
+      "mode": "hash"
     }
   }
 }
