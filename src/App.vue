@@ -17,7 +17,7 @@ import { usePickerDataStore } from '@/store'
 onLaunch(() => {
   const toLogin = () => {
     uni.redirectTo({
-      url: '/pages/login/login',
+      url: '/pages/login/login'
     })
   }
   const pickerDataStore = usePickerDataStore()

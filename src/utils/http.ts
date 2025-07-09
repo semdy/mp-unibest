@@ -25,7 +25,7 @@ export const http = <T>(options: CustomRequestOptions) => {
           !options.hideErrorToast &&
             uni.showToast({
               icon: 'none',
-              title: (res.data as IResData<T>).msg || '请求错误',
+              title: (res.data as IResData<T>).msg || '请求错误'
             })
           reject(res)
         }
@@ -34,10 +34,10 @@ export const http = <T>(options: CustomRequestOptions) => {
       fail(err) {
         uni.showToast({
           icon: 'none',
-          title: '网络错误，换个网络试试',
+          title: '网络错误，换个网络试试'
         })
         reject(err)
-      },
+      }
     })
   })
 }
@@ -49,16 +49,12 @@ export const http = <T>(options: CustomRequestOptions) => {
  * @param header 请求头，默认为json格式
  * @returns
  */
-export const httpGet = <T>(
-  url: string,
-  query?: Record<string, any>,
-  header?: Record<string, any>,
-) => {
+export const httpGet = <T>(url: string, query?: Record<string, any>, header?: Record<string, any>) => {
   return http<T>({
     url,
     query,
     method: 'GET',
-    header,
+    header
   })
 }
 
@@ -74,14 +70,14 @@ export const httpPost = <T>(
   url: string,
   data?: Record<string, any>,
   query?: Record<string, any>,
-  header?: Record<string, any>,
+  header?: Record<string, any>
 ) => {
   return http<T>({
     url,
     query,
     data,
     method: 'POST',
-    header,
+    header
   })
 }
 

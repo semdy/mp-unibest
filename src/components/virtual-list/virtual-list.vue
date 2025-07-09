@@ -1,11 +1,5 @@
 <template>
-  <scroll-view
-    ref="list"
-    scroll-y
-    class="list-container"
-    @scroll="handleScroll"
-    style="height: 100vh"
-  >
+  <scroll-view ref="list" scroll-y class="list-container" @scroll="handleScroll" style="height: 100vh">
     <div class="list-phantom" :style="{ height: listHeight + 'px' }"></div>
     <div class="list" :style="{ transform: getTransform }">
       <div
@@ -27,13 +21,13 @@ export default {
     // 所有列表数据
     listData: {
       type: Array,
-      default: () => [],
+      default: () => []
     },
     // 每项高度
     itemSize: {
       type: Number,
-      default: 200,
-    },
+      default: 200
+    }
   },
   computed: {
     // 列表总高度
@@ -51,14 +45,14 @@ export default {
     // 获取真实显示列表数据
     visibleData() {
       return this.listData.slice(this.startIndex, Math.min(this.endIndex, this.listData.length))
-    },
+    }
   },
   data() {
     return {
       screenHeight: 0, // 屏幕高度即可视区域高度
       startOffset: 0, // 顶部偏移量
       startIndex: 0, // 可视化区域的数据开始下标
-      endIndex: 0, // 可视化区域的数据结束下标
+      endIndex: 0 // 可视化区域的数据结束下标
     }
   },
   mounted() {
@@ -72,7 +66,7 @@ export default {
       uni.getSystemInfo({
         success: res => {
           this.screenHeight = res.screenHeight
-        },
+        }
       })
     },
     handleScroll(e) {
@@ -84,8 +78,8 @@ export default {
       this.endIndex = this.startIndex + this.visibleCount
       // 顶部偏移量
       this.startOffset = scrollTop - (scrollTop % this.itemSize)
-    },
-  },
+    }
+  }
 }
 </script>
 

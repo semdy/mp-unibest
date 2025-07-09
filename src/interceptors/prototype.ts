@@ -9,5 +9,5 @@ export const prototypeInterceptor = {
         return this[index]
       }
     }
-  },
+  }
 }

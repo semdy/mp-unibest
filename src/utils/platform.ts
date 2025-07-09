@@ -19,6 +19,6 @@ const PLATFORM = {
   isMp,
   isMpWeixin,
   isMpAplipay,
-  isMpToutiao,
+  isMpToutiao
 }
 export default PLATFORM

@@ -15,6 +15,6 @@ export const useTokenStore = defineStore('token', () => {
   return {
     setToken,
     token,
-    $reset,
+    $reset
   }
 })

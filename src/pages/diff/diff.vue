@@ -7,42 +7,16 @@
       <view class="page-title">差异汇总</view>
       <view class="page-main">
         <view class="page-filter">
-          <ui-picker
-            dark
-            :columns="pickerData.diff_customers"
-            v-model="customer"
-            placeholder="医院"
-          />
-          <ui-picker
-            dark
-            :columns="pickerData.diff_quarters"
-            v-model="quarter"
-            placeholder="所属季度"
-          />
-          <ui-picker
-            dark
-            :columns="pickerData.diff_diffTypes"
-            v-model="diffType"
-            placeholder="差异类型"
-          />
-          <ui-picker
-            dark
-            :columns="pickerData.diff_approveStatus"
-            v-model="approveStatus"
-            placeholder="审批状态"
-          />
+          <ui-picker dark :columns="pickerData.diff_customers" v-model="customer" placeholder="医院" />
+          <ui-picker dark :columns="pickerData.diff_quarters" v-model="quarter" placeholder="所属季度" />
+          <ui-picker dark :columns="pickerData.diff_diffTypes" v-model="diffType" placeholder="差异类型" />
+          <ui-picker dark :columns="pickerData.diff_approveStatus" v-model="approveStatus" placeholder="审批状态" />
         </view>
         <view class="page-info">
           <view class="page-info-item">
             <view class="page-info-item-title">经销商名称</view>
             <view class="page-info-item-content">
-              <ui-picker
-                dark
-                :columns="pickerData.diff_dealers"
-                v-model="dealer"
-                searchable
-                placeholder="经销商名称"
-              />
+              <ui-picker dark :columns="pickerData.diff_dealers" v-model="dealer" searchable placeholder="经销商名称" />
             </view>
           </view>
         </view>
@@ -109,13 +83,13 @@ export default {
       dealer: '',
       currentPage: 1,
       loadingPage: true,
-      loading: true,
+      loading: true
     }
   },
   mixins: [shareMixins],
   computed: {
     ...mapState(usePickerDataStore, ['pickerData']),
-    ...mapState(useDiffRecordsStore, ['diff_info']),
+    ...mapState(useDiffRecordsStore, ['diff_info'])
   },
   watch: {
     customer() {
@@ -132,16 +106,16 @@ export default {
     },
     dealer(val) {
       this.refreshData()
-    },
+    }
   },
   methods: {
     toDetail(event, index) {
       const queryString = objectToQueryString({
         difference_id: event.id,
-        dataIndex: index,
+        dataIndex: index
       })
       uni.navigateTo({
-        url: '/pages/diff-detail/diff-detail?' + queryString,
+        url: '/pages/diff-detail/diff-detail?' + queryString
       })
     },
     async requestData() {
@@ -158,7 +132,7 @@ export default {
           approve_status: this.approveStatus,
           dealer_id: this.dealer,
           page: this.currentPage,
-          page_size: 20,
+          page_size: 20
         })
         if (pageData.length < 20) {
           this.loadingPage = false
@@ -192,11 +166,11 @@ export default {
     },
     approveStatusStyle(status) {
       return approveStatusStyleMap[status]
-    },
+    }
   },
   onLoad() {
     this.refreshData()
-  },
+  }
 }
 </script>
 

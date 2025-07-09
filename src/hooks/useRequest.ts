@@ -17,7 +17,7 @@ type IUseRequestOptions<T> = {
  */
 export default function useRequest<T>(
   func: () => Promise<IResData<T>>,
-  options: IUseRequestOptions<T> = { immediate: false },
+  options: IUseRequestOptions<T> = { immediate: false }
 ): {
   loading: Ref<boolean>
   error: Ref<unknown>

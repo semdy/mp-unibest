@@ -22,28 +22,28 @@ export default {
   props: {
     draggable: {
       type: Boolean,
-      default: true,
+      default: true
     },
     range: {
       type: Array,
-      default: () => [-Infinity, Infinity],
+      default: () => [-Infinity, Infinity]
     },
     autoSlide: {
       type: Boolean,
-      default: true,
+      default: true
     },
     slideDuration: {
       type: Number,
-      default: 250,
+      default: 250
     },
     slideRatio: {
       type: Number,
-      default: 0.2,
+      default: 0.2
     },
     useTransform: {
       type: Boolean,
-      default: true,
-    },
+      default: true
+    }
   },
   data() {
     return {
@@ -54,7 +54,7 @@ export default {
       lastMoveOffset: 0,
       withAnimation: false,
       clearStyle: true,
-      isSetManually: false,
+      isSetManually: false
     }
   },
   computed: {
@@ -65,14 +65,14 @@ export default {
       if (this.useTransform) {
         return {
           transform: `translateY(${this.moveOffset}px)`,
-          transition: this.withAnimation ? `transform ${this.slideDuration}ms ease-out` : '',
+          transition: this.withAnimation ? `transform ${this.slideDuration}ms ease-out` : ''
         }
       }
       return {
         top: `${this.moveOffset}px`,
-        transition: this.withAnimation ? `top ${this.slideDuration}ms ease-out` : '',
+        transition: this.withAnimation ? `top ${this.slideDuration}ms ease-out` : ''
       }
-    },
+    }
   },
   methods: {
     handleTouchStart(e) {
@@ -87,7 +87,7 @@ export default {
       this.$emit('start', {
         moveOffset: this.moveOffset,
         moveDistance: this.moveDistance,
-        startY: this.startY,
+        startY: this.startY
       })
     },
     handleTouchmove(e) {
@@ -109,7 +109,7 @@ export default {
         this.$emit('move', {
           moveOffset: this.moveOffset,
           moveDistance: this.moveDistance,
-          startY: this.startY,
+          startY: this.startY
         })
       }
     },
@@ -120,7 +120,7 @@ export default {
         this.$emit('end', {
           moveOffset: this.moveOffset,
           moveDistance: this.moveDistance,
-          startY: this.startY,
+          startY: this.startY
         })
         if (this.autoSlide && this.moveDistance !== 0) {
           const [minDistance, maxDistance] = this.range
@@ -168,7 +168,7 @@ export default {
       this.$emit('slideend', {
         moveOffset: this.moveOffset,
         moveDistance: this.moveDistance,
-        startY: this.startY,
+        startY: this.startY
       })
     },
     isAtStart() {
@@ -204,10 +204,10 @@ export default {
       this.$emit(evtName, {
         moveOffset: this.moveOffset,
         moveDistance: offset - this.getLastMoveOffset(),
-        startY: this.startY,
+        startY: this.startY
       })
-    },
-  },
+    }
+  }
 }
 </script>
 

@@ -33,7 +33,7 @@ export default {
       phone: '',
       code: '',
       tips: '',
-      logining: false,
+      logining: false
     }
   },
   mixins: [shareMixins],
@@ -49,7 +49,7 @@ export default {
         showLoading('正在获取验证码')
         try {
           await sendCheckCode({
-            phone: this.phone,
+            phone: this.phone
           })
           toast.success('验证码已发送')
           this.$refs.uCodeRef.start()
@@ -78,19 +78,19 @@ export default {
         const { access: token, refresh: refreshToken } = await loginApi({
           username: this.phone,
           password: this.code,
-          login_type: 'phone',
+          login_type: 'phone'
         })
         authorize.saveToken(token, refreshToken)
         const pickerDataStore = usePickerDataStore()
         pickerDataStore.initAllFilter()
         uni.switchTab({
-          url: '/pages/review/review',
+          url: '/pages/review/review'
         })
       } finally {
         this.logining = false
       }
-    },
-  },
+    }
+  }
 }
 </script>
 

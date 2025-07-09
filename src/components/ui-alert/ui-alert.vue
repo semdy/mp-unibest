@@ -17,27 +17,27 @@ export default {
   props: {
     type: {
       type: String,
-      default: 'primary',
+      default: 'primary'
     },
     icon: {
-      type: String,
+      type: String
     },
     plain: {
       type: Boolean,
-      default: false,
+      default: false
     },
     iconColor: {
-      type: String,
+      type: String
     },
     iconSize: {
       type: Number,
-      default: 14,
+      default: 14
     },
     bold: {
       type: Boolean,
-      default: false,
-    },
-  },
+      default: false
+    }
+  }
 }
 </script>
 

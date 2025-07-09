@@ -8,7 +8,7 @@ const initState = {
   special_sales_qty: 0,
   pass_percentage: '0%',
   audit_report: [] as any[],
-  audit_info: [] as any[],
+  audit_info: [] as any[]
 }
 
 type ISummaryData = typeof initState
@@ -48,6 +48,6 @@ export const useSummaryDataStore = defineStore('summaryData', () => {
     summaryData,
     getReportInvoice,
     getSummarySales,
-    $reset,
+    $reset
   }
 })

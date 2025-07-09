@@ -14,7 +14,7 @@ export function isAuthorized(): Promise<boolean> {
       },
       fail: () => {
         resolve(false)
-      },
+      }
     })
   })
 }
@@ -39,7 +39,7 @@ export function requestAuthorize(scope: keyof UniNamespace.AuthSetting): Promise
             },
             fail(e) {
               reject(e)
-            },
+            }
           })
         } else {
           resolve()
@@ -47,7 +47,7 @@ export function requestAuthorize(scope: keyof UniNamespace.AuthSetting): Promise
       },
       fail(e) {
         reject(e)
-      },
+      }
     })
   })
 }
@@ -74,7 +74,7 @@ export function login(): Promise<string> {
       },
       fail() {
         reject('登录接口调用失败')
-      },
+      }
     })
   })
 }
@@ -87,7 +87,7 @@ export function checkSession(): Promise<any> {
 }
 
 export function getWxUserInfo(
-  options: { withCredentials?: boolean; lang?: string } = {},
+  options: { withCredentials?: boolean; lang?: string } = {}
 ): Promise<UniApp.GetUserInfoRes> {
   return new Promise((resolve, reject) => {
     uni.getUserInfo({
@@ -98,14 +98,14 @@ export function getWxUserInfo(
       },
       fail() {
         reject('用户拒绝授权')
-      },
+      }
     })
   })
 }
 
 export function downloadFile<T = UniApp.DownloadSuccessData>(
   url: string,
-  params: Record<string, any> = {},
+  params: Record<string, any> = {}
 ): Promise<T> {
   return new Promise((resolve, reject) => {
     uni.downloadFile({
@@ -120,15 +120,12 @@ export function downloadFile<T = UniApp.DownloadSuccessData>(
       },
       fail: e => {
         reject(e)
-      },
+      }
     })
   })
 }
 
-export function saveImageToPhotosAlbum(
-  filePath: string,
-  downloadParams?: Record<string, any>,
-): Promise<any> {
+export function saveImageToPhotosAlbum(filePath: string, downloadParams?: Record<string, any>): Promise<any> {
   return new Promise((resolve, reject) => {
     ;(async () => {
       if (/^https?:\/\//.test(filePath)) {
@@ -147,7 +144,7 @@ export function saveImageToPhotosAlbum(
         success: resolve,
         fail: e => {
           reject(e)
-        },
+        }
       })
     })()
   })
@@ -157,13 +154,13 @@ export function uploadFile<T = any>(
   url: string,
   filePath: string,
   params?: Record<string, any>,
-  header?: Record<string, any>,
+  header?: Record<string, any>
 ): Promise<T> {
   showLoading('上传中...')
 
   const defHeaders = {
     'content-type': 'multipart/form-data',
-    token: uni.getStorageSync('token'),
+    token: uni.getStorageSync('token')
   }
 
   for (const i in params) {
@@ -190,7 +187,7 @@ export function uploadFile<T = any>(
       },
       complete() {
         hideLoading()
-      },
+      }
     })
   })
 }
@@ -204,7 +201,7 @@ export function requestSubscribeMessage(tmplIds: string[]): Promise<any> {
     uni.requestSubscribeMessage({
       tmplIds,
       success: resolve,
-      fail: reject,
+      fail: reject
     })
   })
 }

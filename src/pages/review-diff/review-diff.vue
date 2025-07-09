@@ -53,12 +53,7 @@
             <text>{{ item.date }}</text>
           </template>
           <template #header-right v-if="item.audit_result">
-            <ui-alert
-              type="primary"
-              icon="check-circle"
-              plain
-              v-if="item.audit_result === '已核实'"
-            >
+            <ui-alert type="primary" icon="check-circle" plain v-if="item.audit_result === '已核实'">
               {{ item.audit_result }}
             </ui-alert>
             <ui-alert v-else type="error" icon="warning" plain>{{ item.audit_result }}</ui-alert>
@@ -103,7 +98,7 @@ export default {
       invoiceData: [],
       currentPage: 1,
       loadingPage: true,
-      loading: true,
+      loading: true
     }
   },
   mixins: [shareMixins],
@@ -117,7 +112,7 @@ export default {
         const { invoice_info } = await getRelateDetailCompareApi({
           sales_id: this.queryOptions.sales_id,
           page: this.currentPage,
-          page_size: 20,
+          page_size: 20
         })
         if (this.currentPage === 1) {
           this.invoiceData = invoice_info
@@ -143,12 +138,12 @@ export default {
     },
     loadMore() {
       this.appendData()
-    },
+    }
   },
   onLoad(options) {
     this.queryOptions = options
     this.refreshData()
-  },
+  }
 }
 </script>
 

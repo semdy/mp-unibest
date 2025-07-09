@@ -1,10 +1,6 @@
 <template>
   <view class="ui-icon" :class="className" :style="style" @click="onClick">
-    <text
-      v-if="!isImg"
-      :style="{ color: color, fontSize: iconSize }"
-      :class="`ui-iconfont ui-icon-${name}`"
-    />
+    <text v-if="!isImg" :style="{ color: color, fontSize: iconSize }" :class="`ui-iconfont ui-icon-${name}`" />
     <image
       v-else
       class="ui-icon__img"
@@ -26,22 +22,22 @@ export default {
   props: {
     name: {
       type: String,
-      default: '',
+      default: ''
     },
     color: {
       type: String,
-      default: 'currentColor',
+      default: 'currentColor'
     },
     size: {
       type: [Number, String],
-      default: '',
+      default: ''
     },
     style: {
-      type: [Object, String],
+      type: [Object, String]
     },
     class: {
-      type: String,
-    },
+      type: String
+    }
   },
   computed: {
     iconSize() {
@@ -55,13 +51,13 @@ export default {
     },
     className() {
       return this.class
-    },
+    }
   },
   methods: {
     onClick() {
       this.$emit('click')
-    },
-  },
+    }
+  }
 }
 </script>
 

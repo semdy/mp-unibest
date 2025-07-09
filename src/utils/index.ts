@@ -61,7 +61,7 @@ export const getUrlObj = (url: string) => {
   if (!queryStr) {
     return {
       path,
-      query: {},
+      query: {}
     }
   }
   const query: Record<string, string> = {}
@@ -84,8 +84,8 @@ export const getAllPages = (key = 'needLogin') => {
       .filter(page => !key || page[key])
       .map(page => ({
         ...page,
-        path: `/${page.path}`,
-      })),
+        path: `/${page.path}`
+      }))
   ]
   // 这里处理分包
   const subPages: any[] = []
@@ -98,7 +98,7 @@ export const getAllPages = (key = 'needLogin') => {
       .forEach((page: { path: string } & Record<string, any>) => {
         subPages.push({
           ...page,
-          path: `/${root}/${page.path}`,
+          path: `/${root}/${page.path}`
         })
       })
   })
@@ -129,7 +129,7 @@ export const getEnvBaseUrl = () => {
   // 微信小程序端环境区分
   if (isMpWeixin) {
     const {
-      miniProgram: { envVersion },
+      miniProgram: { envVersion }
     } = uni.getAccountInfoSync()
 
     switch (envVersion) {
@@ -164,7 +164,7 @@ export const getEnvBaseUploadUrl = () => {
   // 微信小程序端环境区分
   if (isMpWeixin) {
     const {
-      miniProgram: { envVersion },
+      miniProgram: { envVersion }
     } = uni.getAccountInfoSync()
 
     switch (envVersion) {

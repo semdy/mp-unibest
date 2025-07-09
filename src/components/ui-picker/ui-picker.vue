@@ -48,44 +48,44 @@ export default {
       type: Array,
       default: () => {
         return [[]]
-      },
+      }
     },
     closeOnClickOverlay: {
       type: Boolean,
-      default: true,
+      default: true
     },
     modelValue: {
-      type: [String, Number, Array],
+      type: [String, Number, Array]
     },
     placeholder: {
       type: String,
-      default: '请选择',
+      default: '请选择'
     },
     dark: {
       type: Boolean,
-      default: false,
+      default: false
     },
     searchable: {
       type: Boolean,
-      default: false,
+      default: false
     },
     searchPlaceholder: {
       type: String,
-      default: '请输入搜索关键字',
+      default: '请输入搜索关键字'
     },
     emptyOption: {
       type: Object,
       default: () => ({
         label: '全部',
-        value: '',
-      }),
-    },
+        value: ''
+      })
+    }
   },
   data() {
     return {
       visible: false,
       defaultIndex: [],
-      keyword: '',
+      keyword: ''
     }
   },
   watch: {
@@ -93,14 +93,14 @@ export default {
       handler(val) {
         this.defaultIndex = this.getDefaultIndex(val)
       },
-      immediate: true,
+      immediate: true
     },
     visible(val) {
       if (val && this.modelValue) {
         this.$refs.pickerRef.setIndexs(this.getDefaultIndex(this.modelValue), true)
       }
       this.$emit('open', val)
-    },
+    }
   },
   computed: {
     isMultiple() {
@@ -132,17 +132,14 @@ export default {
     },
     showText() {
       const result = this.defaultIndex.map((it, index) => this.searchedColumns[index][it])
-      if (
-        this.emptyOption &&
-        result.every(item => item === undefined || item.value === this.emptyOption.value)
-      ) {
+      if (this.emptyOption && result.every(item => item === undefined || item.value === this.emptyOption.value)) {
         return ''
       }
       return result
         .filter(Boolean)
         .map(it => it.label)
         .join(',')
-    },
+    }
   },
   methods: {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -173,18 +170,16 @@ export default {
       this.$emit('change', result)
     },
     handleConfirm(result) {
-      const value = result.value.map((it, index) =>
-        !it ? result.values[index][0].value : it.value,
-      )
+      const value = result.value.map((it, index) => (!it ? result.values[index][0].value : it.value))
       this.hidePicker()
       this.$emit('update:modelValue', this.isMultiple ? value : value[0])
       this.$emit('confirm', {
         ...result,
         value,
-        indexs: result.indexs.map(it => (it === -1 ? 0 : it)),
+        indexs: result.indexs.map(it => (it === -1 ? 0 : it))
       })
-    },
-  },
+    }
+  }
 }
 </script>
 

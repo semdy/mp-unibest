@@ -47,11 +47,7 @@
         <view class="policy-header">
           <view class="policy-header-title">政策记录</view>
           <view class="policy-header-filter">
-            <ui-picker
-              :columns="pickerData.policy_quarters"
-              v-model="quarter"
-              placeholder="所有季度"
-            />
+            <ui-picker :columns="pickerData.policy_quarters" v-model="quarter" placeholder="所有季度" />
           </view>
         </view>
         <scroll-view scroll-y enable-flex class="page-scrollview" @scrolltolower="loadMore">
@@ -107,7 +103,7 @@ export default {
       totalRecords: 0,
       currentPage: 1,
       loadingPage: true,
-      loading: true,
+      loading: true
     }
   },
   mixins: [shareMixins],
@@ -115,8 +111,8 @@ export default {
     ...mapState(usePickerDataStore, ['pickerData']),
     ...mapState(usePolicyDataStore, {
       policy_info: 'policy_info',
-      basicInfo: store => store.policy_info[0] || {},
-    }),
+      basicInfo: store => store.policy_info[0] || {}
+    })
   },
   watch: {
     dealer() {
@@ -124,16 +120,16 @@ export default {
     },
     quarter(val) {
       this.refreshData()
-    },
+    }
   },
   methods: {
     toDetail(event) {
       const queryString = objectToQueryString({
         policy_id: event.policy,
-        rebate_amount: event.rebate_amount,
+        rebate_amount: event.rebate_amount
       })
       uni.navigateTo({
-        url: '/pages/policy-detail/policy-detail?' + queryString,
+        url: '/pages/policy-detail/policy-detail?' + queryString
       })
     },
     async requestData() {
@@ -147,7 +143,7 @@ export default {
           dealer_id: this.dealer,
           quarter_id: this.quarter,
           page: this.currentPage,
-          page_size: 20,
+          page_size: 20
         })
         this.totalRecords = res.pagination.total_records
         if (res.data.length < 20) {
@@ -175,11 +171,11 @@ export default {
     },
     statusStyle(status) {
       return dmsConfirmedStatusStyleMap[status]
-    },
+    }
   },
   onLoad() {
     this.refreshData()
-  },
+  }
 }
 </script>
 

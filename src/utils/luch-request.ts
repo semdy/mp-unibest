@@ -5,7 +5,7 @@ import Request, {
   type HttpData,
   type HttpTask,
   type HttpUploadTask,
-  type HttpDownloadTask,
+  type HttpDownloadTask
 } from 'luch-request'
 import { toast, delay } from '@/utils/util'
 import authorize from '@/utils/authorize'
@@ -16,53 +16,21 @@ export type { HttpRequestConfig }
 declare class HttpRequest extends Request {
   request<T = any, D = HttpRequestTask>(config: HttpRequestConfig<D>): Promise<T>
 
-  get<T = any, D = HttpRequestTask>(
-    url: string,
-    params?: HttpParams,
-    config?: HttpRequestConfig<D>,
-  ): Promise<T>
+  get<T = any, D = HttpRequestTask>(url: string, params?: HttpParams, config?: HttpRequestConfig<D>): Promise<T>
 
-  delete<T = any, D = HttpRequestTask>(
-    url: string,
-    data?: HttpData,
-    config?: HttpRequestConfig<D>,
-  ): Promise<T>
+  delete<T = any, D = HttpRequestTask>(url: string, data?: HttpData, config?: HttpRequestConfig<D>): Promise<T>
 
-  head<T = any, D = HttpRequestTask>(
-    url: string,
-    data?: HttpData,
-    config?: HttpRequestConfig<D>,
-  ): Promise<T>
+  head<T = any, D = HttpRequestTask>(url: string, data?: HttpData, config?: HttpRequestConfig<D>): Promise<T>
 
-  options<T = any, D = HttpRequestTask>(
-    url: string,
-    data?: HttpData,
-    config?: HttpRequestConfig<D>,
-  ): Promise<T>
+  options<T = any, D = HttpRequestTask>(url: string, data?: HttpData, config?: HttpRequestConfig<D>): Promise<T>
 
-  post<T = any, D = HttpRequestTask>(
-    url: string,
-    data?: HttpData,
-    config?: HttpRequestConfig<D>,
-  ): Promise<T>
+  post<T = any, D = HttpRequestTask>(url: string, data?: HttpData, config?: HttpRequestConfig<D>): Promise<T>
 
-  put<T = any, D = HttpRequestTask>(
-    url: string,
-    data?: HttpData,
-    config?: HttpRequestConfig<D>,
-  ): Promise<T>
+  put<T = any, D = HttpRequestTask>(url: string, data?: HttpData, config?: HttpRequestConfig<D>): Promise<T>
 
-  connect<T = any, D = HttpRequestTask>(
-    url: string,
-    data?: HttpData,
-    config?: HttpRequestConfig<D>,
-  ): Promise<T>
+  connect<T = any, D = HttpRequestTask>(url: string, data?: HttpData, config?: HttpRequestConfig<D>): Promise<T>
 
-  trace<T = any, D = HttpRequestTask>(
-    url: string,
-    data?: HttpData,
-    config?: HttpRequestConfig<D>,
-  ): Promise<T>
+  trace<T = any, D = HttpRequestTask>(url: string, data?: HttpData, config?: HttpRequestConfig<D>): Promise<T>
 
   upload<T = any, D = HttpUploadTask>(url: string, config?: HttpRequestConfig<D>): Promise<T>
 
@@ -79,7 +47,7 @@ const origHttpGet = http.get
 http.get = <T = any, D = HttpRequestTask>(
   url: string,
   params?: HttpParams,
-  config?: HttpRequestConfig<D>,
+  config?: HttpRequestConfig<D>
 ): Promise<T> => {
   return origHttpGet.call(http, url, { params, ...config }) as Promise<T>
 }
@@ -116,7 +84,7 @@ function initRequest() {
     },
     config => {
       return Promise.reject(config)
-    },
+    }
   )
 
   http.interceptors.response.use(
@@ -182,7 +150,7 @@ function initRequest() {
       }
       // （statusCode !== 200）
       return Promise.reject(response)
-    },
+    }
   )
 }
 

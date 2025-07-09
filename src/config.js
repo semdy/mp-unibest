@@ -2,17 +2,17 @@ export const shareMixins = {
   onShareAppMessage() {
     return {
       title: '票审小程序',
-      path: `/${this.route || this.__route__}`,
+      path: `/${this.route || this.__route__}`
       // imageUrl: '/static/resources/baoheyi/share.png'
     }
   },
   onShareTimeline() {
     return {
       title: '票审小程序',
-      query: '',
+      query: ''
       // imageUrl: '/static/resources/baoheyi/share.png'
     }
-  },
+  }
 }
 
 // export const serverMap = {

@@ -187,20 +187,14 @@
                 :height="70"
                 :max-count="1"
                 :fileList="fileListWithHttp"
-                :deletable="
-                  data.is_approval_permission &&
-                  (data.approval_state === 0 || data.approval_state === 4)
-                "
+                :deletable="data.is_approval_permission && (data.approval_state === 0 || data.approval_state === 4)"
                 :beforeRead="beforeRead"
                 @afterRead="afterRead"
                 @delete="deletePic"
               >
                 <view
                   class="upload-trigger"
-                  v-if="
-                    data.is_approval_permission &&
-                    (data.approval_state === 0 || data.approval_state === 4)
-                  "
+                  v-if="data.is_approval_permission && (data.approval_state === 0 || data.approval_state === 4)"
                   @click.stop="actionShow = true"
                 >
                   <ui-icon name="plus" />
@@ -218,14 +212,7 @@
       class="page-footer flex-row"
       v-if="data.is_approval_permission && (data.approval_state === 1 || data.approval_state === 2)"
     >
-      <up-button
-        type="error"
-        shape="square"
-        plain
-        class="page-footer-btn"
-        @click="showReject"
-        text="驳回"
-      />
+      <up-button type="error" shape="square" plain class="page-footer-btn" @click="showReject" text="驳回" />
       <up-button
         type="primary"
         shape="square"
@@ -239,9 +226,7 @@
       v-if="data.is_approval_permission && (data.approval_state === 0 || data.approval_state === 4)"
       class="page-footer flex-row"
     >
-      <up-button type="primary" shape="square" plain class="page-footer-btn" @click="handleCancel">
-        取消
-      </up-button>
+      <up-button type="primary" shape="square" plain class="page-footer-btn" @click="handleCancel">取消</up-button>
       <up-button
         type="primary"
         shape="square"
@@ -259,14 +244,7 @@
           <textarea v-model="approve_desc" class="approve-editor" placeholder="请填写..." />
         </view>
         <view class="page-footer flex-row">
-          <up-button
-            type="info"
-            shape="square"
-            plain
-            class="page-footer-btn"
-            @click="showPopup = false"
-            text="取消"
-          />
+          <up-button type="info" shape="square" plain class="page-footer-btn" @click="showPopup = false" text="取消" />
           <up-button
             :type="isApprove ? 'primary' : 'error'"
             shape="square"
@@ -277,11 +255,7 @@
           />
         </view>
       </up-popup>
-      <up-action-sheet
-        :actions="actionList"
-        v-model:show="actionShow"
-        @select="handleActionSelect"
-      />
+      <up-action-sheet :actions="actionList" v-model:show="actionShow" @select="handleActionSelect" />
     </view>
   </view>
 </template>
@@ -289,12 +263,7 @@
 <script>
 import { shareMixins } from '@/config'
 import test from 'uview-plus/libs/function/test'
-import {
-  getDiffRecordReportDetailApi,
-  submitDifferenceApi,
-  approveDifferenceApi,
-  uploadFile,
-} from '@/api'
+import { getDiffRecordReportDetailApi, submitDifferenceApi, approveDifferenceApi, uploadFile } from '@/api'
 import { showLoading, hideLoading, toast, getPrevPage } from '@/utils/util'
 import { getEnvBaseUrl } from '@/utils'
 import { approveStatusMap, approveStatusStyleMap, diffTypeMap } from '@/utils/enum'
@@ -313,27 +282,27 @@ export default {
       actionList: [
         {
           name: '从聊天记录里选择',
-          accept: 'all',
+          accept: 'all'
         },
         {
           name: '从相册选择',
           accept: 'image',
-          capture: ['album'],
+          capture: ['album']
         },
         {
           name: '拍照',
           accept: 'image',
-          capture: ['camera'],
+          capture: ['camera']
         },
         {
           name: '取消',
-          action: 'cancel',
-        },
+          action: 'cancel'
+        }
       ],
       actionShow: false,
       queryOptions: {},
       data: {},
-      submitting: false,
+      submitting: false
     }
   },
   mixins: [shareMixins],
@@ -342,7 +311,7 @@ export default {
       if (!val) {
         this.approve_desc = ''
       }
-    },
+    }
   },
   computed: {
     fileListWithHttp() {
@@ -353,14 +322,14 @@ export default {
         }
         return item
       })
-    },
+    }
   },
   methods: {
     async getDiffRecordReportDetail() {
       try {
         showLoading()
         const data = await getDiffRecordReportDetailApi({
-          difference_id: this.queryOptions.difference_id,
+          difference_id: this.queryOptions.difference_id
         })
         // data.diff_type = 1
         // data.approval_state = 0
@@ -369,8 +338,8 @@ export default {
         if (data.file_url) {
           this.fileList = [
             {
-              url: data.file_url,
-            },
+              url: data.file_url
+            }
           ]
         }
         return data
@@ -395,13 +364,10 @@ export default {
           file_url: this.fileList[0].url,
           approve_timeliness: this.data.approve_timeliness,
           difference_id: this.queryOptions.difference_id,
-          summit_note: this.data.summit_note,
+          summit_note: this.data.summit_note
         })
         const newData = await this.getDiffRecordReportDetail()
-        getPrevPage().$vm.updateItemApprovalStateByIndex(
-          this.queryOptions.dataIndex,
-          newData.approval_state,
-        )
+        getPrevPage().$vm.updateItemApprovalStateByIndex(this.queryOptions.dataIndex, newData.approval_state)
       } finally {
         this.submitting = false
       }
@@ -421,14 +387,11 @@ export default {
           difference_id: this.queryOptions.difference_id,
           // approve_result: this.isApprove ? this.approve_desc : '',
           approve_result: this.isApprove,
-          reject_desc: !this.isApprove ? this.approve_desc : '',
+          reject_desc: !this.isApprove ? this.approve_desc : ''
         })
         this.showPopup = false
         const newData = await this.getDiffRecordReportDetail()
-        getPrevPage().$vm.updateItemApprovalStateByIndex(
-          this.queryOptions.dataIndex,
-          newData.approval_state,
-        )
+        getPrevPage().$vm.updateItemApprovalStateByIndex(this.queryOptions.dataIndex, newData.approval_state)
       } finally {
         this.submitting = false
       }
@@ -464,7 +427,7 @@ export default {
         this.fileList.push({
           ...item,
           status: 'uploading',
-          message: '',
+          message: ''
         })
       })
       for (let i = 0; i < lists.length; i++) {
@@ -480,7 +443,7 @@ export default {
         this.fileList.splice(fileListLen, 1, {
           ...item,
           status,
-          url,
+          url
         })
         fileListLen++
       }
@@ -489,7 +452,7 @@ export default {
       return uploadFile({
         filePath: url,
         name: 'file',
-        formData: {},
+        formData: {}
       })
     },
     handleCancel() {
@@ -521,12 +484,12 @@ export default {
     },
     approveStatusStyle(status) {
       return approveStatusStyleMap[status]
-    },
+    }
   },
   onLoad(options) {
     this.queryOptions = options
     this.getDiffRecordReportDetail()
-  },
+  }
 }
 </script>
 

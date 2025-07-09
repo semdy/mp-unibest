@@ -5,15 +5,15 @@ export const ApiResponseSchema = {
   properties: {
     code: {
       type: 'integer',
-      format: 'int32',
+      format: 'int32'
     },
     type: {
-      type: 'string',
+      type: 'string'
     },
     message: {
-      type: 'string',
-    },
-  },
+      type: 'string'
+    }
+  }
 } as const
 
 export const CategorySchema = {
@@ -21,15 +21,15 @@ export const CategorySchema = {
   properties: {
     id: {
       type: 'integer',
-      format: 'int64',
+      format: 'int64'
     },
     name: {
-      type: 'string',
-    },
+      type: 'string'
+    }
   },
   xml: {
-    name: 'Category',
-  },
+    name: 'Category'
+  }
 } as const
 
 export const PetSchema = {
@@ -38,48 +38,48 @@ export const PetSchema = {
   properties: {
     id: {
       type: 'integer',
-      format: 'int64',
+      format: 'int64'
     },
     category: {
-      $ref: '#/definitions/Category',
+      $ref: '#/definitions/Category'
     },
     name: {
       type: 'string',
-      example: 'doggie',
+      example: 'doggie'
     },
     photoUrls: {
       type: 'array',
       xml: {
-        wrapped: true,
+        wrapped: true
       },
       items: {
         type: 'string',
         xml: {
-          name: 'photoUrl',
-        },
-      },
+          name: 'photoUrl'
+        }
+      }
     },
     tags: {
       type: 'array',
       xml: {
-        wrapped: true,
+        wrapped: true
       },
       items: {
         xml: {
-          name: 'tag',
+          name: 'tag'
         },
-        $ref: '#/definitions/Tag',
-      },
+        $ref: '#/definitions/Tag'
+      }
     },
     status: {
       type: 'string',
       description: 'pet status in the store',
-      enum: ['available', 'pending', 'sold'],
-    },
+      enum: ['available', 'pending', 'sold']
+    }
   },
   xml: {
-    name: 'Pet',
-  },
+    name: 'Pet'
+  }
 } as const
 
 export const TagSchema = {
@@ -87,15 +87,15 @@ export const TagSchema = {
   properties: {
     id: {
       type: 'integer',
-      format: 'int64',
+      format: 'int64'
     },
     name: {
-      type: 'string',
-    },
+      type: 'string'
+    }
   },
   xml: {
-    name: 'Tag',
-  },
+    name: 'Tag'
+  }
 } as const
 
 export const OrderSchema = {
@@ -103,32 +103,32 @@ export const OrderSchema = {
   properties: {
     id: {
       type: 'integer',
-      format: 'int64',
+      format: 'int64'
     },
     petId: {
       type: 'integer',
-      format: 'int64',
+      format: 'int64'
     },
     quantity: {
       type: 'integer',
-      format: 'int32',
+      format: 'int32'
     },
     shipDate: {
       type: 'string',
-      format: 'date-time',
+      format: 'date-time'
     },
     status: {
       type: 'string',
       description: 'Order Status',
-      enum: ['placed', 'approved', 'delivered'],
+      enum: ['placed', 'approved', 'delivered']
     },
     complete: {
-      type: 'boolean',
-    },
+      type: 'boolean'
+    }
   },
   xml: {
-    name: 'Order',
-  },
+    name: 'Order'
+  }
 } as const
 
 export const UserSchema = {
@@ -136,33 +136,33 @@ export const UserSchema = {
   properties: {
     id: {
       type: 'integer',
-      format: 'int64',
+      format: 'int64'
     },
     username: {
-      type: 'string',
+      type: 'string'
     },
     firstName: {
-      type: 'string',
+      type: 'string'
     },
     lastName: {
-      type: 'string',
+      type: 'string'
     },
     email: {
-      type: 'string',
+      type: 'string'
     },
     password: {
-      type: 'string',
+      type: 'string'
     },
     phone: {
-      type: 'string',
+      type: 'string'
     },
     userStatus: {
       type: 'integer',
       format: 'int32',
-      description: 'User Status',
-    },
+      description: 'User Status'
+    }
   },
   xml: {
-    name: 'User',
-  },
+    name: 'User'
+  }
 } as const

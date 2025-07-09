@@ -12,13 +12,13 @@ export default {
   props: {
     align: {
       type: String,
-      default: 'left',
+      default: 'left'
     },
     huge: {
       type: Boolean,
-      default: false,
-    },
-  },
+      default: false
+    }
+  }
 }
 </script>
 

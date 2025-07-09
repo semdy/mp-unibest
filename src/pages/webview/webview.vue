@@ -6,17 +6,17 @@
 export default {
   data() {
     return {
-      url: '',
+      url: ''
     }
   },
   onLoad(options) {
     this.url = decodeURIComponent(options.url)
     if (options.title) {
       uni.setNavigationBarTitle({
-        title: options.title,
+        title: options.title
       })
     }
-  },
+  }
 }
 </script>
 

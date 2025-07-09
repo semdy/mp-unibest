@@ -86,7 +86,7 @@ export default {
   data() {
     return {
       queryOptions: {},
-      data: {},
+      data: {}
     }
   },
   mixins: [shareMixins],
@@ -99,12 +99,12 @@ export default {
       } finally {
         hideLoading()
       }
-    },
+    }
   },
   onLoad(options) {
     this.queryOptions = options
     this.getPolicyReportDetail()
-  },
+  }
 }
 </script>
 

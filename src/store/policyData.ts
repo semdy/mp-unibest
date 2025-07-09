@@ -30,6 +30,6 @@ export const usePolicyDataStore = defineStore('policyData', () => {
   return {
     policy_info,
     getPolicyReportData,
-    $reset,
+    $reset
   }
 })

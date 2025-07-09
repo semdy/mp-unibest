@@ -9,13 +9,13 @@ const messages = {
   en,
   'zh-Hans': zhHans,
   'zh-Hant': zhHant,
-  ja,
+  ja
 }
 
 const i18n = createI18n({
   locale: uni.getLocale(), // 获取已设置的语言，fallback 语言需要再 manifest.config.ts 中设置
   messages,
-  allowComposition: true,
+  allowComposition: true
 })
 
 /**

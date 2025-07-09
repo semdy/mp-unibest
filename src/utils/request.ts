@@ -30,7 +30,7 @@ const http = <T>(options: CustomRequestOptions) => {
           !options.hideErrorToast &&
             uni.showToast({
               icon: 'none',
-              title: (res.data as T & { msg?: string })?.msg || '请求错误',
+              title: (res.data as T & { msg?: string })?.msg || '请求错误'
             })
           reject(res)
         }
@@ -39,10 +39,10 @@ const http = <T>(options: CustomRequestOptions) => {
       fail(err) {
         uni.showToast({
           icon: 'none',
-          title: '网络错误，换个网络试试',
+          title: '网络错误，换个网络试试'
         })
         reject(err)
-      },
+      }
     })
   })
 }
@@ -55,11 +55,11 @@ export default function request<T = unknown>(
   options: Omit<CustomRequestOptions, 'url'> & {
     params?: Record<string, unknown>
     headers?: Record<string, unknown>
-  },
+  }
 ) {
   const requestOptions = {
     url,
-    ...options,
+    ...options
   }
 
   if (options.params) {

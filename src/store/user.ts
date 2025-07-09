@@ -24,6 +24,6 @@ export const useUserStore = defineStore('user', () => {
     userInfo,
     setUserInfo,
     isLogined,
-    $reset,
+    $reset
   }
 })

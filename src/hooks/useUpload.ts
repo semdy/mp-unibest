@@ -10,7 +10,7 @@ const VITE_UPLOAD_BASEURL = `${getEnvBaseUploadUrl()}`
  * @returns 返回一个对象{loading, error, data, run}，包含请求的加载状态、错误信息、响应数据和手动触发请求的函数。
  */
 export default function useUpload<T = string>(
-  formData: Record<string, any> = {},
+  formData: Record<string, any> = {}
 ): {
   loading: Ref<boolean>
   error: Ref<boolean>
@@ -35,7 +35,7 @@ export default function useUpload<T = string>(
       fail: err => {
         console.error('uni.chooseMedia err->', err)
         error.value = true
-      },
+      }
     })
     // #endif
     // #ifndef MP-WEIXIN
@@ -49,7 +49,7 @@ export default function useUpload<T = string>(
       fail: err => {
         console.error('uni.chooseImage err->', err)
         error.value = true
-      },
+      }
     })
     // #endif
   }
@@ -62,7 +62,7 @@ function uploadFile<T extends Ref<any>>({
   formData,
   data,
   error,
-  loading,
+  loading
 }: {
   tempFilePath: string
   formData: Record<string, any>
@@ -84,6 +84,6 @@ function uploadFile<T extends Ref<any>>({
     },
     complete: () => {
       loading.value = false
-    },
+    }
   })
 }

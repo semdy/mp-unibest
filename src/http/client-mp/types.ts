@@ -55,7 +55,7 @@ export interface RequestOptions<ThrowOnError extends boolean = boolean, Url exte
 export type RequestResult<
   TData = unknown,
   TError = unknown,
-  ThrowOnError extends boolean = boolean,
+  ThrowOnError extends boolean = boolean
 > = ThrowOnError extends true
   ? Promise<{
       data: TData
@@ -75,12 +75,11 @@ export interface ClientOptions {
 }
 
 type MethodFn = <TData = unknown, TError = unknown, ThrowOnError extends boolean = false>(
-  options: Omit<RequestOptions<ThrowOnError>, 'method'>,
+  options: Omit<RequestOptions<ThrowOnError>, 'method'>
 ) => RequestResult<TData, TError, ThrowOnError>
 
 type RequestFn = <TData = unknown, TError = unknown, ThrowOnError extends boolean = false>(
-  options: Omit<RequestOptions<ThrowOnError>, 'method'> &
-    Pick<Required<RequestOptions<ThrowOnError>>, 'method'>,
+  options: Omit<RequestOptions<ThrowOnError>, 'method'> & Pick<Required<RequestOptions<ThrowOnError>>, 'method'>
 ) => RequestResult<TData, TError, ThrowOnError>
 
 type BuildUrlFn = <
@@ -89,9 +88,9 @@ type BuildUrlFn = <
     path?: Record<string, unknown>
     query?: Record<string, unknown>
     url: string
-  },
+  }
 >(
-  options: Pick<TData, 'url'> & Options<TData>,
+  options: Pick<TData, 'url'> & Options<TData>
 ) => string
 
 export type Client = CoreClient<RequestFn, Config, MethodFn, BuildUrlFn> & {
@@ -107,7 +106,7 @@ export type Client = CoreClient<RequestFn, Config, MethodFn, BuildUrlFn> & {
  * to ensure your client always has the correct values.
  */
 export type CreateClientConfig<T extends ClientOptions = ClientOptions> = (
-  override?: Config<ClientOptions & T>,
+  override?: Config<ClientOptions & T>
 ) => Config<Required<ClientOptions> & T>
 
 export interface TDataShape {
@@ -120,22 +119,16 @@ export interface TDataShape {
 
 type OmitKeys<T, K> = Pick<T, Exclude<keyof T, K>>
 
-export type Options<
-  TData extends TDataShape = TDataShape,
-  ThrowOnError extends boolean = boolean,
-> = OmitKeys<RequestOptions<ThrowOnError>, 'body' | 'path' | 'query' | 'url'> & Omit<TData, 'url'>
+export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean> = OmitKeys<
+  RequestOptions<ThrowOnError>,
+  'body' | 'path' | 'query' | 'url'
+> &
+  Omit<TData, 'url'>
 
-export type OptionsLegacyParser<
-  TData = unknown,
-  ThrowOnError extends boolean = boolean,
-> = TData extends { body?: any }
+export type OptionsLegacyParser<TData = unknown, ThrowOnError extends boolean = boolean> = TData extends { body?: any }
   ? TData extends { headers?: any }
     ? OmitKeys<RequestOptions<ThrowOnError>, 'body' | 'headers' | 'url'> & TData
-    : OmitKeys<RequestOptions<ThrowOnError>, 'body' | 'url'> &
-        TData &
-        Pick<RequestOptions<ThrowOnError>, 'headers'>
+    : OmitKeys<RequestOptions<ThrowOnError>, 'body' | 'url'> & TData & Pick<RequestOptions<ThrowOnError>, 'headers'>
   : TData extends { headers?: any }
-    ? OmitKeys<RequestOptions<ThrowOnError>, 'headers' | 'url'> &
-        TData &
-        Pick<RequestOptions<ThrowOnError>, 'body'>
+    ? OmitKeys<RequestOptions<ThrowOnError>, 'headers' | 'url'> & TData & Pick<RequestOptions<ThrowOnError>, 'body'>
     : OmitKeys<RequestOptions<ThrowOnError>, 'url'> & TData

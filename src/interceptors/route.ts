@@ -50,7 +50,7 @@ const navigateToInterceptor = {
     const redirectRoute = `${loginRoute}?redirect=${encodeURIComponent(url)}`
     uni.navigateTo({ url: redirectRoute })
     return false
-  },
+  }
 }
 
 export const routeInterceptor = {
@@ -59,5 +59,5 @@ export const routeInterceptor = {
     uni.addInterceptor('reLaunch', navigateToInterceptor)
     uni.addInterceptor('redirectTo', navigateToInterceptor)
     uni.addInterceptor('switchTab', navigateToInterceptor)
-  },
+  }
 }

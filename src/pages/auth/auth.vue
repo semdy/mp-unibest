@@ -25,7 +25,7 @@ import authorize from '@/utils/authorize'
 export default {
   data() {
     return {
-      isShow: true,
+      isShow: true
     }
   },
 
@@ -36,8 +36,8 @@ export default {
     onGetUserInfo() {
       authorize.getToken()
       uni.navigateBack()
-    },
-  },
+    }
+  }
 }
 </script>
 

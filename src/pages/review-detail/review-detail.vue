@@ -49,24 +49,12 @@
         style="margin-bottom: 8px"
       />
     </view>
-    <scroll-view
-      scroll-y
-      enable-flex
-      enhanced
-      class="page-scrollview"
-      id="scrollview"
-      @scrolltolower="loadMore"
-    >
+    <scroll-view scroll-y enable-flex enhanced class="page-scrollview" id="scrollview" @scrolltolower="loadMore">
       <view class="page-container" style="padding-top: 0">
         <ui-card @click="toDetail(item)" v-for="(item, index) in sales_detail" :key="index">
           <template #title>
             <view v-if="item.audit_result">
-              <ui-alert
-                type="primary"
-                icon="check-circle"
-                plain
-                v-if="item.audit_result === '已核实'"
-              >
+              <ui-alert type="primary" icon="check-circle" plain v-if="item.audit_result === '已核实'">
                 {{ item.audit_result }}
               </ui-alert>
               <ui-alert v-else type="error" icon="warning" plain>
@@ -120,18 +108,18 @@ export default {
       tabs: [
         { name: '全部', value: 0 },
         { name: '已核实', value: 1 },
-        { name: '未核实', value: 2 },
+        { name: '未核实', value: 2 }
       ],
       result_type: 0,
       queryOptions: {},
       currentPage: 1,
       loadingPage: true,
-      loading: true,
+      loading: true
     }
   },
   mixins: [shareMixins],
   computed: {
-    ...mapState(useSummaryDetailStore, ['sales_detail']),
+    ...mapState(useSummaryDetailStore, ['sales_detail'])
   },
   watch: {
     result_type() {
@@ -139,7 +127,7 @@ export default {
       this.refreshData().then(() => {
         this.scrollViewContext?.scrollTo({ top: 0 })
       })
-    },
+    }
   },
   methods: {
     toDetail(event) {
@@ -149,10 +137,10 @@ export default {
         pass_qty: event.pass_qty,
         customer_name: this.queryOptions.customer_name,
         sales_date: event.sales_date,
-        product_name: event.product_name,
+        product_name: event.product_name
       })
       uni.navigateTo({
-        url: '/pages/review-diff/review-diff?' + queryString,
+        url: '/pages/review-diff/review-diff?' + queryString
       })
     },
     async requestData() {
@@ -166,7 +154,7 @@ export default {
           ...this.queryOptions,
           result_type: this.result_type,
           page: this.currentPage,
-          page_size: 20,
+          page_size: 20
         })
         if (pageData.length < 20) {
           this.loadingPage = false
@@ -200,7 +188,7 @@ export default {
     async getScrollViewContext() {
       await this.$nextTick()
       this.scrollViewContext = await getNode('#scrollview')
-    },
+    }
   },
   onLoad(options) {
     this.queryOptions = options
@@ -208,7 +196,7 @@ export default {
   },
   onReady() {
     this.getScrollViewContext()
-  },
+  }
 }
 </script>
 

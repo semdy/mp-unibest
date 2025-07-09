@@ -24,17 +24,17 @@ export default {
   emits: ['click', 'getPhoneNumber'],
   props: {
     style: {
-      type: [Object, String],
+      type: [Object, String]
     },
     class: {
-      type: String,
-    },
+      type: String
+    }
   },
   computed: {
     ...mapState(useUserStore, ['userInfo']),
     className() {
       return this.class
-    },
+    }
   },
   methods: {
     onClick() {
@@ -55,8 +55,8 @@ export default {
     },
     onAuthError() {
       toast.error('已拒绝授权')
-    },
-  },
+    }
+  }
 }
 </script>
 

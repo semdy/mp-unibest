@@ -16,7 +16,7 @@ export const useDiffRecordsStore = defineStore('diffRecords', () => {
   const updateData = ({ status, index }: { status: number; index: number }) => {
     diff_info.value[index] = {
       ...diff_info.value[index],
-      approval_state: status,
+      approval_state: status
     }
   }
 
@@ -42,6 +42,6 @@ export const useDiffRecordsStore = defineStore('diffRecords', () => {
     diff_info,
     getDiffRecordsReport,
     updateApprovalState,
-    $reset,
+    $reset
   }
 })

@@ -12,13 +12,7 @@
   />
   <!-- #endif -->
   <!-- #ifdef MP-ALIPAY -->
-  <uni-nav-bar
-    :fixed="true"
-    :border="false"
-    :dark="dark"
-    status-bar
-    background-color="transparent"
-  />
+  <uni-nav-bar :fixed="true" :border="false" :dark="dark" status-bar background-color="transparent" />
   <!-- #endif -->
 </template>
 
@@ -27,16 +21,16 @@ export default {
   name: 'FixedNavBar',
   props: {
     title: {
-      type: String,
+      type: String
     },
     dark: {
       type: Boolean,
-      default: false,
+      default: false
     },
     canBack: {
       type: Boolean,
-      default: true,
-    },
+      default: true
+    }
   },
   methods: {
     onBack() {
@@ -49,7 +43,7 @@ export default {
       /* #ifndef H5 */
       uni.navigateBack()
       /* #endif */
-    },
-  },
+    }
+  }
 }
 </script>

@@ -8,7 +8,7 @@ export function formatDate(source: string | Date | null, format: string): string
     'm+': source.getMinutes(),
     's+': source.getSeconds(),
     'q+': Math.floor((source.getMonth() + 3) / 3),
-    'f+': source.getMilliseconds(),
+    'f+': source.getMilliseconds()
   }
   if (/(y+)/.test(format)) {
     format = format.replace(RegExp.$1, (source.getFullYear() + '').substr(4 - RegExp.$1.length))
@@ -17,7 +17,7 @@ export function formatDate(source: string | Date | null, format: string): string
     if (new RegExp('(' + k + ')').test(format)) {
       format = format.replace(
         RegExp.$1,
-        RegExp.$1.length === 1 ? o[k].toString() : ('00' + o[k]).substr(('' + o[k]).length),
+        RegExp.$1.length === 1 ? o[k].toString() : ('00' + o[k]).substr(('' + o[k]).length)
       )
     }
   }
@@ -53,7 +53,7 @@ export function calcSum(objArray: Record<string, any>[], key: string): number {
 export function getNodeRect<T extends boolean = false>(
   selector: string,
   all?: T,
-  scope?: any,
+  scope?: any
 ): Promise<T extends true ? UniNamespace.NodeInfo[] : UniNamespace.NodeInfo> {
   return new Promise(resolve => {
     let query = uni.createSelectorQuery()
@@ -145,7 +145,7 @@ export function confirm(
   msg: string,
   title: string = '',
   confirmText: string = '确定',
-  cancelText: string = '取消',
+  cancelText: string = '取消'
 ): Promise<boolean> {
   return new Promise(resolve => {
     uni.showModal({
@@ -160,7 +160,7 @@ export function confirm(
         } else {
           resolve(false)
         }
-      },
+      }
     })
   })
 }
@@ -169,7 +169,7 @@ export function Alert(msg: string, title?: string) {
   return uni.showModal({
     title: title || '提示',
     showCancel: false,
-    content: msg,
+    content: msg
   })
 }
 
@@ -187,7 +187,7 @@ export function showLoading(title = '请稍候...', mask = true) {
   isLoadingShown = true
   return uni.showLoading({
     mask: mask,
-    title: title,
+    title: title
   })
 }
 
@@ -208,7 +208,7 @@ toast.error = (msg: string, duration = 2000, image = '') => {
     title: typeof msg === 'object' ? JSON.stringify(msg) : msg,
     icon: 'none',
     image: image,
-    duration: duration,
+    duration: duration
   })
 }
 
@@ -217,7 +217,7 @@ toast.info = (msg: string, duration = 2000, image = '') => {
     title: typeof msg === 'object' ? JSON.stringify(msg) : msg,
     icon: 'none',
     image: image,
-    duration: duration,
+    duration: duration
   })
 }
 
@@ -225,7 +225,7 @@ toast.success = (msg: string, duration = 2000) => {
   return toast({
     title: typeof msg === 'object' ? JSON.stringify(msg) : msg,
     icon: 'success',
-    duration: duration,
+    duration: duration
   })
 }
 
@@ -251,23 +251,19 @@ export function pxToRpx(px: number) {
   return (750 * px) / screenWidth
 }
 
-export function pickerDataAdapter(
-  data: any[],
-  labelName: string = 'label',
-  valueName: string = 'value',
-) {
+export function pickerDataAdapter(data: any[], labelName: string = 'label', valueName: string = 'value') {
   if (!data) return []
   return data.map(item => {
     if (typeof item === 'object') {
       return {
         ...item,
         label: item[labelName],
-        value: item[valueName],
+        value: item[valueName]
       }
     }
     return {
       label: item,
-      value: item,
+      value: item
     }
   })
 }

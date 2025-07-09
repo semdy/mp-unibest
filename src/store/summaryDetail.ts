@@ -32,6 +32,6 @@ export const useSummaryDetailStore = defineStore('summaryDetail', () => {
     setData,
     appendData,
     $reset,
-    getDetailSales,
+    getDetailSales
   }
 })

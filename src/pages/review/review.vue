@@ -1,8 +1,8 @@
 <route lang="json5" type="home">
 {
   style: {
-    navigationBarTitleText: '',
-  },
+    navigationBarTitleText: ''
+  }
 }
 </route>
 <template>
@@ -77,22 +77,14 @@
             <view class="stats-chart-info">
               <template v-if="!reportLoading">
                 <view class="stats-chart-labels">
-                  <view
-                    class="stats-chart-label"
-                    v-for="(item, index) in summaryData.audit_report"
-                    :key="index"
-                  >
+                  <view class="stats-chart-label" v-for="(item, index) in summaryData.audit_report" :key="index">
                     <view class="stats-chart-label-text" :style="{ '--color': colors[index] }">
                       {{ item.label }}
                     </view>
-                    <view class="stats-chart-label-value">
-                      {{ item.qty }}; {{ item.percentage }}
-                    </view>
+                    <view class="stats-chart-label-value">{{ item.qty }}; {{ item.percentage }}</view>
                   </view>
                   <view class="stats-chart-label">
-                    <view class="stats-chart-label-text" style="--color: #deeaff">
-                      特殊销量上报
-                    </view>
+                    <view class="stats-chart-label-text" style="--color: #deeaff">特殊销量上报</view>
                     <view class="stats-chart-label-value">{{ summaryData.special_sales_qty }}</view>
                   </view>
                 </view>
@@ -107,9 +99,7 @@
                       :style="{ display: canvasOpacity > 0 ? '' : 'none' }"
                     />
                   </view>
-                  <view class="stats-chart-empty" v-if="summaryData.audit_report.length === 0">
-                    暂无差异
-                  </view>
+                  <view class="stats-chart-empty" v-if="summaryData.audit_report.length === 0">暂无差异</view>
                 </view>
               </template>
               <up-loading-icon
@@ -154,13 +144,7 @@
             </view>
           </view>
           <ui-alert icon="info" class="review-alert">请尽快根据差异情况补充相关内容</ui-alert>
-          <scroll-view
-            scroll-y
-            enable-flex
-            class="page-scrollview"
-            @scrolltolower="loadMore"
-            @scroll="handleScroll"
-          >
+          <scroll-view scroll-y enable-flex class="page-scrollview" @scrolltolower="loadMore" @scroll="handleScroll">
             <view class="review-content">
               <ui-card
                 :title="item.customer_name"
@@ -221,7 +205,7 @@ export default {
       loadingPage: true,
       loading: true,
       reportLoading: true,
-      colors: ['#326DF8', '#06BCFF', '#FF06E1', '#FFA820', '#FE584C', '#0ACEBE'],
+      colors: ['#326DF8', '#06BCFF', '#FF06E1', '#FFA820', '#FE584C', '#0ACEBE']
     }
   },
   mixins: [shareMixins],
@@ -237,9 +221,9 @@ export default {
       },
       quarterName(store) {
         return store.pickerData.audit_quarters.find(item => item.value === this.quarter)?.label
-      },
+      }
     }),
-    ...mapState(useSummaryDataStore, ['summaryData']),
+    ...mapState(useSummaryDataStore, ['summaryData'])
   },
   watch: {
     dealer() {
@@ -268,7 +252,7 @@ export default {
           this.initRingCharts()
           this.getMainHeight()
         })
-      },
+      }
     },
     'pickerData.audit_quarters': {
       handler(val) {
@@ -280,8 +264,8 @@ export default {
           }
         }
       },
-      immediate: true,
-    },
+      immediate: true
+    }
   },
   methods: {
     refreshFilterSales() {
@@ -289,7 +273,7 @@ export default {
       pickerDataStore.filterSales({
         dealer_id: this.dealer,
         quarter_id: this.quarter?.toString(),
-        audit_type: this.auditType,
+        audit_type: this.auditType
       })
     },
     async requestData(isAppend) {
@@ -298,7 +282,7 @@ export default {
         if (!isAppend) {
           await summaryDataStore.getReportInvoice({
             dealer_id: this.dealer,
-            quarter_id: this.quarter?.toString(),
+            quarter_id: this.quarter?.toString()
           })
         }
       } finally {
@@ -316,7 +300,7 @@ export default {
           customer_name: this.salesCustomer,
           sales_month: this.salesMonth,
           page: this.currentPage,
-          page_size: 20,
+          page_size: 20
         })
         if (pageData.length < 20) {
           this.loadingPage = false
@@ -347,10 +331,10 @@ export default {
         sales_month: event.sales_month,
         sales_global_name: event.sales_global_name,
         total_sales_qty: event.total_sales_qty,
-        pass_qty: event.pass_qty,
+        pass_qty: event.pass_qty
       })
       uni.navigateTo({
-        url: '/pages/review-detail/review-detail?' + queryString,
+        url: '/pages/review-detail/review-detail?' + queryString
       })
     },
     async getMainHeight() {
@@ -413,9 +397,9 @@ export default {
             name: item.label,
             data: item.qty,
             stroke: false,
-            color: this.colors[i],
+            color: this.colors[i]
           }
-        }),
+        })
       })
     },
     initRingCharts() {
@@ -433,15 +417,15 @@ export default {
         extra: {
           ringWidth: 22,
           pie: {
-            offsetAngle: -45,
-          },
+            offsetAngle: -45
+          }
         },
         series: this.summaryData.audit_report.map((item, i) => {
           return {
             name: item.label,
             data: item.qty,
             stroke: false,
-            color: this.colors[i],
+            color: this.colors[i]
           }
         }),
         disablePieStroke: true,
@@ -450,7 +434,7 @@ export default {
         dataLabel: false,
         legend: false,
         background: '#fff',
-        padding: 0,
+        padding: 0
       })
       // this.ringChart.addEventListener('renderComplete', () => {
       //   console.log('renderComplete')
@@ -468,14 +452,14 @@ export default {
           this.$refs.popup.slideToUpper()
         }
       }
-    },
+    }
   },
   mounted() {
     this.getMainHeight()
   },
   onLoad() {
     // this.refreshData()
-  },
+  }
   // onReady() {
   //   this.initRingCharts()
   //   // this.$refs.ringCharts.initRingCharts()
