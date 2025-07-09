@@ -1,24 +1,11 @@
-<template>
-  <view class="ui-icon" :class="className" :style="style" @click="onClick">
-    <text v-if="!isImg" :style="{ color: color, fontSize: iconSize }" :class="`ui-iconfont ui-icon-${name}`" />
-    <image
-      v-else
-      class="ui-icon__img"
-      :src="`/static/img-icons/${name}`"
-      :style="`width:${iconSize};height:${iconSize}`"
-    />
-  </view>
-</template>
-
 <script>
-const getVal = val => {
-  const reg = /^[0-9]*$/g
-  return typeof val === 'number' || reg.test(val) ? val + 'px' : val
+function getVal(val) {
+  const reg = /^\d*$/g
+  return typeof val === 'number' || reg.test(val) ? `${val}px` : val
 }
 
 export default {
   name: 'UIIcon',
-  emits: ['click'],
   props: {
     name: {
       type: String,
@@ -47,31 +34,35 @@ export default {
       return '1em'
     },
     isImg() {
-      return /\.(png|svg|gif|jpe?g|bmp|webp)$/i.test(this.name)
+      return /\.(?:png|svg|gif|jpe?g|bmp|webp)$/i.test(this.name)
     },
     className() {
       return this.class
-    }
-  },
-  methods: {
-    onClick() {
-      this.$emit('click')
     }
   }
 }
 </script>
 
+<template>
+  <view class="ui-icon" :class="className" :style="style">
+    <text v-if="!isImg" :style="{ color, fontSize: iconSize }" :class="`ui-iconfont ui-icon-${name}`" />
+    <image
+      v-else
+      class="ui-icon__img"
+      :src="`/static/img-icons/${name}`"
+      :style="`width:${iconSize};height:${iconSize}`"
+    />
+  </view>
+</template>
+
 <style lang="scss">
 @import '@/static/fonts/styles/ui-iconfont.css';
 
 .ui-icon {
-  display: inline-block;
-  line-height: 1;
-
-  .ui-iconfont,
-  .ui-icon__img {
-    line-height: 1;
-    vertical-align: bottom;
-  }
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  flex-shrink: 0;
 }
 </style>

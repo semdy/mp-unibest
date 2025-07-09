@@ -1,10 +1,11 @@
-<route lang="json5" type="home">
+<route lang="jsonc" type="home">
 {
-  style: {
-    navigationBarTitleText: ''
+  "style": {
+    "navigationBarTitleText": ""
   }
 }
 </route>
+
 <template>
   <view class="home-page g-page bg1 full-bg full-page">
     <view style="flex: none; height: 44px">

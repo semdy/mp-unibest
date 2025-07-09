@@ -1,6 +1,7 @@
-import { Ref, ref } from 'vue'
+import type { Ref } from 'vue'
+import { ref } from 'vue'
 
-type IUseRequestOptions<T> = {
+interface IUseRequestOptions<T> {
   /** 是否立即执行 */
   immediate?: boolean
   /** 初始化数据 */

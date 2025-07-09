@@ -1,4 +1,5 @@
-import { Ref, ref } from 'vue'
+import type { Ref } from 'vue'
+import { ref } from 'vue'
 // TODO: 别忘加更改环境变量的 VITE_UPLOAD_BASEURL 地址。
 import { getEnvBaseUploadUrl } from '@/utils'
 
