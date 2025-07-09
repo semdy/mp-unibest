@@ -21,4 +21,5 @@ types.gen.ts
 client.gen.ts
 @tanstack/
 
+.husky/
 .gitignore

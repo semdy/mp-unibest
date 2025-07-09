@@ -1,5 +1,5 @@
+import type { CustomRequestOptions } from '@/interceptors/request'
 import { refreshTokenApi } from '@/api/loginApi'
-import { CustomRequestOptions } from '@/interceptors/request'
 import { useUserStore } from '@/store'
 
 type CustomRequestOptionsOmit = Omit<CustomRequestOptions, 'url' | 'method'>
@@ -23,19 +23,19 @@ export default class ApiClient {
           const store = useUserStore()
           const { refreshToken } = store.userInfo || {}
           // token 失效的，且有刷新 token 的，才放到请求队列里
-          if ((res.data.code == 401 || res.statusCode == 401) && refreshToken != '') {
+          if ((res.data.code === 401 || res.statusCode === 401) && refreshToken !== '') {
             taskQueue.push(() => {
               resolve(this.http<T>(options))
             })
           }
 
-          if ((res.data.code == 401 || res.statusCode == 401) && refreshToken != '' && !refreshing) {
+          if ((res.data.code === 401 || res.statusCode === 401) && refreshToken !== '' && !refreshing) {
             refreshing = true
             // 发起刷新 token 请求
             const [refreshTokenRes, refreshTokenErr] = await refreshTokenApi()
             refreshing = false
             // 刷新 token 成功，将任务队列的所有任务重新请求
-            if (refreshTokenRes?.data.code == 200) {
+            if (refreshTokenRes?.data.code === 200) {
               nextTick(() => {
                 // 关闭其他弹窗
                 uni.hideToast()
@@ -99,6 +99,7 @@ export default class ApiClient {
       }
     }
   }
+
   // GET
   public static get<T>(url: string, options?: CustomRequestOptionsOmit) {
     return this.http<T>({
@@ -107,6 +108,7 @@ export default class ApiClient {
       ...options
     })
   }
+
   // POST
   public static post<T>(url: string, options?: CustomRequestOptionsOmit) {
     return this.http<T>({
@@ -115,6 +117,7 @@ export default class ApiClient {
       ...options
     })
   }
+
   // PUT
   public static put<T>(url: string, options?: CustomRequestOptionsOmit) {
     return this.http<T>({
@@ -123,6 +126,7 @@ export default class ApiClient {
       ...options
     })
   }
+
   // DELETE
   public static delete<T>(url: string, options?: CustomRequestOptionsOmit) {
     return this.http<T>({
