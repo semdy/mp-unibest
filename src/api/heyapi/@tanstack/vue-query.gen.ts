@@ -38,6 +38,9 @@ const createQueryKey = <TOptions extends Options>(id: string, options?: TOptions
 
 export const uploadFileQueryKey = (options: Options<UploadFileData>) => createQueryKey('uploadFile', options);
 
+/**
+ * uploads an image
+ */
 export const uploadFileOptions = (options: Options<UploadFileData>) => {
     return queryOptions({
         queryFn: async ({ queryKey, signal }) => {
@@ -53,6 +56,9 @@ export const uploadFileOptions = (options: Options<UploadFileData>) => {
     });
 };
 
+/**
+ * uploads an image
+ */
 export const uploadFileMutation = (options?: Partial<Options<UploadFileData>>): UseMutationOptions<UploadFileResponse, DefaultError, Options<UploadFileData>> => {
     const mutationOptions: UseMutationOptions<UploadFileResponse, DefaultError, Options<UploadFileData>> = {
         mutationFn: async (localOptions) => {
@@ -69,6 +75,9 @@ export const uploadFileMutation = (options?: Partial<Options<UploadFileData>>): 
 
 export const addPetQueryKey = (options: Options<AddPetData>) => createQueryKey('addPet', options);
 
+/**
+ * Add a new pet to the store
+ */
 export const addPetOptions = (options: Options<AddPetData>) => {
     return queryOptions({
         queryFn: async ({ queryKey, signal }) => {
@@ -84,6 +93,9 @@ export const addPetOptions = (options: Options<AddPetData>) => {
     });
 };
 
+/**
+ * Add a new pet to the store
+ */
 export const addPetMutation = (options?: Partial<Options<AddPetData>>): UseMutationOptions<unknown, DefaultError, Options<AddPetData>> => {
     const mutationOptions: UseMutationOptions<unknown, DefaultError, Options<AddPetData>> = {
         mutationFn: async (localOptions) => {
@@ -98,6 +110,9 @@ export const addPetMutation = (options?: Partial<Options<AddPetData>>): UseMutat
     return mutationOptions;
 };
 
+/**
+ * Update an existing pet
+ */
 export const updatePetMutation = (options?: Partial<Options<UpdatePetData>>): UseMutationOptions<unknown, DefaultError, Options<UpdatePetData>> => {
     const mutationOptions: UseMutationOptions<unknown, DefaultError, Options<UpdatePetData>> = {
         mutationFn: async (localOptions) => {
@@ -114,6 +129,10 @@ export const updatePetMutation = (options?: Partial<Options<UpdatePetData>>): Us
 
 export const findPetsByStatusQueryKey = (options: Options<FindPetsByStatusData>) => createQueryKey('findPetsByStatus', options);
 
+/**
+ * Finds Pets by status
+ * Multiple status values can be provided with comma separated strings
+ */
 export const findPetsByStatusOptions = (options: Options<FindPetsByStatusData>) => {
     return queryOptions({
         queryFn: async ({ queryKey, signal }) => {
@@ -131,6 +150,11 @@ export const findPetsByStatusOptions = (options: Options<FindPetsByStatusData>) 
 
 export const findPetsByTagsQueryKey = (options: Options<FindPetsByTagsData>) => createQueryKey('findPetsByTags', options);
 
+/**
+ * Finds Pets by tags
+ * Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.
+ * @deprecated
+ */
 export const findPetsByTagsOptions = (options: Options<FindPetsByTagsData>) => {
     return queryOptions({
         queryFn: async ({ queryKey, signal }) => {
@@ -146,6 +170,9 @@ export const findPetsByTagsOptions = (options: Options<FindPetsByTagsData>) => {
     });
 };
 
+/**
+ * Deletes a pet
+ */
 export const deletePetMutation = (options?: Partial<Options<DeletePetData>>): UseMutationOptions<unknown, DefaultError, Options<DeletePetData>> => {
     const mutationOptions: UseMutationOptions<unknown, DefaultError, Options<DeletePetData>> = {
         mutationFn: async (localOptions) => {
@@ -162,6 +189,10 @@ export const deletePetMutation = (options?: Partial<Options<DeletePetData>>): Us
 
 export const getPetByIdQueryKey = (options: Options<GetPetByIdData>) => createQueryKey('getPetById', options);
 
+/**
+ * Find pet by ID
+ * Returns a single pet
+ */
 export const getPetByIdOptions = (options: Options<GetPetByIdData>) => {
     return queryOptions({
         queryFn: async ({ queryKey, signal }) => {
@@ -179,6 +210,9 @@ export const getPetByIdOptions = (options: Options<GetPetByIdData>) => {
 
 export const updatePetWithFormQueryKey = (options: Options<UpdatePetWithFormData>) => createQueryKey('updatePetWithForm', options);
 
+/**
+ * Updates a pet in the store with form data
+ */
 export const updatePetWithFormOptions = (options: Options<UpdatePetWithFormData>) => {
     return queryOptions({
         queryFn: async ({ queryKey, signal }) => {
@@ -194,6 +228,9 @@ export const updatePetWithFormOptions = (options: Options<UpdatePetWithFormData>
     });
 };
 
+/**
+ * Updates a pet in the store with form data
+ */
 export const updatePetWithFormMutation = (options?: Partial<Options<UpdatePetWithFormData>>): UseMutationOptions<unknown, DefaultError, Options<UpdatePetWithFormData>> => {
     const mutationOptions: UseMutationOptions<unknown, DefaultError, Options<UpdatePetWithFormData>> = {
         mutationFn: async (localOptions) => {
@@ -210,6 +247,10 @@ export const updatePetWithFormMutation = (options?: Partial<Options<UpdatePetWit
 
 export const getInventoryQueryKey = (options?: Options<GetInventoryData>) => createQueryKey('getInventory', options);
 
+/**
+ * Returns pet inventories by status
+ * Returns a map of status codes to quantities
+ */
 export const getInventoryOptions = (options?: Options<GetInventoryData>) => {
     return queryOptions({
         queryFn: async ({ queryKey, signal }) => {
@@ -227,6 +268,9 @@ export const getInventoryOptions = (options?: Options<GetInventoryData>) => {
 
 export const placeOrderQueryKey = (options: Options<PlaceOrderData>) => createQueryKey('placeOrder', options);
 
+/**
+ * Place an order for a pet
+ */
 export const placeOrderOptions = (options: Options<PlaceOrderData>) => {
     return queryOptions({
         queryFn: async ({ queryKey, signal }) => {
@@ -242,6 +286,9 @@ export const placeOrderOptions = (options: Options<PlaceOrderData>) => {
     });
 };
 
+/**
+ * Place an order for a pet
+ */
 export const placeOrderMutation = (options?: Partial<Options<PlaceOrderData>>): UseMutationOptions<PlaceOrderResponse, DefaultError, Options<PlaceOrderData>> => {
     const mutationOptions: UseMutationOptions<PlaceOrderResponse, DefaultError, Options<PlaceOrderData>> = {
         mutationFn: async (localOptions) => {
@@ -256,6 +303,10 @@ export const placeOrderMutation = (options?: Partial<Options<PlaceOrderData>>): 
     return mutationOptions;
 };
 
+/**
+ * Delete purchase order by ID
+ * For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors
+ */
 export const deleteOrderMutation = (options?: Partial<Options<DeleteOrderData>>): UseMutationOptions<unknown, DefaultError, Options<DeleteOrderData>> => {
     const mutationOptions: UseMutationOptions<unknown, DefaultError, Options<DeleteOrderData>> = {
         mutationFn: async (localOptions) => {
@@ -272,6 +323,10 @@ export const deleteOrderMutation = (options?: Partial<Options<DeleteOrderData>>)
 
 export const getOrderByIdQueryKey = (options: Options<GetOrderByIdData>) => createQueryKey('getOrderById', options);
 
+/**
+ * Find purchase order by ID
+ * For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions
+ */
 export const getOrderByIdOptions = (options: Options<GetOrderByIdData>) => {
     return queryOptions({
         queryFn: async ({ queryKey, signal }) => {
@@ -289,6 +344,9 @@ export const getOrderByIdOptions = (options: Options<GetOrderByIdData>) => {
 
 export const createUsersWithListInputQueryKey = (options: Options<CreateUsersWithListInputData>) => createQueryKey('createUsersWithListInput', options);
 
+/**
+ * Creates list of users with given input array
+ */
 export const createUsersWithListInputOptions = (options: Options<CreateUsersWithListInputData>) => {
     return queryOptions({
         queryFn: async ({ queryKey, signal }) => {
@@ -304,6 +362,9 @@ export const createUsersWithListInputOptions = (options: Options<CreateUsersWith
     });
 };
 
+/**
+ * Creates list of users with given input array
+ */
 export const createUsersWithListInputMutation = (options?: Partial<Options<CreateUsersWithListInputData>>): UseMutationOptions<unknown, DefaultError, Options<CreateUsersWithListInputData>> => {
     const mutationOptions: UseMutationOptions<unknown, DefaultError, Options<CreateUsersWithListInputData>> = {
         mutationFn: async (localOptions) => {
@@ -318,6 +379,10 @@ export const createUsersWithListInputMutation = (options?: Partial<Options<Creat
     return mutationOptions;
 };
 
+/**
+ * Delete user
+ * This can only be done by the logged in user.
+ */
 export const deleteUserMutation = (options?: Partial<Options<DeleteUserData>>): UseMutationOptions<unknown, DefaultError, Options<DeleteUserData>> => {
     const mutationOptions: UseMutationOptions<unknown, DefaultError, Options<DeleteUserData>> = {
         mutationFn: async (localOptions) => {
@@ -334,6 +399,9 @@ export const deleteUserMutation = (options?: Partial<Options<DeleteUserData>>): 
 
 export const getUserByNameQueryKey = (options: Options<GetUserByNameData>) => createQueryKey('getUserByName', options);
 
+/**
+ * Get user by user name
+ */
 export const getUserByNameOptions = (options: Options<GetUserByNameData>) => {
     return queryOptions({
         queryFn: async ({ queryKey, signal }) => {
@@ -349,6 +417,10 @@ export const getUserByNameOptions = (options: Options<GetUserByNameData>) => {
     });
 };
 
+/**
+ * Updated user
+ * This can only be done by the logged in user.
+ */
 export const updateUserMutation = (options?: Partial<Options<UpdateUserData>>): UseMutationOptions<unknown, DefaultError, Options<UpdateUserData>> => {
     const mutationOptions: UseMutationOptions<unknown, DefaultError, Options<UpdateUserData>> = {
         mutationFn: async (localOptions) => {
@@ -365,6 +437,9 @@ export const updateUserMutation = (options?: Partial<Options<UpdateUserData>>): 
 
 export const loginUserQueryKey = (options: Options<LoginUserData>) => createQueryKey('loginUser', options);
 
+/**
+ * Logs user into the system
+ */
 export const loginUserOptions = (options: Options<LoginUserData>) => {
     return queryOptions({
         queryFn: async ({ queryKey, signal }) => {
@@ -382,6 +457,9 @@ export const loginUserOptions = (options: Options<LoginUserData>) => {
 
 export const logoutUserQueryKey = (options?: Options<LogoutUserData>) => createQueryKey('logoutUser', options);
 
+/**
+ * Logs out current logged in user session
+ */
 export const logoutUserOptions = (options?: Options<LogoutUserData>) => {
     return queryOptions({
         queryFn: async ({ queryKey, signal }) => {
@@ -399,6 +477,9 @@ export const logoutUserOptions = (options?: Options<LogoutUserData>) => {
 
 export const createUsersWithArrayInputQueryKey = (options: Options<CreateUsersWithArrayInputData>) => createQueryKey('createUsersWithArrayInput', options);
 
+/**
+ * Creates list of users with given input array
+ */
 export const createUsersWithArrayInputOptions = (options: Options<CreateUsersWithArrayInputData>) => {
     return queryOptions({
         queryFn: async ({ queryKey, signal }) => {
@@ -414,6 +495,9 @@ export const createUsersWithArrayInputOptions = (options: Options<CreateUsersWit
     });
 };
 
+/**
+ * Creates list of users with given input array
+ */
 export const createUsersWithArrayInputMutation = (options?: Partial<Options<CreateUsersWithArrayInputData>>): UseMutationOptions<unknown, DefaultError, Options<CreateUsersWithArrayInputData>> => {
     const mutationOptions: UseMutationOptions<unknown, DefaultError, Options<CreateUsersWithArrayInputData>> = {
         mutationFn: async (localOptions) => {
@@ -430,6 +514,10 @@ export const createUsersWithArrayInputMutation = (options?: Partial<Options<Crea
 
 export const createUserQueryKey = (options: Options<CreateUserData>) => createQueryKey('createUser', options);
 
+/**
+ * Create user
+ * This can only be done by the logged in user.
+ */
 export const createUserOptions = (options: Options<CreateUserData>) => {
     return queryOptions({
         queryFn: async ({ queryKey, signal }) => {
@@ -445,6 +533,10 @@ export const createUserOptions = (options: Options<CreateUserData>) => {
     });
 };
 
+/**
+ * Create user
+ * This can only be done by the logged in user.
+ */
 export const createUserMutation = (options?: Partial<Options<CreateUserData>>): UseMutationOptions<unknown, DefaultError, Options<CreateUserData>> => {
     const mutationOptions: UseMutationOptions<unknown, DefaultError, Options<CreateUserData>> = {
         mutationFn: async (localOptions) => {
