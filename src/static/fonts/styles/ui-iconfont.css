@@ -1,14 +1,18 @@
 @font-face {
-  font-family: "ui-iconfont";
-  src: url('../fonts/ui-iconfont.eot?t=bc42f9cf7724cce7c7cd48f355f9e45d'); /* IE9 */
-  src: url('../fonts/ui-iconfont.eot?t=bc42f9cf7724cce7c7cd48f355f9e45d#iefix') format('embedded-opentype'), /* IE6-IE8 */
-    url('../fonts/ui-iconfont.woff?t=bc42f9cf7724cce7c7cd48f355f9e45d') format('woff'),
-    url('../fonts/ui-iconfont.ttf?t=bc42f9cf7724cce7c7cd48f355f9e45d') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
-    url('../fonts/ui-iconfont.svg?t=bc42f9cf7724cce7c7cd48f355f9e45d#ui-iconfont') format('svg'); /* iOS 4.1- */
+  font-family: 'ui-iconfont';
+  src: url('../fonts/ui-iconfont.eot?t=52644c0b5bb9e022f5a4245f20eb69ca'); /* IE9 */
+  src:
+    url('../fonts/ui-iconfont.eot?t=52644c0b5bb9e022f5a4245f20eb69ca#iefix') format('embedded-opentype'),
+    /* IE6-IE8 */ url('../fonts/ui-iconfont.woff?t=52644c0b5bb9e022f5a4245f20eb69ca') format('woff'),
+    url('../fonts/ui-iconfont.ttf?t=52644c0b5bb9e022f5a4245f20eb69ca') format('truetype'),
+    /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+      url('../fonts/ui-iconfont.svg?t=52644c0b5bb9e022f5a4245f20eb69ca#ui-iconfont') format('svg'); /* iOS 4.1- */
 }
+
 .ui-iconfont {
   font-family: "ui-iconfont";
   font-size: 1em;
+  line-height: 1;
   font-style: normal;
   font-weight: normal;
   font-variant: normal;
@@ -24,9 +28,13 @@
   line-height: 0.75em;
   vertical-align: -15%;
 }
+
 .ui-icon-2x { font-size: 2em; }
+
 .ui-icon-3x { font-size: 3em; }
+
 .ui-icon-4x { font-size: 4em; }
+
 .ui-icon-5x { font-size: 5em; }
 
 .ui-icon-fw {
@@ -34,22 +42,41 @@
   text-align: center;
 }
 
+
 .ui-icon-ID:before { content: "\EA01" }
+
 .ui-icon-angle-down:before { content: "\EA02" }
+
 .ui-icon-angle-left:before { content: "\EA03" }
+
 .ui-icon-angle-right:before { content: "\EA04" }
+
 .ui-icon-bo:before { content: "\EA05" }
+
 .ui-icon-caret:before { content: "\EA06" }
+
 .ui-icon-check-circle:before { content: "\EA07" }
+
 .ui-icon-close:before { content: "\EA08" }
+
 .ui-icon-diff:before { content: "\EA09" }
+
 .ui-icon-info:before { content: "\EA0A" }
+
 .ui-icon-piao:before { content: "\EA0B" }
+
 .ui-icon-plus:before { content: "\EA0C" }
+
 .ui-icon-policy:before { content: "\EA0D" }
+
 .ui-icon-review:before { content: "\EA0E" }
+
 .ui-icon-warning-circle:before { content: "\EA0F" }
+
 .ui-icon-warning:before { content: "\EA10" }
+
 .ui-icon-yi:before { content: "\EA11" }
+
 .ui-icon-zheng:before { content: "\EA12" }
+
 .ui-icon-zhi:before { content: "\EA13" }

@@ -6,7 +6,7 @@ import App from './App.vue'
 import uviewPlus from 'uview-plus'
 // import { requestInterceptor, routeInterceptor } from './interceptors'
 import { initRequest } from '@/utils/luch-request'
-import i18n from './locale'
+import i18n from './locales'
 import store from './store'
 
 export function createApp() {

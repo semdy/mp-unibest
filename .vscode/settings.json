@@ -16,7 +16,7 @@
   "explorer.fileNesting.expand": false,
   "explorer.fileNesting.patterns": {
     "README.md": "index.html,favicon.ico,robots.txt,CHANGELOG.md",
-    "pages.config.ts": "manifest.config.ts,openapi-ts-request.config.ts,openapi-ts.config.ts,openapi-ts.config.js",
+    "pages.config.ts": "manifest.config.ts,openapi-ts-request.config.ts,openapi-ts.config.ts,openapi-ts.config.js,iconfont-generator.config*",
     "package.json": "pnpm-lock.yaml,pnpm-workspace.yaml,LICENSE,.gitattributes,.gitignore,.gitpod.yml,CNAME,.npmrc,.browserslistrc",
     "eslint.config.mjs": ".prettierrc.*,prettier*,.prettier*,prettierignore,.stylelintrc.*,stylelint*,.stylelintignore,.commitlintrc.*,commitlint*,.eslint*,.editorconfig"
   },
