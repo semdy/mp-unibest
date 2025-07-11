@@ -163,7 +163,7 @@
     "eslint-plugin-vue": "^9.32.0",
     "globals": "^15.14.0",
     "husky": "^9.1.7",
-    "iconfont-generator-v2": "^1.2.5",
+    "iconfont-generator-v2": "^1.2.6",
     "less": "^4.1.3",
     "lint-staged": "^15.2.10",
     "postcss": "^8.4.49",
