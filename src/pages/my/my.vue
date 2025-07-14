@@ -5,6 +5,12 @@ import checkUpdate from '@/uni_modules/uni-upgrade-center-app/utils/check-update
 // #endif
 import { hideLoading, showLoading, toast } from '@/utils/toast'
 
+const upgradeCode2MessageMap = {
+  0: '当前版本已经是最新的，不需要更新',
+  '-101': '暂无更新或检查appid是否填写正确',
+  '-102': '请检查传参是否填写正确'
+}
+
 export default {
   data() {
     return {
@@ -61,7 +67,7 @@ export default {
               this.checkingUpdate = true
               await checkUpdate()
             } catch (err) {
-              toast.error(err?.message || err)
+              toast.error(upgradeCode2MessageMap[err?.code] || err?.message || err)
             } finally {
               this.checkingUpdate = false
             }

@@ -1,5 +1,5 @@
 <script>
-import { setI18nLocale, getI18nLocale } from '@/locale'
+import { getI18nLocale, setI18nLocale } from '@/locale'
 
 export default {
   data() {
@@ -16,12 +16,11 @@ export default {
   },
   methods: {
     onClickRight() {
+      setI18nLocale(this.selected)
       uni.navigateBack()
     },
     onSelected(item) {
       this.selected = item.value
-      setI18nLocale(item.value)
-      uni.navigateBack()
     }
   }
 }
