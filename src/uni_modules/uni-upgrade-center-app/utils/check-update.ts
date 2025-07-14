@@ -89,7 +89,7 @@ export default function () : Promise<UniUpgradeCenterResult> {
 				// #endif
 
 				return resolve(uniUpgradeCenterResult)
-			} else if (code < 0) {
+			} else if (code <= 0) {
 				console.error(message)
 				return reject(uniUpgradeCenterResult)
 			}
