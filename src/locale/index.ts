@@ -94,7 +94,7 @@ function formatI18n(template: string, data?: any) {
   })
 }
 
-export function changeI18nLocale(l: LocalesKeys) {
+export function setI18nLocale(l: LocalesKeys) {
   locale = l
   i18n.global.locale.value = l
   dayjs.locale(getDayjsLocale(l))

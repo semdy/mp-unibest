@@ -73,6 +73,7 @@ const config = [
       'import-x/no-unresolved': 'off',
       'import/default': 'off',
       'import-x/default': 'off',
+      'import-x/namespace': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-require-imports': 'off',
       '@typescript-eslint/no-unused-expressions': 'off',
