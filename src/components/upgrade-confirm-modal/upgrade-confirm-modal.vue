@@ -31,8 +31,7 @@ export default {
 
   ::v-deep .u-modal {
     overflow: visible !important;
-    background: #f7f8fa url($index-bg) no-repeat;
-    background-size: 100% 70%;
+    background: #f7f8fa;
   }
 
   &-container {

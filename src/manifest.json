@@ -1,6 +1,6 @@
 {
   "name": "unibest",
-  "appid": "H57F2ACE4",
+  "appid": "__UNI__05F057C",
   "description": "",
   "versionName": "1.0.0",
   "versionCode": "100",
@@ -161,6 +161,7 @@
     "enable": false
   },
   "vueVersion": "3",
+  "locale": "en",
   "h5": {
     "optimization": {
       "prefetch": true,

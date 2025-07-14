@@ -98,7 +98,15 @@
       "type": "page"
     },
     {
+      "path": "pages/language/language",
+      "type": "page"
+    },
+    {
       "path": "pages/login/login",
+      "type": "page"
+    },
+    {
+      "path": "pages/my/my",
       "type": "page"
     },
     {

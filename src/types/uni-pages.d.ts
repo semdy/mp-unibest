@@ -8,7 +8,9 @@ interface NavigateToOptions {
        "/pages/auth/auth" |
        "/pages/diff/diff" |
        "/pages/diff-detail/diff-detail" |
+       "/pages/language/language" |
        "/pages/login/login" |
+       "/pages/my/my" |
        "/pages/policy/policy" |
        "/pages/policy-detail/policy-detail" |
        "/pages/review-detail/review-detail" |
