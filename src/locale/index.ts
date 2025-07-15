@@ -4,12 +4,18 @@ import { createI18n } from 'vue-i18n'
 import en from './en.json'
 import ja from './ja.json'
 import th from './th.json'
+import id from './id.json'
+import lo from './lo.json'
+import vi from './vi.json'
 import zhHans from './zh-Hans.json'
 import zhHant from './zh-Hant.json'
 
 import en_gen from './gen/en.json'
 import ja_gen from './gen/ja.json'
 import th_gen from './gen/th.json'
+import id_gen from './gen/id.json'
+import lo_gen from './gen/lo.json'
+import vi_gen from './gen/vi.json'
 import zhHans_gen from './gen/zh-cn.json'
 import zhHant_gen from './gen/zh-tw.json'
 
@@ -19,24 +25,35 @@ import 'dayjs/locale/ja'
 import 'dayjs/locale/th'
 
 const messages = {
-  en: { ...en, ...en_gen },
   'zh-Hans': { ...zhHans, ...zhHans_gen },
   'zh-Hant': { ...zhHant, ...zhHant_gen },
+  en: { ...en, ...en_gen },
   ja: { ...ja, ...ja_gen },
-  th: { ...th, ...th_gen }
+  th: { ...th, ...th_gen },
+  id: { ...id, ...id_gen },
+  lo: { ...lo, ...lo_gen },
+  vi: { ...vi, ...vi_gen }
 } as const
 
 export type LocalesKeys = keyof typeof messages
 
+export const languageList = [
+  { value: 'zh-Hans', name: '简体中文' },
+  { value: 'zh-Hant', name: '繁体中文' },
+  { value: 'en', name: 'English' },
+  { value: 'id', name: 'Bahasa Indonesia' },
+  { value: 'ja', name: '日本語' },
+  { value: 'lo', name: 'ພາສາລາວ' },
+  { value: 'th', name: 'แบบไทย' },
+  { value: 'vi', name: 'Tiếng Việt' }
+]
+
 function getDayjsLocale(locale: LocalesKeys): string {
   const localeMap = {
     'zh-Hans': 'zh-cn',
-    'zh-Hant': 'zh-tw',
-    en: 'en',
-    ja: 'ja',
-    th: 'th'
+    'zh-Hant': 'zh-tw'
   }
-  return localeMap[locale] || 'en'
+  return localeMap[locale] || locale
 }
 
 let locale = getI18nLocale()

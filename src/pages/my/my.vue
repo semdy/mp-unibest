@@ -3,6 +3,7 @@
 import callCheckVersion from '@/uni_modules/uni-upgrade-center-app/utils/call-check-version'
 import checkUpdate from '@/uni_modules/uni-upgrade-center-app/utils/check-update'
 // #endif
+import { getI18nLocale, languageList } from '@/locale'
 import { hideLoading, showLoading, toast } from '@/utils/toast'
 
 const upgradeCode2MessageMap = {
@@ -23,10 +24,12 @@ export default {
   },
   computed: {
     settings() {
+      const locale = getI18nLocale()
+      const localeName = languageList.find(item => item.value === locale)?.name || languageList[0].name
       return [
         {
           title: '语言设置',
-          desc: '简体中文',
+          desc: localeName,
           onClick: () => {
             uni.navigateTo({
               url: '/pages/language/language'

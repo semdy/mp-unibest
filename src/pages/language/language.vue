@@ -1,17 +1,11 @@
 <script>
-import { getI18nLocale, setI18nLocale } from '@/locale'
+import { getI18nLocale, setI18nLocale, languageList } from '@/locale'
 
 export default {
   data() {
     return {
       selected: getI18nLocale(),
-      languages: [
-        { value: 'zh-Hans', name: '简体中文' },
-        { value: 'zh-Hant', name: '繁体中文' },
-        { value: 'ja', name: '日本語' },
-        { value: 'en', name: 'English' },
-        { value: 'th', name: 'แบบไทย' }
-      ]
+      languages: languageList
     }
   },
   methods: {
