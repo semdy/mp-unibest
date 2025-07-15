@@ -92,7 +92,7 @@ export default function() {
 				})
 				
 				return
-			} else if (code < 0) {
+			} else if (code <= 0) {
 				// TODO 云函数报错处理
 				console.error(message)
 				return reject(e)
